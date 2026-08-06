@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dotsContainer = document.getElementById('dotsContainer');
     const bgCards = document.querySelectorAll('.bg-card');
 
-    // زمن عرض كل صورة (تم تقليله لـ 1.5 ثانية كما طلبت لتبديل أسرع)
+    // زمن عرض كل صورة (تم تقليله لـ 1.5 ثانية لتبديل أسرع)
     let currentSlide = 0;
     const slideDuration = 1500;
 
@@ -40,29 +40,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const langAr = document.getElementById('langAr');
     const translatableElements = document.querySelectorAll('[data-en]');
 
-    langToggle.addEventListener('click', () => {
-        const isCurrentEn = langEn.classList.contains('active');
-        const targetLang = isCurrentEn ? 'ar' : 'en';
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+            const isCurrentEn = langEn.classList.contains('active');
+            const targetLang = isCurrentEn ? 'ar' : 'en';
 
-        if (targetLang === 'ar') {
-            langEn.classList.remove('active');
-            langAr.classList.add('active');
-            document.documentElement.setAttribute('dir', 'rtl');
-            document.documentElement.setAttribute('lang', 'ar');
-        } else {
-            langAr.classList.remove('active');
-            langEn.classList.add('active');
-            document.documentElement.setAttribute('dir', 'ltr');
-            document.documentElement.setAttribute('lang', 'en');
-        }
-
-        // ترجمة جميع العناصر التفاعلية والقائمة المنزلقة
-        translatableElements.forEach(el => {
-            if (el.dataset[targetLang]) {
-                el.textContent = el.dataset[targetLang];
+            if (targetLang === 'ar') {
+                langEn.classList.remove('active');
+                langAr.classList.add('active');
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                langAr.classList.remove('active');
+                langEn.classList.add('active');
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
             }
+
+            // ترجمة جميع العناصر التفاعلية والقائمة المنزلقة
+            translatableElements.forEach(el => {
+                if (el.dataset[targetLang]) {
+                    el.textContent = el.dataset[targetLang];
+                }
+            });
         });
-    });
+    }
 
     // 4. تجهيز نقاط الترقيم وتحديد الصور الخلفية للـ 3D Stack
     if (slides.length > 0) {
@@ -143,16 +145,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 9. الاختفاء والتوجيه لصفحة المشترك
+    // 9. التوجيه الذكي بعد انتهاء الفيديو
     if (introVideo) {
         introVideo.addEventListener('ended', () => {
             setTimeout(() => {
-                document.body.style.transition = 'opacity 1.5s ease';
-                document.body.style.opacity = '0';
+                // قراءة بارامتر الصفحة القادم منه الزائر (مثال: ?return=Dr-Moustafa)
+                const urlParams = new URLSearchParams(window.location.search);
+                const returnPage = urlParams.get('return');
 
-                setTimeout(() => {
-                    window.location.href = 'client-profile.html';
-                }, 1500);
+                // إذا كان الزائر قادماً من صفحة عميل محددة
+                if (returnPage) {
+                    document.body.style.transition = 'opacity 1.5s ease';
+                    document.body.style.opacity = '0';
+
+                    setTimeout(() => {
+                        window.location.href = `https://mydigital-id.github.io/${returnPage}/`;
+                    }, 1500);
+                } else {
+                    // إذا دخل الزائر للرابط الرئيسي مباشرة، يظل في الصفحة دون توجيه خاطئ
+                    console.log("انتهى عرض الديمو، الزائر يظل في الصفحة الرئيسية.");
+                }
             }, 3000);
         });
     }
