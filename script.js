@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dotsContainer = document.getElementById('dotsContainer');
     const bgCards = document.querySelectorAll('.bg-card');
 
-    // زمن عرض كل صورة (تم تقليله لـ 1.5 ثانية لتبديل أسرع)
+    // زمن عرض كل صورة
     let currentSlide = 0;
     const slideDuration = 1500;
 
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.documentElement.setAttribute('lang', 'en');
             }
 
-            // ترجمة جميع العناصر التفاعلية والقائمة المنزلقة
+            // ترجمة جميع العناصر التفاعلية
             translatableElements.forEach(el => {
                 if (el.dataset[targetLang]) {
                     el.textContent = el.dataset[targetLang];
@@ -66,7 +66,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. تجهيز نقاط الترقيم وتحديد الصور الخلفية للـ 3D Stack
+    // 4. تجهيز زر العودة الذكي لصفحة العميل
+    const clientReturnBtn = document.getElementById('clientReturnBtn');
+    const returnBtnText = document.getElementById('returnBtnText');
+    const returnIcon = document.getElementById('returnIcon');
+    const urlParams = new URLSearchParams(window.location.search);
+    const returnTarget = urlParams.get('return');
+
+    const clientRoutes = {
+        'Dr-Moustafa': 'https://mydigital-id.github.io/Dr-Moustafa/'
+    };
+
+    if (clientReturnBtn) {
+        if (returnTarget && clientRoutes[returnTarget]) {
+            clientReturnBtn.href = clientRoutes[returnTarget];
+        } else if (document.referrer && document.referrer.includes('mydigital-id.github.io')) {
+            clientReturnBtn.href = document.referrer;
+        } else {
+            clientReturnBtn.href = 'https://mydigital-id.github.io/Dr-Moustafa/';
+        }
+
+        function updateReturnBtnDirection() {
+            const isAr = document.documentElement.getAttribute('lang') === 'ar';
+            if (returnIcon) {
+                returnIcon.className = isAr ? 'fas fa-arrow-right' : 'fas fa-arrow-left';
+            }
+        }
+        
+        updateReturnBtnDirection();
+
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                setTimeout(updateReturnBtnDirection, 50);
+            });
+        }
+    }
+
+    // 5. تجهيز نقاط الترقيم وتحديد الصور الخلفية للـ 3D Stack
     if (slides.length > 0) {
         slides.forEach((_, index) => {
             const dot = document.createElement('div');
@@ -78,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const dots = document.querySelectorAll('.dot');
 
-    // 5. رفع الشعار وإظهار السلايدر بعد 4.8 ثانية
+    // 6. رفع الشعار وإظهار السلايدر بعد 4.8 ثانية
     setTimeout(() => {
         if (intro) intro.classList.add('move-up');
         if (mediaContainer) mediaContainer.classList.add('show');
@@ -89,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 4800);
 
-    // 6. دالة تحديث صور الكروت الخلفية 3D
+    // 7. دالة تحديث صور الكروت الخلفية 3D
     function updateBackgroundCards(index) {
         if (bgCards.length >= 3 && slides.length > 0) {
             const next1 = (index + 1) % slides.length;
@@ -102,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 7. تشغيل معرض الصور
+    // 8. تشغيل معرض الصور
     function startSlideshow() {
         const interval = setInterval(() => {
             if (slides[currentSlide]) {
@@ -125,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, slideDuration);
     }
 
-    // 8. التحول للفيديو (4:3)
+    // 9. التحول للفيديو
     function switchToVideo() {
         if (slideshow) slideshow.style.display = 'none';
         
@@ -145,27 +181,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 9. التوجيه الذكي بعد انتهاء الفيديو
+    // 10. عدم التوجيه القسري تلقائياً بعد انتهاء الفيديو
     if (introVideo) {
         introVideo.addEventListener('ended', () => {
-            setTimeout(() => {
-                // قراءة بارامتر الصفحة القادم منه الزائر (مثال: ?return=Dr-Moustafa)
-                const urlParams = new URLSearchParams(window.location.search);
-                const returnPage = urlParams.get('return');
-
-                // إذا كان الزائر قادماً من صفحة عميل محددة
-                if (returnPage) {
-                    document.body.style.transition = 'opacity 1.5s ease';
-                    document.body.style.opacity = '0';
-
-                    setTimeout(() => {
-                        window.location.href = `https://mydigital-id.github.io/${returnPage}/`;
-                    }, 1500);
-                } else {
-                    // إذا دخل الزائر للرابط الرئيسي مباشرة، يظل في الصفحة دون توجيه خاطئ
-                    console.log("انتهى عرض الديمو، الزائر يظل في الصفحة الرئيسية.");
-                }
-            }, 3000);
+            console.log("انتهى العرض، الزائر يعاين الصفحة كاملة وبإمكانه العودة يدوياً عبر أيقونة العودة.");
         });
     }
 });

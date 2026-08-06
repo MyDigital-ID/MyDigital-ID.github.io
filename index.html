@@ -52,10 +52,19 @@
 
     <!-- Top Header -->
     <header class="top-header">
-        <div class="lang-switch" id="langToggle">
-            <span id="langEn" class="lang-opt active">EN</span> | 
-            <span id="langAr" class="lang-opt">AR</span>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="lang-switch" id="langToggle">
+                <span id="langEn" class="lang-opt active">EN</span> | 
+                <span id="langAr" class="lang-opt">AR</span>
+            </div>
+
+            <!-- زر العودة لصفحة العميل -->
+            <a id="clientReturnBtn" href="https://mydigital-id.github.io/Dr-Moustafa/" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.15); border: 1px solid #d4af37; color: #d4af37; padding: 4px 10px; border-radius: 20px; text-decoration: none; font-size: 0.75rem; font-weight: 600; transition: all 0.3s ease;">
+                <i class="fas fa-arrow-left" id="returnIcon"></i>
+                <span id="returnBtnText" data-en="Back" data-ar="رجوع">Back</span>
+            </a>
         </div>
+
         <div class="menu-btn" id="openDrawerBtn">
             <i class="fas fa-bars"></i>
         </div>
@@ -118,7 +127,6 @@
             <h3 id="contactTitle" data-en="Contact Us" data-ar="تواصل معنا">Contact Us</h3>
 
             <div class="contactButtons">
-                <!-- تم تفعيل رابط الواتساب والبريد الإلكتروني الحقيقيين -->
                 <a id="whatsappBtn" href="https://wa.me/201008070087" target="_blank" class="contact-btn wa">
                     <i class="fab fa-whatsapp"></i> <span data-en="WhatsApp" data-ar="واتساب">WhatsApp</span>
                 </a>
@@ -134,9 +142,7 @@
     </div>
 
     <!-- Script File -->
- <script src="script.js?v=2"></script>
+    <script src="script.js?v=4"></script>
 
 </body>
 </html>
-
-
