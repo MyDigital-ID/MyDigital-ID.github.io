@@ -1,1 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Digital ID</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS File -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Overlay Layer for Drawer -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Side Drawer Menu (القائمة المنزلقة) -->
+    <aside class="side-drawer" id="sideDrawer">
+        <div class="drawer-header">
+            <h3 data-en="About Us" data-ar="عن هويتي الرقمية">About Us</h3>
+            <button class="close-btn" id="closeDrawerBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="drawer-content">
+            <!-- 1. vision -->
+            <div class="info-block">
+                <h4 data-en="Our Vision" data-ar="رؤيتنا">Our Vision</h4>
+                <p data-en="We live in an advanced digital age where communication no longer relies solely on direct or face-to-face interaction. Anyone who lacks easy channels to communicate and showcase their practical and professional capabilities on the ground inevitably drains their creative and productive potential. Therefore, through our vision, it has become imperative for us to help you accelerate communication with everyone—whether they are your existing long-term clients, prospective clients, or those striving to reach you."
+                   data-ar="نحن نعيش في عصر رقمي متطور لم يعد التواصل فيه يعتمد على الاتصال المباشر أو وجهاً لوجه، ومن لا يملك قنوات سهلة للتواصل وشرح أفكاره وإمكانياته العملية والمهنية على أرض الواقع، فإنه يستنزف قدراته الإبداعية وطاقته الإنتاجية، لذلك أصبح لزاماً علينا من خلال رؤيتنا أن نساعدك في سرعة التواصل مع الجميع سواء كانوا من العملاء المستدامين لديك أو من العملاء المحتملين أو أولئك الذين يسعون في سبيل الوصول إليك.">
+                    We live in an advanced digital age where communication no longer relies solely on direct or face-to-face interaction...
+                </p>
+            </div>
+
+            <hr class="drawer-divider">
+
+            <!-- 2. mission -->
+            <div class="info-block">
+                <h4 data-en="Our Mission" data-ar="مهمتنا">Our Mission</h4>
+                <p data-en="We continuously and tirelessly strive to introduce you to the modern world in the best possible light and image, enabling you to highlight your true skills and capabilities. This ensures that your communication with others is fast, targeted, and aligned with your ambitions to acquire new clients seeking top-tier results and performance to accomplish their tasks flawlessly. This is precisely the role we fulfill on the 'My Digital ID' page."
+                   data-ar="نسعى بشكل دائم ومتواصل من أجل تقديمك إلى العالم المتطور بأفضل شكل وفي أفضل صورة تمكنك من إظهار قدراتك وإمكانياتك الحقيقية، حتى يكون تواصلك مع الآخرين سريع وهادف ويثماشي مع طموحاتك في إكتساب عملاء جدد يبحثون عن أفضل نتيجة وأداء ممكن لإنجاز مهامهم على الوجه الأكمل، وهذا الدور هو ما نقوم به في صفحة 'هويتي الرقمية'.">
+                    We continuously and tirelessly strive to introduce you to the modern world in the best possible light...
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="lang-switch" id="langToggle">
+            <span id="langEn" class="lang-opt active">EN</span> | 
+            <span id="langAr" class="lang-opt">AR</span>
+        </div>
+        <div class="menu-btn" id="openDrawerBtn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <!-- Intro Section -->
+        <section id="intro">
+            <div class="logo-container">
+                <h1 id="logo">My Digital ID</h1>
+            </div>
+            <h2 id="about" data-en="All About Me" data-ar="كل ما يخصني">All About Me</h2>
+            <h3 id="gate" data-en="My Business Gate" data-ar="بوابتك للأعمال">My Business Gate</h3>
+
+            <p class="showtime-title seq-fade-1" data-en="More Than a Business Showtime Page ....." data-ar="أكثر من مجرد صفحة عرض للأعمال .....">More Than a Business Showtime Page .....</p>
+            
+            <h2 class="slogan-title seq-fade-2">
+                <span data-en="One " data-ar="هوية ">One </span>
+                <span class="gold" data-en="Identity." data-ar="واحدة. ">Identity. </span>
+                <span data-en="Infinite " data-ar="وإمكانيات ">Infinite </span>
+                <span class="gold" data-en="Possibilities" data-ar="لا محدودة">Possibilities</span>
+            </h2>
+            
+            <div class="infinity-symbol seq-fade-3"><i class="fas fa-infinity"></i></div>
+        </section>
+
+        <!-- Media Container (Stack 3D Carousel + Video) -->
+        <div id="mediaContainer">
+            <div class="card-stack-bg" id="cardStackBg">
+                <div class="bg-card bg-card-3"></div>
+                <div class="bg-card bg-card-2"></div>
+                <div class="bg-card bg-card-1"></div>
+            </div>
+
+            <div class="main-frame">
+                <section id="slideshow">
+                    <img src="assets/images/1.png" class="slide" alt="">
+                    <img src="assets/images/2.png" class="slide" alt="">
+                    <img src="assets/images/3.png" class="slide" alt="">
+                    <img src="assets/images/4.png" class="slide" alt="">
+                    <img src="assets/images/5.png" class="slide" alt="">
+                    <img src="assets/images/6.png" class="slide" alt="">
+                    <img src="assets/images/Meclass.png" class="slide" alt="">
+                    
+                    <div class="carousel-dots" id="dotsContainer"></div>
+                </section>
+
+                <section id="videoSection">
+                    <video id="introVideo" muted playsinline preload="auto">
+                        <source src="https://raw.githack.com/MyDigital-ID/MyDigital-ID.github.io/main/assets/videos/intro-video.mp4" type="video/mp4">
+                        Your browser doesn't support HTML5 video.
+                    </video>
+                </section>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <section id="contactSection">
+            <h2 id="businessText" data-en="To add your Professional Web ID" data-ar="لإنشاء هويتك الرقمية الاحترافية">To add your Professional Web ID</h2>
+            <h3 id="contactTitle" data-en="Contact Us" data-ar="تواصل معنا">Contact Us</h3>
+
+            <div class="contactButtons">
+                <!-- تم تفعيل رابط الواتساب والبريد الإلكتروني الحقيقيين -->
+                <a id="whatsappBtn" href="https://wa.me/201008070087" target="_blank" class="contact-btn wa">
+                    <i class="fab fa-whatsapp"></i> <span data-en="WhatsApp" data-ar="واتساب">WhatsApp</span>
+                </a>
+                <a id="emailBtn" href="mailto:rake2work@gmail.com" class="contact-btn email">
+                    <i class="far fa-envelope"></i> <span data-en="Email Us" data-ar="البريد الإلكتروني">Email Us</span>
+                </a>
+            </div>
+        </section>
+
+        <footer class="footer-copyright">
+            &copy; 2026 MyDigital-ID. All Rights Reserved.
+        </footer>
+    </div>
+
+    <!-- Script File -->
+    <script src="script.js"></script>
+</body>
+</html>
