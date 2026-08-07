@@ -1,0 +1,452 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #05080e;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* خلفية الماتريكس */
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.22;
+    pointer-events: none;
+}
+
+/* الشريط العلوي */
+.top-bar {
+    position: fixed;
+    top: 15px;
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+    z-index: 1000;
+}
+
+.lang-switch-top {
+    display: flex;
+    gap: 6px;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.lang-btn {
+    padding: 6px 14px;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-weight: bold;
+    font-size: 13px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lang-btn.active {
+    background: #2563eb;
+    color: #fff;
+}
+
+.menu-btn {
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 8px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+/* القائمة الجانبية */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -340px;
+    width: 320px;
+    height: 100%;
+    background: rgba(8, 12, 20, 0.96);
+    backdrop-filter: blur(15px);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 1001;
+    transition: 0.4s ease;
+    padding: 35px 20px;
+}
+
+.side-menu.open {
+    right: 0;
+}
+
+.close-btn {
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    text-align: left;
+}
+
+.menu-links {
+    list-style: none;
+    margin-top: 25px;
+}
+
+.menu-links li {
+    margin-bottom: 18px;
+}
+
+.menu-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: 0.3s;
+}
+
+.menu-links a:hover {
+    color: #38bdf8;
+}
+
+.menu-divider {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 15px 0;
+}
+
+/* النافذة المنبثقة للـ QR Code */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #0f172a;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.2);
+    text-align: center;
+    position: relative;
+    max-width: 320px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 24px; cursor: pointer; color: #fff;
+}
+
+.qr-img {
+    width: 180px;
+    height: 180px;
+    margin: 15px 0;
+    border-radius: 10px;
+}
+
+/* حاوي الشرائح والكاردات */
+.slides-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px;
+    padding: 80px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slide {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.slide.active {
+    display: flex;
+}
+
+.shimmer-text {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(110deg, #64748b 30%, #ffffff 50%, #64748b 70%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.sub-logo {
+    font-size: 15px;
+    color: #94a3b8;
+}
+
+/* إطار الصور والمرونة */
+.glow-frame {
+    width: auto;
+    max-width: 90%;
+    max-height: 60vh;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glow-frame img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    display: block;
+}
+
+.welcome-box, .content-box {
+    background: rgba(15, 23, 42, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    width: 100%;
+}
+
+.welcome-box h2 {
+    font-size: 28px;
+    color: #f8fafc;
+    margin-bottom: 15px;
+}
+
+/* تنسيق العناوين */
+.headline-titles {
+    margin: 20px 0;
+}
+
+.headline-titles p {
+    color: #f59e0b;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-bottom: 6px;
+}
+
+.credentials-list p {
+    color: #e2e8f0;
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.location-box {
+    margin: 20px 0;
+    color: #38bdf8;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.contact-section {
+    margin-top: 25px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.contact-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.contact-btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.whatsapp-btn {
+    border: 1px solid #22c55e;
+    color: #22c55e;
+    background: rgba(34, 197, 94, 0.1);
+}
+
+.email-btn {
+    border: 1px solid #3b82f6;
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.article-title {
+    font-size: 24px;
+    color: #38bdf8;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+    padding-bottom: 8px;
+}
+
+.pearl-text {
+    color: #f1f5f9;
+    line-height: 2;
+    font-size: 17px;
+    text-align: justify;
+}
+
+/* شريط التحكم والتنقل */
+.fixed-navigation {
+    margin-top: 25px;
+    display: flex;
+    gap: 25px;
+    background: rgba(15, 23, 42, 0.95);
+    padding: 10px 30px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.fixed-navigation button {
+    background: transparent;
+    border: none;
+    color: #38bdf8;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.fixed-navigation button:hover {
+    color: #ffffff;
+    transform: scale(1.2);
+}
+
+/* Footer Styling */
+.mydigital-footer {
+    width: 100%;
+    padding: 25px 15px;
+    background: rgba(8, 12, 20, 0.85);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    text-align: center;
+    margin-top: 40px;
+    position: relative;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.brand-link:hover {
+    transform: translateY(-2px);
+}
+
+.footer-logo {
+    width: 35px;
+    height: auto;
+    display: inline-block;
+    object-fit: contain;
+}
+
+.brand-text {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+}
+
+.brand-text strong {
+    color: #38bdf8;
+}
+
+.call-to-action p {
+    margin: 6px 0 10px;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.call-to-action .contact-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    background-color: transparent;
+    color: #38bdf8;
+    border: 1px solid #38bdf8;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.call-to-action .contact-btn:hover {
+    background-color: rgba(56, 189, 248, 0.15);
+    color: #ffffff;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+    .glow-frame { max-height: 280px; }
+    .headline-titles p { font-size: 16px; }
+    .pearl-text { font-size: 15px; }
+    .mydigital-footer { padding: 20px 10px; }
+}

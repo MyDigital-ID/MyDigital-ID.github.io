@@ -1,1 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Mostafa Darwish | MyDigital-ID</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
 
+    <!-- خلفية الماتريكس -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- الشريط العلوي -->
+    <div class="top-bar">
+        <div class="lang-switch-top">
+            <button onclick="setLanguage('ar')" class="lang-btn active">AR</button>
+            <button onclick="setLanguage('en')" class="lang-btn">EN</button>
+        </div>
+        <div class="menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+    <!-- القائمة الجانبية -->
+    <div class="side-menu" id="sideMenu">
+        <div class="close-btn" onclick="toggleMenu()">&times;</div>
+        <ul class="menu-links">
+            <li><a href="#" onclick="goToSlide(0); toggleMenu();" data-ar="الصفحة الرئيسية" data-en="Home"><i class="fas fa-home"></i> الصفحة الرئيسية</a></li>
+            <li><a href="#" onclick="goToSlide(1); toggleMenu();" data-ar="تطور مهنة المحاماة" data-en="Legal Evolution"><i class="fas fa-gavel"></i> تطور مهنة المحاماة في العصر الرقمي</a></li>
+            <li><a href="#" onclick="goToSlide(2); toggleMenu();" data-ar="لعنة القروض المتعثرة" data-en="Distressed Debts"><i class="fas fa-exclamation-triangle"></i> لعنة القروض المتعثرة</a></li>
+            <li><a href="#" onclick="goToSlide(3); toggleMenu();" data-ar="التسويات النهائية للقروض البنكية" data-en="Banking Settlements"><i class="fas fa-file-contract"></i> التسويات النهائية للقروض البنكية</a></li>
+            <li><a href="#" onclick="goToSlide(4); toggleMenu();" data-ar="الدعم التدريبي لموظفي القطاع المصرفي" data-en="Banking Training"><i class="fas fa-graduation-cap"></i> الدعم التدريبي لموظفي القطاع المصرفي</a></li>
+            <li><a href="#" onclick="goToSlide(5); toggleMenu();" data-ar="تطوير الأعمال" data-en="Business Development"><i class="fas fa-chart-line"></i> تطوير الأعمال</a></li>
+            <hr class="menu-divider">
+            <li><a href="#" onclick="downloadVCard(); toggleMenu();" data-ar="تحميل بيانات التواصل (vCard)" data-en="Save Contact Card"><i class="fas fa-address-card"></i> تحميل بيانات التواصل</a></li>
+            <li><a href="#" onclick="openQRModal(); toggleMenu();" data-ar="رمز QR الخاص بالصفحة" data-en="Page QR Code"><i class="fas fa-qrcode"></i> رمز QR للصفحة</a></li>
+        </ul>
+    </div>
+
+    <!-- نافذة منبثقة للـ QR Code -->
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeQRModal()">&times;</span>
+            <h3 data-ar="مسح رمز QR للتواصل" data-en="Scan QR Code">مسح رمز QR</h3>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://mydigital-id.com" alt="QR Code" class="qr-img">
+            <p data-ar="امسح الرمز للوصول السريع للملف الشخصي" data-en="Scan to access profile">امسح الرمز للوصول السريع للملف الشخصي</p>
+        </div>
+    </div>
+
+    <!-- حاوي الشرائح -->
+    <div class="slides-container">
+
+        <!-- الشريحة 1: التعريف والترحيب -->
+        <div class="slide active" id="slide-0">
+            <div class="header-logo logo-intro">
+                <h1 class="shimmer-text">MY DIGITAL ID</h1>
+                <p class="sub-logo" data-ar="All About Me" data-en="All About Me">All About Me</p>
+                <p class="sub-logo" data-ar="My Business Gate" data-en="My Business Gate">My Business Gate</p>
+            </div>
+
+            <div class="image-frame glow-frame">
+                <img src="assets/images/Main-me.png" alt="Dr. Mostafa Darwish">
+            </div>
+
+            <div class="welcome-box fade-in">
+                <h2>Dr. Mostafa Darwish</h2>
+                <div class="headline-titles">
+                    <p data-ar="مستشار قانوني متخصص في قضايا البنوك" data-en="Legal Consultant specializing in Banking Disputes">مستشار قانوني متخصص في قضايا البنوك</p>
+                    <p data-ar="والتسويات البنكية" data-en="and Banking Settlements">والتسويات البنكية</p>
+                    <p data-ar="وإعادة جدولة الديون المتعثرة داخل مصر ودول الخليج العربي" data-en="and Restructuring Distressed Debts in Egypt & GCC">وإعادة جدولة الديون المتعثرة داخل مصر ودول الخليج العربي</p>
+                </div>
+                
+                <div class="credentials-list">
+                    <p data-ar="دكتوراه في التنمية البشرية وتطوير الأعمال" data-en="PhD in Human Development & Business Development">دكتوراه في التنمية البشرية وتطوير الأعمال</p>
+                    <p data-ar="محاضر معتمد من أكاديمية التدريب الدولية بالمملكة المتحدة" data-en="Certified Lecturer at the International Training Academy (UK)">محاضر معتمد من أكاديمية التدريب الدولية بالمملكة المتحدة</p>
+                </div>
+
+                <div class="location-box">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span data-ar="52 شارع توت عنخ أمون أبراج سيدي جابر ، الإسكندرية" data-en="52 Tut Ankhamun St, Sidi Gaber Towers, Alexandria">52 شارع توت عنخ أمون أبراج سيدي جابر ، الإسكندرية</span>
+                </div>
+
+                <div class="contact-section">
+                    <h3 data-ar="Contact Us" data-en="Contact Us">Contact Us</h3>
+                    <div class="contact-buttons">
+                        <a href="https://wa.me/" class="contact-btn whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="mailto:info@mydigital-id.com" class="contact-btn email-btn">
+                            <i class="fas fa-envelope"></i> Email Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشريحة 2: المقالة الأولى - تطور مهنة المحاماة -->
+        <div class="slide" id="slide-1">
+            <div class="image-frame glow-frame">
+                <img src="assets/images/Tatweer.png" alt="تطور مهنة المحاماة في العصر الرقمي">
+            </div>
+            <div class="content-box">
+                <h2 class="article-title" data-ar="تطور مهنة المحاماة في العصر الرقمي" data-en="The Evolution of Law Practice in the Digital Age">تطور مهنة المحاماة في العصر الرقمي</h2>
+                <p class="pearl-text" data-ar="شهدت مهنة المحاماة خلال السنوات الأخيرة تطورًا كبيرًا بفضل الثورة الرقمية والتقدم التكنولوجي، فلم يعد دور المحامي يقتصر على الحضور إلى المحاكم أو إعداد المذكرات القانونية بالأساليب التقليدية. فقد أصبحت وسائل الاتصال الحديثة تتيح للمحامي التواصل مع موكليه من أي مكان في العالم، وتقديم الاستشارات القانونية عبر المنصات الإلكترونية والاجتماعات المرئية بكل سهولة وسرعة. كما ساهمت الأنظمة القضائية الرقمية في تسهيل رفع الدعاوى، وتبادل المستندات، ومتابعة إجراءات التقاضي إلكترونيًا، مما وفر الوقت والجهد لجميع الأطراف. وأصبح الذكاء الاصطناعي وقواعد البيانات القانونية أدوات مهمة تساعد المحامي على البحث وتحليل السوابق القضائية بدقة وكفاءة. كذلك انتشرت وسائل بديلة ومتطورة لحل المنازعات، مثل التحكيم والوساطة الإلكترونية، والتي أسهمت في إنهاء العديد من القضايا بعيدًا عن إجراءات التقاضي التقليدية. ولم تعد جودة عمل المحامي تقاس فقط بخبرته القانونية، بل أيضًا بقدرته على استخدام التكنولوجيا ومواكبة التطورات الرقمية. لذلك أصبح المحامي العصري يجمع بين المعرفة القانونية العميقة والمهارات التقنية الحديثة، ليقدم خدمات قانونية أكثر سرعة ودقة وكفاءة، بما يتوافق مع متطلبات العصر ويعزز وصول العدالة إلى الجميع." data-en="In recent years, the legal profession has witnessed significant evolution thanks to the digital revolution and technological advancement. A lawyer's role is no longer limited to court appearances or preparing legal briefs through traditional methods. Modern communication tools allow lawyers to communicate with clients worldwide, providing legal consultations through electronic platforms and video meetings with ease and speed. Furthermore, digital judicial systems have facilitated filing lawsuits, exchanging documents, and tracking litigation procedures online, saving time and effort for all parties. Artificial intelligence and legal databases have become vital tools that help lawyers conduct research and analyze legal precedents accurately and efficiently. Advanced alternative dispute resolution methods, such as arbitration and electronic mediation, have also spread, resolving many issues away from traditional litigation. A lawyer's quality of work is no longer measured solely by legal expertise, but also by the ability to utilize technology and keep pace with digital developments. Thus, the modern lawyer combines deep legal knowledge with modern technical skills to provide faster, more precise, and efficient legal services.">شهدت مهنة المحاماة خلال السنوات الأخيرة تطورًا كبيرًا بفضل الثورة الرقمية والتقدم التكنولوجي، فلم يعد دور المحامي يقتصر على الحضور إلى المحاكم أو إعداد المذكرات القانونية بالأساليب التقليدية. فقد أصبحت وسائل الاتصال الحديثة تتيح للمحامي التواصل مع موكليه من أي مكان في العالم، وتقديم الاستشارات القانونية عبر المنصات الإلكترونية والاجتماعات المرئية بكل سهولة وسرعة. كما ساهمت الأنظمة القضائية الرقمية في تسهيل رفع الدعاوى، وتبادل المستندات، ومتابعة إجراءات التقاضي إلكترونيًا، مما وفر الوقت والجهد لجميع الأطراف. وأصبح الذكاء الاصطناعي وقواعد البيانات القانونية أدوات مهمة تساعد المحامي على البحث وتحليل السوابق القضائية بدقة وكفاءة. كذلك انتشرت وسائل بديلة ومتطورة لحل المنازعات، مثل التحكيم والوساطة الإلكترونية، والتي أسهمت في إنهاء العديد من القضايا بعيدًا عن إجراءات التقاضي التقليدية. ولم تعد جودة عمل المحامي تقاس فقط بخبرته القانونية، بل أيضًا بقدرته على استخدام التكنولوجيا ومواكبة التطورات الرقمية. لذلك أصبح المحامي العصري يجمع بين المعرفة القانونية العميقة والمهارات التقنية الحديثة، ليقدم خدمات قانونية أكثر سرعة ودقة وكفاءة، بما يتوافق مع متطلبات العصر ويعزز وصول العدالة إلى الجميع.</p>
+            </div>
+        </div>
+
+        <!-- الشريحة 3: المقالة الثانية - لعنة القروض المتعثرة -->
+        <div class="slide" id="slide-2">
+            <div class="image-frame glow-frame">
+                <img src="assets/images/Debts.png" alt="لعنة القروض المتعثرة">
+            </div>
+            <div class="content-box">
+                <h2 class="article-title" data-ar="لعنة القروض المتعثرة" data-en="The Curse of Non-Performing Loans">لعنة القروض المتعثرة</h2>
+                <p class="pearl-text" data-ar="تشكل القروض المتعثرة صداعاً مستمراً لدى كُلاً من البنك والعميل المتعثر في السداد للدرجة التي تصبح فيها تلك القروض عبأً حقيقياً على البنك الذي يرى هامش أرباحه يتم اقتطاع جزء منها يساوي قيمة القرض المتعثر كاملاً، وكذلك العميل الذي يجد نفسه محاصراً تحت وطأة هذا القرض وتضخم القيمة الحقيقية للقرض بسبب تراكم فوائد وغرامات التأخير في السداد، لذلك أصبح دور المحامي المتمرس في شئون المعاملات البنكية وأساليب معالجة الأمور بالشكل الصحيح للوصول إلى الحلول الواقعية بدون مغالاة، دوراً فعالاً يؤدي إلى الخروج من النفق المظلم ورفع الضغوط عن جميع الأطراف .. ونحن نمتلك خبرة تتجاوز العشرون عاماً في هذا المجال داخل مصر ودول الخليج العربي ويسعدنا أن نستكمل هذا النجاح معك شخصياً." data-en="Non-performing loans constitute an ongoing headache for both banks and defaulted clients to the extent that such loans become a real burden on the bank, which sees its profit margin deducted by an amount equal to the entire value of the defaulted loan. Likewise, the client finds themselves trapped under the weight of this loan and the inflation of its actual value due to accumulated interest and delay penalties. Therefore, the role of an experienced lawyer in banking transactions and proper remediation methods to reach realistic solutions without exaggeration has become effective in exiting the dark tunnel and relieving pressure on all parties. We possess over twenty years of experience in this field within Egypt and the GCC, and we are pleased to continue this success with you personally.">تشكل القروض المتعثرة صداعاً مستمراً لدى كُلاً من البنك والعميل المتعثر في السداد للدرجة التي تصبح فيها تلك القروض عبأً حقيقياً على البنك الذي يرى هامش أرباحه يتم اقتطاع جزء منها يساوي قيمة القرض المتعثر كاملاً، وكذلك العميل الذي يجد نفسه محاصراً تحت وطأة هذا القرض وتضخم القيمة الحقيقية للقرض بسبب تراكم فوائد وغرامات التأخير في السداد، لذلك أصبح دور المحامي المتمرس في شئون المعاملات البنكية وأساليب معالجة الأمور بالشكل الصحيح للوصول إلى الحلول الواقعية بدون مغالاة، دوراً فعالاً يؤدي إلى الخروج من النفق المظلم ورفع الضغوط عن جميع الأطراف .. ونحن نمتلك خبرة تتجاوز العشرون عاماً في هذا المجال داخل مصر ودول الخليج العربي ويسعدنا أن نستكمل هذا النجاح معك شخصياً.</p>
+            </div>
+        </div>
+
+        <!-- الشريحة 4: المقالة الثالثة - التسويات النهائية للقروض البنكية -->
+        <div class="slide" id="slide-3">
+            <div class="image-frame glow-frame">
+                <img src="assets/images/Settlement.png" alt="التسويات النهائية للقروض البنكية">
+            </div>
+            <div class="content-box">
+                <h2 class="article-title" data-ar="التسويات النهائية للقروض البنكية" data-en="Final Banking Loan Settlements"><b>التسويات النهائية للقروض البنكية</b></h2>
+                <p class="pearl-text" data-ar="نسعى بكل أجتهاد من أجل الوصول إلى تسويه نهائية عادله تضمن لك إنهاء التزاماتك البنكيه بالشكل الذي يتوافق مع اقصى درجات العداله التي لا تؤدي .. إلى إرهاقك مادياً .. كما نساعدك في الوصول الي مرحلة جدولة القرض بالشكل الذي يتناسب مع مركزك المالي الحالي في ظل معطيات الظروف الإقتصاديه المتغيره سواء كانت تلك المديونية قائمه داخل أياً من البنوك المنتشره داخل جمهورية مصر العربية او حتى داخل البنوك القائمه في دولة الإمارات العربية و دول منطقة الخليج العربي." data-en="We strive with all diligence to achieve a fair final settlement that guarantees ending your banking obligations in a manner that aligns with the highest degree of fairness without causing financial fatigue. We also assist you in reaching a loan restructuring stage that matches your current financial standing under changing economic conditions, whether these debts are within banks across Egypt or within banks in the UAE and GCC region.">نسعى بكل أجتهاد من أجل الوصول إلى تسويه نهائية عادله تضمن لك إنهاء التزاماتك البنكيه بالشكل الذي يتوافق مع اقصى درجات العداله التي لا تؤدي .. إلى إرهاقك مادياً .. كما نساعدك في الوصول الي مرحلة جدولة القرض بالشكل الذي يتناسب مع مركزك المالي الحالي في ظل معطيات الظروف الإقتصاديه المتغيره سواء كانت تلك المديونية قائمه داخل أياً من البنوك المنتشره داخل جمهورية مصر العربية او حتى داخل البنوك القائمه في دولة الإمارات العربية و دول منطقة الخليج العربي.</p>
+            </div>
+        </div>
+
+        <!-- الشريحة 5: المقالة الرابعة - الدعم التدريبي -->
+        <div class="slide" id="slide-4">
+            <div class="image-frame glow-frame">
+                <img src="assets/images/Meclass.png" alt="الدعم التدريبي لموظفي القطاع المصرفي">
+            </div>
+            <div class="content-box">
+                <h2 class="article-title" data-ar="الدعم التدريبي لموظفي القطاع المصرفي" data-en="Training Support for Banking Employees">الدعم التدريبي لموظفي القطاع المصرفي</h2>
+                <p class="pearl-text" data-ar="نفتخر بتقديم الدعم التدريبي لموظفي القطاع المصرفي في إطار دبلومة البنوك المتخصصة بدعم من أكاديمية التدريب الدولية المعتمده من المملكة المتحدة etc.uk" data-en="We are proud to provide training support to banking sector employees within the specialized banking diploma framework, supported by the International Training Academy accredited in the UK (etc.uk).">نفتخر بتقديم الدعم التدريبي لموظفي القطاع المصرفي في إطار دبلومة البنوك المتخصصة بدعم من أكاديمية التدريب الدولية المعتمده من المملكة المتحدة etc.uk</p>
+            </div>
+        </div>
+
+        <!-- الشريحة 6: المقالة الخامسة - تطوير الأعمال -->
+        <div class="slide" id="slide-5">
+            <div class="image-frame glow-frame">
+                <img src="assets/images/Meoffice.jpg" alt="تطوير الأعمال">
+            </div>
+            <div class="content-box">
+                <h2 class="article-title" data-ar="تطوير الأعمال" data-en="Business Development">تطوير الأعمال</h2>
+                <p class="pearl-text" data-ar="بفضل الله اولا و اخيراً ثم بالإستعانه بالدراسات الأكاديمية و المهنيه في مجال القانون و إدارة الاعمال و تطوير المشاريع على ارض الواقع أستطعنا مساعدة عشرات المشاريع و تقديم الدعم و الإستشارات الناجزه التي ساهمت في تعديل المسار و تغيير الدفه و المسار من حافة الفشل و التوقف إلى بداية الإزدهار و تحقيق الأرباح و الغايه الأسمى وهي إستدامة النشاط .. نحن هنا نتفهم القلق الذي ينتابك عند بدء نشاط جديد أو تأخر تحقيق الأرباح المتوقعه و بسعدنا دائماً أن نكون إلى جوارك حتى نصل سويا إلى الاهداف التي بدأت من أجلها ." data-en="By the grace of God first and foremost, and through academic and professional studies in law, business management, and practical project development, we have helped dozens of projects and provided effective consultations that altered their course from the brink of failure to prosperity, profitability, and business sustainability. We understand the anxiety when starting a new venture or facing delayed profits, and we are always pleased to stand beside you to achieve your goals.">بفضل الله اولا و اخيراً ثم بالإستعانه بالدراسات الأكاديمية و المهنيه في مجال القانون و إدارة الاعمال و تطوير المشاريع على ارض الواقع أستطعنا مساعدة عشرات المشاريع و تقديم الدعم و الإستشارات الناجزه التي ساهمت في تعديل المسار و تغيير الدفه و المسار من حافة الفشل و التوقف إلى بداية الإزدهار و تحقيق الأرباح و الغايه الأسمى وهي إستدامة النشاط .. نحن هنا نتفهم القلق الذي ينتابك عند بدء نشاط جديد أو تأخر تحقيق الأرباح المتوقعه و بسعدنا دائماً أن نكون إلى جوارك حتى نصل سويا إلى الاهداف التي بدأت من أجلها .</p>
+            </div>
+        </div>
+
+        <!-- شريط التنقل السفلي -->
+        <div class="fixed-navigation">
+            <button onclick="prevSlide()" title="السابقة"><i class="fas fa-chevron-right"></i></button>
+            <button onclick="goToSlide(0)" title="الرئيسية"><i class="fas fa-home"></i></button>
+            <button onclick="nextSlide()" title="التالية"><i class="fas fa-chevron-left"></i></button>
+        </div>
+
+    </div>
+
+    <!-- Footer Branding -->
+    <footer class="mydigital-footer">
+      <div class="footer-container">
+        <a href="https://mydigital-id.github.io/?return=Dr-Moustafa" class="brand-link" target="_self">
+          <img src="assets/logo/Main-logo.png" alt="MyDigital-ID Logo" class="footer-logo">
+          <div class="brand-text">
+            <span>Powered by <strong>MyDigital-ID</strong></span>
+          </div>
+        </a>
+        
+        <div class="call-to-action">
+          <p>To Create Your Own Business Web or Add Your Professional Web ID</p>
+          <a href="https://mydigital-id.github.io/?return=Dr-Moustafa" class="contact-btn">Contact Us</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
