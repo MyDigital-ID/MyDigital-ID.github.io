@@ -46,16 +46,19 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeQRModal()">&times;</span>
             
-            <!-- كارت الـ QR المخصص للحفظ الشامل -->
+            <!-- كارت الـ QR المخصص للحفظ والمشاركة -->
             <div class="qr-card">
                 <div class="qr-card-header">
                     <h2>Dr. Mostafa Darwish</h2>
                     <p class="qr-sub-header">Official Digital Gate</p>
                 </div>
                 
-                <div class="qr-frame">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://mydigital-id.github.io/Dr-Moustafa/" alt="Dr. Mostafa Darwish QR Code" class="qr-img">
-                </div>
+                <!-- الرمز يقرأ من مجلد الصور بالمشروع ومغلف برابط للفتح المباشر عند الضغط -->
+                <a href="https://mydigital-id.github.io/Dr-Moustafa/" target="_blank" style="display: block; cursor: pointer; text-decoration: none;">
+                    <div class="qr-frame">
+                        <img src="assets/images/qr-code.png" alt="Dr. Mostafa Darwish QR Code" class="qr-img">
+                    </div>
+                </a>
                 
                 <div class="qr-card-footer">
                     <p class="qr-action-text">Save For Quick Access</p>
