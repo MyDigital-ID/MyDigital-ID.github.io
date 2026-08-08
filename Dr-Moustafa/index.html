@@ -6,6 +6,8 @@
     <title>Dr. Mostafa Darwish | MyDigital-ID</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- مكتبة التقاط الشاشة للحفظ كصورة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -43,9 +45,24 @@
     <div id="qrModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeQRModal()">&times;</span>
-            <h3 data-ar="مسح رمز QR للتواصل" data-en="Scan QR Code">مسح رمز QR</h3>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://mydigital-id.com" alt="QR Code" class="qr-img">
-            <p data-ar="امسح الرمز للوصول السريع للملف الشخصي" data-en="Scan to access profile">امسح الرمز للوصول السريع للملف الشخصي</p>
+            
+            <!-- كارت الـ QR المخصص للحفظ الشامل -->
+            <div class="qr-card">
+                <div class="qr-card-header">
+                    <h2>Dr. Mostafa Darwish</h2>
+                    <p class="qr-sub-header">Official Digital Gate</p>
+                </div>
+                
+                <div class="qr-frame">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://mydigital-id.github.io/Dr-Moustafa/" alt="Dr. Mostafa Darwish QR Code" class="qr-img">
+                </div>
+                
+                <div class="qr-card-footer">
+                    <p class="qr-action-text">Save For Quick Access</p>
+                    <button type="button" class="silver-save-btn" onclick="saveQRCardAsImage()">Save</button>
+                </div>
+            </div>
+
         </div>
     </div>
 

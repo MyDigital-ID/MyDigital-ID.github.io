@@ -1,7 +1,6 @@
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 let autoTimer = null;
-// تم تحديث الأوقات لتشمل الشرائح الـ 6 كاملة (بما فيها شريحة التسويات البنكية)
 const slideDurations = [15, 20, 20, 20, 20, 20];
 
 // تأثير خلفية الماتريكس (Matrix Effect)
@@ -85,6 +84,26 @@ function closeQRModal() {
     document.getElementById('qrModal').style.display = 'none';
 }
 
+// دالة حفظ كارت الـ QR بالإطار والبيانات بالكامل كصورة
+function saveQRCardAsImage() {
+    const qrCardElement = document.querySelector('.qr-card');
+    if (!qrCardElement) return;
+
+    html2canvas(qrCardElement, {
+        scale: 2,
+        backgroundColor: '#0f172a',
+        useCORS: true
+    }).then(canvas => {
+        const image = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = image;
+        link.download = 'Dr_Mostafa_Digital_ID.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+}
+
 // إنشاء وتنزيل ملف Contact Card (vCard)
 function downloadVCard() {
     const vcardData = `BEGIN:VCARD
@@ -92,7 +111,7 @@ VERSION:3.0
 FN:Dr. Mostafa Darwish
 TITLE:مستشار قانوني وتدريب مصرفي
 ADR:;;52 شارع توت عنخ أمون أبراج سيدي جابر;الإسكندرية;;;مصر
-URL:https://mydigital-id.com
+URL:https://mydigital-id.github.io/Dr-Moustafa/
 END:VCARD`;
 
     const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8;' });
