@@ -97,7 +97,7 @@ function saveQRCardAsImage() {
         const image = canvas.toDataURL('image/png');
         const link = document.createElement('a');
         link.href = image;
-        link.download = 'Dr_Mostafa_Digital_ID.png';
+        link.download = 'Dr_Moustafa_Digital_ID.png';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -108,8 +108,9 @@ function saveQRCardAsImage() {
 function downloadVCard() {
     const vcardData = `BEGIN:VCARD
 VERSION:3.0
-FN:Dr. Mostafa Darwish
+FN:Dr. Moustafa Darwish
 TITLE:مستشار قانوني وتدريب مصرفي
+TEL;TYPE=CELL,VOICE:+201008070087
 ADR:;;52 شارع توت عنخ أمون أبراج سيدي جابر;الإسكندرية;;;مصر
 URL:https://mydigital-id.github.io/Dr-Moustafa/
 END:VCARD`;
@@ -117,7 +118,7 @@ END:VCARD`;
     const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.setAttribute('download', 'Dr_Mostafa_Darwish.vcf');
+    link.setAttribute('download', 'Dr_Moustafa_Darwish.vcf');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
