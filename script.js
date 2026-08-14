@@ -66,22 +66,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. ضبط اتجاه سهم زر العودة الذكي فقط عند تبديل اللغة (بدون فرض روابط)
+    // 4. الربط والتحقق الذكي لإظهار زر العودة (Back) عند الدخول من صفحة عميل
+    const clientReturnBtn = document.getElementById('clientReturnBtn');
     const returnIcon = document.getElementById('returnIcon');
+    const urlParams = new URLSearchParams(window.location.search);
+    const returnTarget = urlParams.get('return') || urlParams.get('returnUrl');
 
-    function updateReturnBtnDirection() {
-        const isAr = document.documentElement.getAttribute('lang') === 'ar';
-        if (returnIcon) {
-            returnIcon.className = isAr ? 'fas fa-arrow-right' : 'fas fa-arrow-left';
+    const clientRoutes = {
+        'Dr-Moustafa': 'https://mydigital-id.github.io/Dr-Moustafa/'
+    };
+
+    if (clientReturnBtn) {
+        let destinationUrl = '';
+
+        // 1. فحص هل هناك اسم عميل أو رابط ممرر في الـ URL
+        if (returnTarget && clientRoutes[returnTarget]) {
+            destinationUrl = clientRoutes[returnTarget];
+        } else if (returnTarget) {
+            destinationUrl = decodeURIComponent(returnTarget);
+        } 
+        // 2. فحص هل الزائر قادم من موقع خارجي حقيقي (مثل موقع د. مصطفى أو غيره)
+        else if (document.referrer && document.referrer.trim() !== '' && !document.referrer.includes(window.location.hostname)) {
+            destinationUrl = document.referrer;
         }
-    }
 
-    updateReturnBtnDirection();
+        // إظهار زر الرجوع فقط في حال وجود مصدر عودة حقيقي
+        if (destinationUrl) {
+            clientReturnBtn.href = destinationUrl;
+            clientReturnBtn.style.display = 'inline-flex';
+        }
 
-    if (langToggle) {
-        langToggle.addEventListener('click', () => {
-            setTimeout(updateReturnBtnDirection, 50);
-        });
+        // تحديث اتجاه السهم حسب اللغة
+        function updateReturnBtnDirection() {
+            const isAr = document.documentElement.getAttribute('lang') === 'ar';
+            if (returnIcon) {
+                returnIcon.className = isAr ? 'fas fa-arrow-right' : 'fas fa-arrow-left';
+            }
+        }
+        
+        updateReturnBtnDirection();
+
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                setTimeout(updateReturnBtnDirection, 50);
+            });
+        }
     }
 
     // 5. تجهيز نقاط الترقيم وتحديد الصور الخلفية للـ 3D Stack
@@ -163,10 +192,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 10. ثبات الصفحة بسلام بعد انتهاء الفيديو بدون أي توجيه أو خطأ
+    // 10. ثبات الصفحة بسلام بعد انتهاء الفيديو بدون أي توجيه تلقائي قسري
     if (introVideo) {
         introVideo.addEventListener('ended', () => {
-            console.log("انتهى العرض، الزائر يعاين الصفحة بسلام.");
+            console.log("انتهى العرض، الصفحة ثابتة وجاهزة للتحكم اليدوي.");
         });
     }
 });
