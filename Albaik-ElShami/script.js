@@ -1,120 +1,215 @@
-const cart = {};
-let currentLang = 'ar';
+document.addEventListener('DOMContentLoaded', () => {
 
-window.addEventListener('DOMContentLoaded', () => {
-    const promoVideo = document.getElementById('promoVideo');
-    const transitionLogoContainer = document.getElementById('transitionLogoContainer');
+    // --- قاموس الترجمات (i18n) ---
+    const translations = {
+        ar: {
+            pageTitle: "مطعم البيك الشامي",
+            mainTitle: "مطعم البيك الشامي",
+            aboutTitle: "عن البيك الشامي",
+            aboutText: "مرحباً بكم في مطعم البيك الشامي! نقدم لكم أشهى وألذ المأكولات الشامية والوجبات السريعة المحضرة بأعلى معايير الجودة والنظافة، باستخدام أفضل المكونات والبهارات الأصلية لننقل لكم طعم الشام الحقيقي في كل وجبة.",
+            slogan: '"أطيب من هيك .. ما في غير عند البيك"',
+            subSlogan: "البيك الشامي .. الطعم السوري الأصلي",
+            mapBtn: "موقعنا على الخريطة",
+            vcardBtn: "حفظ جهة الاتصال (vCard)",
+            qrTitle: "رمز QR الخاص بالمنيو",
+            qrDownload: "تحميل الـ QR Code",
+            addToCart: "إضافة للسلة",
+            whatsappBtn: "اطلب الآن عبر الواتساب",
+            
+            // الوجبات
+            mixBox: "بوكس الميكس العائلي",
+            farhaBox: "بوكس الفرحة",
+            familyBox: "بوكس العيلة",
+            sitraBox: "بوكس السترة",
+            kingShawarmaBox: "بوكس ملك الشاورما",
+            azamaBox: "بوكس العظمة",
+            akilaBox: "بوكس الأكيلة",
+            moalemBox: "بوكس المعلم",
+            karmOffer: "عرض الكرم",
+            mariaKings: "ملوك المعمرية",
+            summerOffer: "عرض الصيف",
+            vacationOffer: "عرض الإجازة",
+            bakawatOffer: "عرض البكاوات",
+            tabtabaOffer: "عرض الطبطبة",
+            kingOffer: "عرض الكينج",
+            moalemOffer: "عرض المعلم",
+            mzagOffer: "عرض المزاج",
+            raiqMeatOffer: "عرض الرايق لحم",
+            raiqChickenOffer: "عرض الرايق دجاج",
+            saadaOffer: "عرض السعادة",
+            ostoraOffer: "عرض الأسطورة",
+            ebnBaikOffer: "عرض ابن البيك"
+        },
+        en: {
+            pageTitle: "Al-Baik Al-Shami Restaurant",
+            mainTitle: "Al-Baik Al-Shami Restaurant",
+            aboutTitle: "About Al-Baik Al-Shami",
+            aboutText: "Welcome to Al-Baik Al-Shami! We serve the finest Levantine cuisine and fast food prepared with the highest quality and cleanliness standards, using authentic spices to bring you the true taste of Syria.",
+            slogan: '"Nothing beats the taste of Al-Baik"',
+            subSlogan: "Al-Baik Al-Shami .. Authentic Syrian Taste",
+            mapBtn: "Our Location on Map",
+            vcardBtn: "Save Contact (vCard)",
+            qrTitle: "Menu QR Code",
+            qrDownload: "Download QR Code",
+            addToCart: "Add to Cart",
+            whatsappBtn: "Order Now via WhatsApp",
+            
+            // Meals
+            mixBox: "Family Mix Box",
+            farhaBox: "Farha Box",
+            familyBox: "Family Box",
+            sitraBox: "Sitra Box",
+            kingShawarmaBox: "Shawarma King Box",
+            azamaBox: "Azama Box",
+            akilaBox: "Akila Box",
+            moalemBox: "El-Moalem Box",
+            karmOffer: "El-Karm Offer",
+            mariaKings: "Kings of Maria",
+            summerOffer: "Summer Offer",
+            vacationOffer: "Vacation Offer",
+            bakawatOffer: "Bakawat Offer",
+            tabtabaOffer: "Tabtaba Offer",
+            kingOffer: "King Offer",
+            moalemOffer: "Moalem Offer",
+            mzagOffer: "Mzag Offer",
+            raiqMeatOffer: "Raiq Meat Offer",
+            raiqChickenOffer: "Raiq Chicken Offer",
+            saadaOffer: "Saada Offer",
+            ostoraOffer: "Ostora Offer",
+            ebnBaikOffer: "Ebn El-Baik Offer"
+        }
+    };
 
-    if (promoVideo) {
-        promoVideo.addEventListener('ended', () => {
-            promoVideo.style.display = 'none';
-            if (transitionLogoContainer) {
-                transitionLogoContainer.style.display = 'block';
+    let currentLang = 'ar';
+
+    // 1. زر تبديل اللغة
+    const langToggleBtn = document.getElementById('langToggleBtn');
+    langToggleBtn?.addEventListener('click', () => {
+        currentLang = (currentLang === 'ar') ? 'en' : 'ar';
+        langToggleBtn.textContent = (currentLang === 'ar') ? 'EN' : 'عربي';
+        
+        // تغيير اتجاه الصفحة
+        document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+        document.documentElement.setAttribute('lang', currentLang);
+
+        // تحديث النصوص
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[currentLang][key]) {
+                el.textContent = translations[currentLang][key];
+            }
+        });
+    });
+
+    // 2. القائمة الجانبية
+    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggleBtn?.addEventListener('click', () => sidebar.classList.add('open'));
+    closeSidebarBtn?.addEventListener('click', () => sidebar.classList.remove('open'));
+
+    // 3. فيديو الهيدر
+    const chefVideo = document.getElementById('chefVideo');
+    const videoWrapper = document.getElementById('videoWrapper');
+    const logo2Wrapper = document.getElementById('logo2Wrapper');
+    let videoPlayCount = 0;
+
+    if (chefVideo) {
+        chefVideo.addEventListener('ended', () => {
+            videoPlayCount++;
+            if (videoPlayCount < 2) {
+                chefVideo.play();
+            } else {
+                videoWrapper.style.opacity = '0';
+                setTimeout(() => {
+                    videoWrapper.style.display = 'none';
+                    logo2Wrapper.style.opacity = '1';
+                }, 1000);
             }
         });
     }
-});
 
-function toggleSidebar() {
-    document.getElementById('sidebarNav').classList.toggle('active');
-}
+    // 4. إظهار كرات الاختيار بعد 3 ثوانٍ
+    setTimeout(() => {
+        document.querySelector('.floating-categories')?.classList.add('show');
+    }, 3000);
 
-function filterCategory(category, element = null) {
-    const cards = document.querySelectorAll('.box-card');
-    const titleEl = document.getElementById('categoryTitle');
+    // 5. التصفية التفاعلية بالصفوف عند الضغط على الكرات
+    const categoryBalls = document.querySelectorAll('.category-ball');
+    const mainFeaturedRows = document.querySelectorAll('.main-featured-row');
+    const categoryRows = document.querySelectorAll('[data-category-row]');
 
-    document.getElementById('sidebarNav').classList.remove('active');
+    categoryBalls.forEach(ball => {
+        ball.addEventListener('click', () => {
+            const selectedCategory = ball.getAttribute('data-category');
 
-    if (element) {
-        document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
-        element.classList.add('active');
-    }
+            // إخفاء الوجبات الرئيسية الأربعة
+            mainFeaturedRows.forEach(row => row.classList.add('hidden-row'));
 
-    const titles = {
-        'all': currentLang === 'ar' ? 'جميع الوجبات والعروض' : 'All Offers & Meals',
-        'single': currentLang === 'ar' ? 'وجبات الفرد' : 'Single Meals',
-        'two': currentLang === 'ar' ? 'وجبات لفردين' : 'Double Meals',
-        'family': currentLang === 'ar' ? 'وجبات العائلة' : 'Family Meals'
-    };
-    if (titleEl) titleEl.innerText = titles[category] || titles['all'];
-
-    cards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
+            // إظهار صفوف القسم المختار
+            categoryRows.forEach(row => {
+                if (row.getAttribute('data-category-row') === selectedCategory) {
+                    row.classList.remove('hidden-row');
+                } else {
+                    row.classList.add('hidden-row');
+                }
+            });
+        });
     });
 
-    document.getElementById('mealsGrid').scrollIntoView({ behavior: 'smooth' });
-}
+    // 6. فيديو الدجاج
+    const chickenVideo = document.getElementById('chickenVideo');
+    let chickenPlayCount = 0;
 
-function updateQty(mealId, change) {
-    const card = document.querySelector(`[data-id="${mealId}"]`);
-    const mealName = card.dataset.name;
-
-    if (!cart[mealId]) {
-        cart[mealId] = { name: mealName, qty: 0 };
+    if (chickenVideo) {
+        chickenVideo.addEventListener('ended', () => {
+            chickenPlayCount++;
+            if (chickenPlayCount < 2) {
+                chickenVideo.play();
+            } else {
+                chickenVideo.pause();
+            }
+        });
     }
 
-    cart[mealId].qty += change;
+    // 7. تحميل vCard
+    document.getElementById('downloadVcardBtn')?.addEventListener('click', () => {
+        const vcardData = 
+`BEGIN:VCARD
+VERSION:3.0
+FN:مطعم البيك الشامي
+TEL;TYPE=CELL:+201287307518
+ADR;TYPE=WORK:;;شارع نفق المحروسة من البحر, السيوف بحري, أول المنتزه;الإسكندرية;;;مصر
+URL;TYPE=WORK:https://mydigital-id.github.io/Albaik-ElShami/
+URL;TYPE=Facebook:https://www.facebook.com/share/18GpESiAv5/
+URL;TYPE=Instagram:https://www.instagram.com/albaik_elshami/
+END:VCARD`;
 
-    if (cart[mealId].qty <= 0) {
-        delete cart[mealId];
-        document.getElementById(`qty-${mealId}`).innerText = 0;
-    } else {
-        document.getElementById(`qty-${mealId}`).innerText = cart[mealId].qty;
-    }
+        const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'AlBaik-ElShami.vcf');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
 
-    renderCartModal();
-}
+    // 8. أزرار التحكم بالكمية
+    document.querySelectorAll('.qty-btn').forEach(group => {
+        const minus = group.querySelector('.minus');
+        const plus = group.querySelector('.plus');
+        const count = group.querySelector('span');
 
-function renderCartModal() {
-    const listContainer = document.getElementById('cartItemsList');
-    let totalQty = 0;
-    listContainer.innerHTML = '';
+        minus.addEventListener('click', () => {
+            let val = parseInt(count.textContent);
+            if (val > 1) count.textContent = --val;
+        });
 
-    if (Object.keys(cart).length === 0) {
-        listContainer.innerHTML = `<p class="empty-msg">${currentLang === 'ar' ? 'السلة فارغة حالياً' : 'Cart is empty'}</p>`;
-    } else {
-        for (let id in cart) {
-            const item = cart[id];
-            totalQty += item.qty;
-            listContainer.innerHTML += `
-                <div style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #222;">
-                    <span>${item.name}</span>
-                    <strong>${item.qty}</strong>
-                </div>
-            `;
-        }
-    }
-
-    document.getElementById('cartBadge').innerText = totalQty;
-    document.getElementById('totalMealsCount').innerText = totalQty;
-}
-
-function toggleCartModal() {
-    document.getElementById('cartModal').classList.toggle('active');
-}
-
-function sendOrderToWhatsapp() {
-    if (Object.keys(cart).length === 0) {
-        alert("السلة فارغة، فضلاً اختر الوجبات أولاً!");
-        return;
-    }
-
-    let totalQty = 0;
-    let message = "طلب جديد من البيك الشامي 🔥🍔\n---------------------------\n";
-
-    for (let id in cart) {
-        const item = cart[id];
-        totalQty += item.qty;
-        message += `• ${item.name} (العدد: ${item.qty})\n`;
-    }
-
-    message += `---------------------------\nإجمالي الوجبات: ${totalQty}\n`;
-    message += `📍 العنوان: شارع نفق المحروسه سيدي بشر الترام بجوار مكتب البريد، الإسكندرية`;
-
-    const phoneNumber = "201287307518";
-    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-}
+        plus.addEventListener('click', () => {
+            let val = parseInt(count.textContent);
+            count.textContent = ++val;
+        });
+    });
+});
