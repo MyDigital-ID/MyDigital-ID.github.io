@@ -33,7 +33,7 @@
                 <h4 data-en="Our Vision" data-ar="رؤيتنا">Our Vision</h4>
                 <p data-en="We live in an advanced digital age where communication no longer relies solely on direct or face-to-face interaction. Anyone who lacks easy channels to communicate and showcase their practical and professional capabilities on the ground inevitably drains their creative and productive potential. Therefore, through our vision, it has become imperative for us to help you accelerate communication with everyone—whether they are your existing long-term clients, prospective clients, or those striving to reach you."
                    data-ar="نحن نعيش في عصر رقمي متطور لم يعد التواصل فيه يعتمد على الاتصال المباشر أو وجهاً لوجه، ومن لا يملك قنوات سهلة للتواصل وشرح أفكاره وإمكانياته العملية والمهنية على أرض الواقع، فإنه يستنزف قدراته الإبداعية وطاقته الإنتاجية، لذلك أصبح لزاماً علينا من خلال رؤيتنا أن نساعدك في سرعة التواصل مع الجميع سواء كانوا من العملاء المستدامين لديك أو من العملاء المحتملين أو أولئك الذين يسعون في سبيل الوصول إليك.">
-                    We live in an advanced digital age where communication no longer relies solely on direct or face-to-face interaction...
+                    We live in an advanced digital age where communication no longer relies solely on direct or face-to-face interaction. Anyone who lacks easy channels to communicate and showcase their practical and professional capabilities on the ground inevitably drains their creative and productive potential. Therefore, through our vision, it has become imperative for us to help you accelerate communication with everyone—whether they are your existing long-term clients, prospective clients, or those striving to reach you.
                 </p>
             </div>
 
@@ -44,7 +44,7 @@
                 <h4 data-en="Our Mission" data-ar="مهمتنا">Our Mission</h4>
                 <p data-en="We continuously and tirelessly strive to introduce you to the modern world in the best possible light and image, enabling you to highlight your true skills and capabilities. This ensures that your communication with others is fast, targeted, and aligned with your ambitions to acquire new clients seeking top-tier results and performance to accomplish their tasks flawlessly. This is precisely the role we fulfill on the 'My Digital ID' page."
                    data-ar="نسعى بشكل دائم ومتواصل من أجل تقديمك إلى العالم المتطور بأفضل شكل وفي أفضل صورة تمكنك من إظهار قدراتك وإمكانياتك الحقيقية، حتى يكون تواصلك مع الآخرين سريع وهادف ويثماشي مع طموحاتك في إكتساب عملاء جدد يبحثون عن أفضل نتيجة وأداء ممكن لإنجاز مهامهم على الوجه الأكمل، وهذا الدور هو ما نقوم به في صفحة 'هويتي الرقمية'.">
-                    We continuously and tirelessly strive to introduce you to the modern world in the best possible light...
+                    We continuously and tirelessly strive to introduce you to the modern world in the best possible light and image, enabling you to highlight your true skills and capabilities. This ensures that your communication with others is fast, targeted, and aligned with your ambitions to acquire new clients seeking top-tier results and performance to accomplish their tasks flawlessly. This is precisely the role we fulfill on the 'My Digital ID' page.
                 </p>
             </div>
         </div>
@@ -58,8 +58,8 @@
                 <span id="langAr" class="lang-opt">AR</span>
             </div>
 
-            <!-- زر العودة لصفحة العميل -->
-            <a id="clientReturnBtn" href="https://mydigital-id.github.io/Dr-Moustafa/" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.15); border: 1px solid #d4af37; color: #d4af37; padding: 4px 10px; border-radius: 20px; text-decoration: none; font-size: 0.75rem; font-weight: 600; transition: all 0.3s ease;">
+            <!-- زر العودة لصفحة العميل (مخفي افتراضياً ولا يظهر إلا عند وجود مصدر خارجي) -->
+            <a id="clientReturnBtn" href="javascript:void(0);" onclick="goBackOrHome()" style="display: none; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.15); border: 1px solid #d4af37; color: #d4af37; padding: 4px 10px; border-radius: 20px; text-decoration: none; font-size: 0.75rem; font-weight: 600; transition: all 0.3s ease;">
                 <i class="fas fa-arrow-left" id="returnIcon"></i>
                 <span id="returnBtnText" data-en="Back" data-ar="رجوع">Back</span>
             </a>
@@ -143,6 +143,32 @@
 
     <!-- Script File -->
     <script src="script.js?v=4"></script>
+
+    <!-- السكربت الآمن للتحقق من المصدر والتوجيه -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const returnBtn = document.getElementById('clientReturnBtn');
+            const urlParams = new URLSearchParams(window.location.search);
+            const returnUrl = urlParams.get('returnUrl');
+
+            if (returnUrl) {
+                if (returnBtn) returnBtn.style.display = 'inline-flex';
+            } else if (document.referrer && document.referrer.trim() !== '' && !document.referrer.includes(window.location.hostname)) {
+                if (returnBtn) returnBtn.style.display = 'inline-flex';
+            }
+        });
+
+        function goBackOrHome() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const returnUrl = urlParams.get('returnUrl');
+
+            if (returnUrl) {
+                window.location.href = decodeURIComponent(returnUrl);
+            } else if (document.referrer && document.referrer.trim() !== '' && !document.referrer.includes(window.location.hostname)) {
+                window.location.href = document.referrer;
+            }
+        }
+    </script>
 
 </body>
 </html>

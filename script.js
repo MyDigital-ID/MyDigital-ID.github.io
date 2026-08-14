@@ -66,40 +66,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. تجهيز زر العودة الذكي لصفحة العميل
-    const clientReturnBtn = document.getElementById('clientReturnBtn');
-    const returnBtnText = document.getElementById('returnBtnText');
+    // 4. ضبط اتجاه سهم زر العودة الذكي فقط عند تبديل اللغة (بدون فرض روابط)
     const returnIcon = document.getElementById('returnIcon');
-    const urlParams = new URLSearchParams(window.location.search);
-    const returnTarget = urlParams.get('return');
 
-    const clientRoutes = {
-        'Dr-Moustafa': 'https://mydigital-id.github.io/Dr-Moustafa/'
-    };
-
-    if (clientReturnBtn) {
-        if (returnTarget && clientRoutes[returnTarget]) {
-            clientReturnBtn.href = clientRoutes[returnTarget];
-        } else if (document.referrer && document.referrer.includes('mydigital-id.github.io')) {
-            clientReturnBtn.href = document.referrer;
-        } else {
-            clientReturnBtn.href = 'https://mydigital-id.github.io/Dr-Moustafa/';
+    function updateReturnBtnDirection() {
+        const isAr = document.documentElement.getAttribute('lang') === 'ar';
+        if (returnIcon) {
+            returnIcon.className = isAr ? 'fas fa-arrow-right' : 'fas fa-arrow-left';
         }
+    }
 
-        function updateReturnBtnDirection() {
-            const isAr = document.documentElement.getAttribute('lang') === 'ar';
-            if (returnIcon) {
-                returnIcon.className = isAr ? 'fas fa-arrow-right' : 'fas fa-arrow-left';
-            }
-        }
-        
-        updateReturnBtnDirection();
+    updateReturnBtnDirection();
 
-        if (langToggle) {
-            langToggle.addEventListener('click', () => {
-                setTimeout(updateReturnBtnDirection, 50);
-            });
-        }
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+            setTimeout(updateReturnBtnDirection, 50);
+        });
     }
 
     // 5. تجهيز نقاط الترقيم وتحديد الصور الخلفية للـ 3D Stack
@@ -181,10 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 10. عدم التوجيه القسري تلقائياً بعد انتهاء الفيديو
+    // 10. ثبات الصفحة بسلام بعد انتهاء الفيديو بدون أي توجيه أو خطأ
     if (introVideo) {
         introVideo.addEventListener('ended', () => {
-            console.log("انتهى العرض، الزائر يعاين الصفحة كاملة وبإمكانه العودة يدوياً عبر أيقونة العودة.");
+            console.log("انتهى العرض، الزائر يعاين الصفحة بسلام.");
         });
     }
 });
