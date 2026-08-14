@@ -1,1 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+/* خلفية متوازنة غير مائلة للأحمر بطريقة مزعجة */
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.88), rgba(15, 3, 3, 0.92)), url('Background.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Dynamic Food Matrix Rain */
+.matrix-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.drop {
+    position: absolute;
+    top: -50px;
+    font-size: 1.8rem;
+    opacity: 0.22;
+    animation: fall linear infinite;
+}
+
+.d1 { left: 5%; animation-duration: 8s; animation-delay: 0s; }
+.d2 { left: 18%; animation-duration: 10s; animation-delay: 2s; }
+.d3 { left: 30%; animation-duration: 7s; animation-delay: 1s; }
+.d4 { left: 45%; animation-duration: 11s; animation-delay: 3s; }
+.d5 { left: 60%; animation-duration: 9s; animation-delay: 0.5s; }
+.d6 { left: 72%; animation-duration: 12s; animation-delay: 4s; }
+.d7 { left: 85%; animation-duration: 8s; animation-delay: 1.5s; }
+.d8 { left: 95%; animation-duration: 10s; animation-delay: 2.5s; }
+
+@keyframes fall {
+    0% { top: -50px; transform: rotate(0deg); opacity: 0.3; }
+    100% { top: 105vh; transform: rotate(360deg); opacity: 0; }
+}
+
+.main-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 15px 40px;
+}
+
+/* Header & White Title (العنوان باللون الأبيض الناصع) */
+.main-header {
+    text-align: center;
+    padding: 10px 0 20px;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.lang-btn, .menu-toggle-btn {
+    background: rgba(20, 20, 20, 0.9);
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.top-logo-large {
+    max-width: 150px;
+    height: auto;
+}
+
+/* العنوان الرئيسي باللون الأبيض */
+.main-title-white {
+    color: #ffffff !important;
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    margin-top: 5px;
+}
+
+/* ================= حركة بندول نيوتن الفيزياء الواقعية ================= */
+.cradle-section {
+    margin: 35px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.cradle-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0; /* متلاصقة كالبندول الحقيقي */
+    border-top: 4px solid #d4af37;
+    padding-top: 0;
+}
+
+.cradle-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transform-origin: top center;
+    padding: 0 4px;
+}
+
+.cradle-item .string {
+    width: 2px;
+    height: 50px;
+    background: linear-gradient(to bottom, #d4af37, #ff4500);
+}
+
+.ball-img-wrapper {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: 2px solid #d4af37;
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+    overflow: hidden;
+    background: #000;
+}
+
+.ball-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cradle-item span {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #d4af37;
+}
+
+/* الكرات في المنتصف ثابته وتنقل الصدمة فقط */
+.ball-physics-middle {
+    transform: none !important;
+}
+
+/* الحركة الفيزيائية المرتدة: الكرة الأولى تخبط $\rightarrow$ الكرة الأخيرة تطير */
+.ball-physics-1 {
+    animation: swingLeftReal 2s cubic-bezier(0.2, 0, 0.8, 1) infinite;
+}
+
+.ball-physics-2 {
+    animation: swingRightReal 2s cubic-bezier(0.2, 0, 0.8, 1) infinite;
+}
+
+@keyframes swingLeftReal {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(35deg); } /* ترتفع للأعلى */
+    50% { transform: rotate(0deg); }  /* تصدم الكرات */
+    100% { transform: rotate(0deg); } /* تقف وهي تنتظر صدمة العودة */
+}
+
+@keyframes swingRightReal {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(0deg); }  /* تنتظر حتى تصدمها الكرة الأولى */
+    75% { transform: rotate(-35deg); }/* ترتفع من أثر الصدمة */
+    100% { transform: rotate(0deg); } /* تعود لتصدم الصفحة مجدداً */
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100%;
+    background: rgba(12, 12, 12, 0.98);
+    border-left: 2px solid #e50914;
+    z-index: 999;
+    transition: right 0.4s ease;
+    padding: 20px;
+}
+
+.sidebar-nav.active { right: 0; }
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.nav-links { list-style: none; margin: 20px 0; }
+
+.nav-item {
+    padding: 12px;
+    margin-bottom: 8px;
+    background: #180606;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-item.active { background: #e50914; color: #fff; }
+
+/* Meals Grid & Cards */
+.category-header-title {
+    text-align: center;
+    color: #d4af37;
+    margin: 25px 0 15px;
+    font-size: 1.4rem;
+}
+
+.meals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.coal-frame-wrapper {
+    position: relative;
+    border: 2px solid #ff4500;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(15, 15, 15, 0.9);
+    padding: 10px;
+}
+
+.meal-title {
+    font-size: 0.95rem;
+    color: #fff;
+    text-align: center;
+    margin: 10px 0 5px;
+}
+
+.img-container img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.qty-btn {
+    background: #e50914;
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.qty-count { font-weight: bold; }
+
+/* Actions & Footer */
+.center-action-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.huge-ember-btn {
+    background: linear-gradient(45deg, #e50914, #ff4500);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.huge-cart-btn {
+    position: relative;
+    background: #111;
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px; right: -5px;
+    background: #e50914; color: #fff;
+    font-size: 0.75rem;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.main-footer { text-align: center; padding-top: 20px; }
+.digital-id-link { color: #d4af37; text-decoration: none; font-weight: bold; }
+
+/* Video & Cart Modal */
+.video-frame video, .secondary-video-wrapper video { width: 100%; border-radius: 8px; }
+.hidden-logo-container { display: none; text-align: center; padding: 15px 0; }
+.transition-logo { max-width: 80%; height: auto; }
+
+.cart-modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: none; justify-content: center; align-items: center; z-index: 1000;
+}
+.cart-modal-overlay.active { display: flex; }
+.cart-modal-content { background: #111; border: 2px solid #d4af37; border-radius: 12px; width: 90%; max-width: 400px; padding: 20px; }
+.modal-header { display: flex; justify-content: space-between; color: #d4af37; }
+.close-modal { background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+.checkout-btn { width: 100%; background: #25d366; color: #fff; border: none; padding: 10px; border-radius: 6px; font-weight: bold; margin-top: 15px; cursor: pointer; }
