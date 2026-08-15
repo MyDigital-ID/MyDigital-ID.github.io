@@ -208,12 +208,13 @@ body {
 }
 
 /* قسم الفيديوهات الضامنة للظهور */
+/* قسم الفيديو الأول بنسبة 3:4 */
 .hero-section {
     position: relative;
     width: 90%;
-    max-width: 500px;
-    height: 200px;
-    min-height: 200px;
+    max-width: 360px; /* تقليل العرض الأقصى ليتناسب مع الطول */
+    aspect-ratio: 3 / 4; /* تحديد النسبة الأبعاد بدقة 3:4 */
+    height: auto; /* ترك الارتفاع يتعدل تلقائياً بناءً على النسبة */
     margin: 15px auto;
     border: 2px solid #ff4500;
     border-radius: 15px;
