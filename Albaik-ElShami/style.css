@@ -24,43 +24,49 @@ body {
     opacity: 0.85;
 }
 
-/* الترويسة والأزرار العلوية */
+/* ==========================================
+   1. الترويسة والأزرار العلوية (مفصولة)
+   ========================================== */
 .header-controls {
     position: fixed;
     top: 15px;
-    right: 15px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 0 15px;
     display: flex;
-    gap: 10px;
+    justify-content: space-between; /* فصل زر القائمة يميناً وزر اللغة يساراً */
+    align-items: center;
     z-index: 99;
-}
-
-/* تعديل الاتجاه في حال كانت اللغة إنجليزية LTR */
-[dir="ltr"] .header-controls {
-    right: auto;
-    left: 15px;
+    pointer-events: none;
 }
 
 .menu-toggle-btn, .lang-toggle-btn {
-    background: #ff4500;
-    color: white;
-    border: none;
+    pointer-events: auto;
+    background: rgba(15, 5, 5, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 14px;
     font-size: 1.1rem;
     font-weight: bold;
-    padding: 8px 12px;
-    border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
     transition: 0.3s;
 }
 
-.lang-toggle-btn {
-    background: #111;
-    border: 1px solid #ff4500;
+/* زر القائمة الجانبية (يمين) - شرط باللون الأصفر/الذهبي */
+.menu-toggle-btn {
     color: #ffaa00;
 }
 
+/* زر تغيير اللغة (يسار) - باللون الأبيض */
+.lang-toggle-btn {
+    color: #ffffff;
+}
+
 .menu-toggle-btn:hover, .lang-toggle-btn:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    border-color: #ffaa00;
 }
 
 /* القائمة الجانبية */
@@ -171,74 +177,85 @@ body {
     font-size: 0.8rem;
 }
 
-/* الهيدر والعنوان */
+/* ==========================================
+   2. الهيدر واللوجو (ممركز في المنتصف تماماً)
+   ========================================== */
 .main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 20px 10px 10px;
+    padding: 25px 10px 10px;
+    width: 100%;
 }
 
 .main-logo {
-    width: 110px;
+    width: 130px;
+    max-width: 45vw;
+    height: auto;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7));
 }
 
 .sparkle-title {
     font-size: 1.8rem;
     font-weight: 900;
-    color: #fff;
-    text-shadow: 0 0 8px #ff5500;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 69, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.9);
+    margin: 0;
     position: relative;
     display: inline-block;
 }
 
+/* إزالة تأثير النجمة المارة بالكامل */
 .sparkle-title::after {
-    content: '★';
-    position: absolute;
-    top: -8px;
-    right: 0;
-    color: #00d2ff;
-    font-size: 1.1rem;
-    text-shadow: 0 0 10px #00d2ff, 0 0 20px #00d2ff;
-    animation: sweepAcrossText 4s linear infinite;
+    display: none !important;
 }
 
-@keyframes sweepAcrossText {
-    0% { right: 0%; opacity: 1; }
-    50% { right: 90%; opacity: 0.8; }
-    100% { right: 0%; opacity: 1; }
-}
-
-/* قسم الفيديوهات الضامنة للظهور */
-/* قسم الفيديو الأول بنسبة 3:4 */
+/* ==========================================
+   3. قسم الفيديو الأول (بدون إطار وبحجم أصغر)
+   ========================================== */
 .hero-section {
     position: relative;
-    width: 90%;
-    max-width: 360px; /* تقليل العرض الأقصى ليتناسب مع الطول */
-    aspect-ratio: 3 / 4; /* تحديد النسبة الأبعاد بدقة 3:4 */
-    height: auto; /* ترك الارتفاع يتعدل تلقائياً بناءً على النسبة */
-    margin: 15px auto;
-    border: 2px solid #ff4500;
-    border-radius: 15px;
+    width: 65%;
+    max-width: 260px;
+    aspect-ratio: 3 / 4;
+    margin: 10px auto 20px;
+    border: none !important;
+    border-radius: 12px;
     overflow: hidden;
-    background: rgba(20, 5, 5, 0.8);
+    background: transparent;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
 .video-wrapper, .logo2-wrapper {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    transition: opacity 1s;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease;
 }
 
 .video-wrapper video {
-    width: 100%; height: 100%; object-fit: cover; display: block;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block;
 }
 
 .logo2-wrapper {
-    display: flex; justify-content: center; align-items: center;
     opacity: 0;
 }
 
 .logo-secondary {
-    max-width: 80%; max-height: 80%; object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 /* الكرات الطافية */
@@ -360,6 +377,10 @@ body {
     .card { max-width: 320px; }
     .card img { height: 220px; }
     .card h3 { font-size: 1.1rem; }
+    
+    .main-logo {
+        width: 160px; /* تكبير متناسق للوجو على الديسك توب */
+    }
 }
 
 /* فيديو الدجاج والنصوص اللؤلؤية */
