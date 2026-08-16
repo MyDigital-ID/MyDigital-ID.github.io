@@ -22,7 +22,7 @@
 </head>
 <body>
 
-    <!-- تأثير الخلفية بالأكواد (لون نبيتي غامق + دخان وبخار ضبابي + تساقط قطع الدجاج) -->
+    <!-- تأثير الخلفية بالأكواد (نبيتي غامق زاهي + سلاسل دخان أبيض تصاعدي + تساقط الماتريكس) -->
     <canvas id="matrix-canvas"></canvas>
 
     <!-- أزرار الترويسة: زر المنيو وزر تحويل اللغة -->
@@ -46,7 +46,7 @@
 
             <hr class="sidebar-divider">
 
-            <!-- إضافة قسم الوجبات والعروض داخل السايدبار -->
+            <!-- قسم الوجبات والعروض داخل السايدبار -->
             <div class="sidebar-menu-categories">
                 <h4 data-i18n="menuCategoriesTitle"><i class="fas fa-utensils"></i> الوجبات والعروض</h4>
                 <ul class="sidebar-menu-list">
@@ -261,7 +261,7 @@
 
     <script src="script.js"></script>
 
-    <!-- كود الخلفية الديناميكية: لون نبيتي غامق + بخار ودخان ضبابي متصاعد + تساقط عناصر الماتريكس -->
+    <!-- كود الخلفية الديناميكية: لون نبيتي ملكي غني + كتل ناعمة وتصاعدية من الدخان الأبيض المترابط + تساقط الماتريكس -->
     <script>
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
@@ -273,17 +273,20 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // إعداد جزيئات الدخان والبخار الضبابي
-        const smokeParticles = [];
-        const smokeCount = 35;
-        for (let i = 0; i < smokeCount; i++) {
-            smokeParticles.push({
+        // إعداد كتل تصاعد الدخان الأبيض المتصاعد لشكله الواقعي
+        const smokePuffs = [];
+        const puffCount = 28;
+
+        for (let i = 0; i < puffCount; i++) {
+            smokePuffs.push({
                 x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 80 + 40,
-                opacity: Math.random() * 0.15 + 0.05,
-                vx: (Math.random() - 0.5) * 0.4,
-                vy: -Math.random() * 0.6 - 0.2
+                y: id="id="id=""""canvas.height + Math.random() * 200,
+                radius: Math.random() * 35 + 20,
+                maxRadius: Math.random() * 70 + 50,
+                opacity: Math.random() * 0.25 + 0.1,
+                speedY: Math.random() * 0.8 + 0.5,
+                driftX: (Math.random() - 0.5) * 0.35,
+                growthRate: Math.random() * 0.15 + 0.05
             });
         }
 
@@ -298,38 +301,55 @@
         }
 
         function drawScene() {
-            // 1. رسم الخلفية العميقة بلون نبيتي غامق مدرج
-            const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            grad.addColorStop(0, '#120003');
-            grad.addColorStop(0.5, '#260207');
-            grad.addColorStop(1, '#0d0002');
-            ctx.fillStyle = grad;
+            // 1. رسم خلفية باللون النبيتي المشرق/الغني من المنتصف والأغمق من الأطراف
+            const centerGradient = ctx.createRadialGradient(
+                canvas.width / 2, canvas.height / 2, 50,
+                canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height) / 1.2
+            );
+            centerGradient.addColorStop(0, '#5a0612'); // نبيتي غني ومركز
+            centerGradient.addColorStop(0.6, '#320208');
+            centerGradient.addColorStop(1, '#150003');
+
+            ctx.fillStyle = centerGradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // 2. رسم وتحريك الدخان والبخار الضبابي الأبيض/الرمادي
-            smokeParticles.forEach(p => {
+            // 2. رسم وتحريك سلاسل الدخان الأبيض التصاعدية
+            smokePuffs.forEach(p => {
                 ctx.save();
                 ctx.beginPath();
-                const pGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-                pGrad.addColorStop(0, `rgba(255, 255, 255, ${p.opacity})`);
-                pGrad.addColorStop(0.5, `rgba(220, 220, 225, ${p.opacity * 0.5})`);
-                pGrad.addColorStop(1, 'rgba(200, 200, 200, 0)');
-                ctx.fillStyle = pGrad;
+                
+                const smokeGradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+                smokeGradient.addColorStop(0, `rgba(255, 255, 255, ${p.opacity})`);
+                smokeGradient.addColorStop(0.4, `rgba(240, 240, 245, ${p.opacity * 0.6})`);
+                smokeGradient.addColorStop(0.8, `rgba(220, 220, 230, ${p.opacity * 0.2})`);
+                smokeGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+                ctx.fillStyle = smokeGradient;
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.restore();
 
-                // تحديث موقع الدخان
-                p.x += p.vx;
-                p.y += p.vy;
+                // تحديث حركة تصاعد الدخان نحو الأعلى
+                p.y -= p.speedY;
+                p.x += Math.sin(p.y * 0.01) * 0.4 + p.driftX; // حركة التموج الطبيعية
 
-                // إعادة تدوير جزيئات الدخان عند خروجها من الشاشة
-                if (p.y + p.radius < 0) {
-                    p.y = canvas.height + p.radius;
-                    p.x = Math.random() * canvas.width;
+                // تكبير حجم حزمة الدخان أثناء التصاعد
+                if (p.radius < p.maxRadius) {
+                    p.radius += p.growthRate;
                 }
-                if (p.x - p.radius > canvas.width) p.x = -p.radius;
-                if (p.x + p.radius < 0) p.x = canvas.width + p.radius;
+
+                // إضعاف الشفافية تدريجياً أثناء الارتفاع لتبخير الدخان في الهواء
+                if (p.y < canvas.height * 0.5) {
+                    p.opacity -= 0.001;
+                }
+
+                // إعادة توليد الدخان الجديد من الأسفل
+                if (p.y + p.radius < -20 || p.opacity <= 0) {
+                    p.y = canvas.height + Math.random() * 50;
+                    p.x = Math.random() * canvas.width;
+                    p.radius = Math.random() * 30 + 15;
+                    p.opacity = Math.random() * 0.25 + 0.12;
+                }
             });
 
             // 3. رسم تساقط عناصر الماتريكس
@@ -340,7 +360,7 @@
                 
                 if (y > 0) {
                     ctx.font = `${fontSize}px sans-serif`;
-                    ctx.globalAlpha = 0.35;
+                    ctx.globalAlpha = 0.4;
                     ctx.fillText(text, x, y);
                 }
                 
