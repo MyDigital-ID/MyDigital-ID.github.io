@@ -12,7 +12,7 @@
     
     <!-- وسوم التواصل الاجتماعي (Open Graph) -->
     <meta property="og:title" content="مطعم البيك الشامي - طعم الشام الأصلي">
-    <meta property="og:description" content="أشهى الوجبات الشامية في الإسكندرية. اطلب الآن!">
+    <meta property="og:description" content="أشهى الوجبات الشامية في الإسكندرية. تأكيد الطلب!">
     <meta property="og:url" content="https://mydigital-id.github.io/Albaik-ElShami/">
     <meta property="og:type" content="website">
 
@@ -22,7 +22,7 @@
 </head>
 <body>
 
-    <!-- تأثير الخلفية بالأكواد (نبيتي غامق زاهي + سلاسل دخان أبيض تصاعدي + تساقط الماتريكس) -->
+    <!-- تأثير الخلفية بالأكواد (نبيتي غامق غني + سلاسل دخان أبيض تصاعدية + تساقط عناصر الماتريكس) -->
     <canvas id="matrix-canvas"></canvas>
 
     <!-- أزرار الترويسة: زر المنيو وزر تحويل اللغة -->
@@ -226,7 +226,7 @@
 
             <!-- زر الطلب الآن -->
             <button class="confirm-order-btn" id="sendCartWhatsapp">
-                <i class="fab fa-whatsapp"></i> <span data-i18n="orderNowBtn">اطلب الآن</span>
+                <i class="fab fa-whatsapp"></i> <span data-i18n="orderNowBtn"> تأكيد الطلب</span>
             </button>
 
             <div class="direct-upload-notice">
@@ -261,7 +261,7 @@
 
     <script src="script.js"></script>
 
-    <!-- كود الخلفية الديناميكية: لون نبيتي ملكي غني + كتل ناعمة وتصاعدية من الدخان الأبيض المترابط + تساقط الماتريكس -->
+    <!-- كود الـ Canvas المصحح كاملاً: ظهور ثابت للدخان الأبيض المتصاعد مع الماتريكس بوضوح -->
     <script>
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
@@ -269,59 +269,59 @@
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+            initMatrix();
         }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
 
-        // إعداد كتل تصاعد الدخان الأبيض المتصاعد لشكله الواقعي
+        // 1. إعداد كتل تصاعد الدخان الأبيض
         const smokePuffs = [];
-        const puffCount = 28;
+        const puffCount = 35;
 
         for (let i = 0; i < puffCount; i++) {
             smokePuffs.push({
-                x: Math.random() * canvas.width,
-                y: id="id="id=""""canvas.height + Math.random() * 200,
-                radius: Math.random() * 35 + 20,
-                maxRadius: Math.random() * 70 + 50,
-                opacity: Math.random() * 0.25 + 0.1,
-                speedY: Math.random() * 0.8 + 0.5,
-                driftX: (Math.random() - 0.5) * 0.35,
-                growthRate: Math.random() * 0.15 + 0.05
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                radius: Math.random() * 40 + 25,
+                opacity: Math.random() * 0.25 + 0.12,
+                speedY: Math.random() * 0.7 + 0.4,
+                driftX: (Math.random() - 0.5) * 0.4
             });
         }
 
-        // إعداد تساقط عناصر الماتريكس
-        const items = ['🍗', '🍗', '🌶️', '🧄', '🥫', '🍟', '✨'];
-        const fontSize = 18;
-        const columns = Math.floor(canvas.width / (fontSize + 12)) || 10;
-        
-        const drops = [];
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.floor(Math.random() * -50); 
+        // 2. إعداد تساقط الماتريكس
+        const items = ['🍗', '🌶️', '🧄', '🥫', '🍟', '✨'];
+        const fontSize = 20;
+        let columns = 0;
+        let drops = [];
+
+        function initMatrix() {
+            columns = Math.floor(canvas.width / (fontSize + 12)) || 10;
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * -30);
+            }
         }
 
-        function drawScene() {
-            // 1. رسم خلفية باللون النبيتي المشرق/الغني من المنتصف والأغمق من الأطراف
-            const centerGradient = ctx.createRadialGradient(
-                canvas.width / 2, canvas.height / 2, 50,
-                canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height) / 1.2
-            );
-            centerGradient.addColorStop(0, '#5a0612'); // نبيتي غني ومركز
-            centerGradient.addColorStop(0.6, '#320208');
-            centerGradient.addColorStop(1, '#150003');
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
-            ctx.fillStyle = centerGradient;
+        function drawScene() {
+            // رسم الخلفية النبيتي الغنية
+            const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            grad.addColorStop(0, '#4a040d');
+            grad.addColorStop(0.5, '#2b0207');
+            grad.addColorStop(1, '#150003');
+            ctx.fillStyle = grad;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // 2. رسم وتحريك سلاسل الدخان الأبيض التصاعدية
-            smokePuffs.forEach(p => {
+            // رسم وتحريك كتل الدخان الأبيض المتصاعد
+            for (let i = 0; i < smokePuffs.length; i++) {
+                let p = smokePuffs[i];
                 ctx.save();
                 ctx.beginPath();
                 
-                const smokeGradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+                let smokeGradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
                 smokeGradient.addColorStop(0, `rgba(255, 255, 255, ${p.opacity})`);
-                smokeGradient.addColorStop(0.4, `rgba(240, 240, 245, ${p.opacity * 0.6})`);
-                smokeGradient.addColorStop(0.8, `rgba(220, 220, 230, ${p.opacity * 0.2})`);
+                smokeGradient.addColorStop(0.5, `rgba(240, 240, 245, ${p.opacity * 0.5})`);
                 smokeGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
 
                 ctx.fillStyle = smokeGradient;
@@ -329,42 +329,30 @@
                 ctx.fill();
                 ctx.restore();
 
-                // تحديث حركة تصاعد الدخان نحو الأعلى
+                // تحديث موقع الدخان
                 p.y -= p.speedY;
-                p.x += Math.sin(p.y * 0.01) * 0.4 + p.driftX; // حركة التموج الطبيعية
+                p.x += p.driftX;
 
-                // تكبير حجم حزمة الدخان أثناء التصاعد
-                if (p.radius < p.maxRadius) {
-                    p.radius += p.growthRate;
-                }
-
-                // إضعاف الشفافية تدريجياً أثناء الارتفاع لتبخير الدخان في الهواء
-                if (p.y < canvas.height * 0.5) {
-                    p.opacity -= 0.001;
-                }
-
-                // إعادة توليد الدخان الجديد من الأسفل
-                if (p.y + p.radius < -20 || p.opacity <= 0) {
-                    p.y = canvas.height + Math.random() * 50;
+                // إعادة تدوير الدخان عند خروجه من أعلى الصفحة
+                if (p.y + p.radius < 0) {
+                    p.y = canvas.height + p.radius;
                     p.x = Math.random() * canvas.width;
-                    p.radius = Math.random() * 30 + 15;
-                    p.opacity = Math.random() * 0.25 + 0.12;
                 }
-            });
+            }
 
-            // 3. رسم تساقط عناصر الماتريكس
+            // رسم تساقط عناصر الماتريكس فوق الدخان
+            ctx.font = `${fontSize}px sans-serif`;
             for (let i = 0; i < drops.length; i++) {
-                const text = items[Math.floor(Math.random() * items.length)];
+                const text = items[i % items.length];
                 const x = i * (fontSize + 12);
                 const y = drops[i] * fontSize;
-                
+
                 if (y > 0) {
-                    ctx.font = `${fontSize}px sans-serif`;
-                    ctx.globalAlpha = 0.4;
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
                     ctx.fillText(text, x, y);
                 }
-                
-                if (y > canvas.height && Math.random() > 0.975) {
+
+                if (y > canvas.height && Math.random() > 0.96) {
                     drops[i] = 0;
                 }
                 drops[i]++;
