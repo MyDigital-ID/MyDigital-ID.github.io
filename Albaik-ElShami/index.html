@@ -22,8 +22,7 @@
 </head>
 <body>
 
-    <div class="bg-overlay"></div>
-    <!-- تأثير ماتريكس تساقط قطع الدجاج والدقة الشامية -->
+    <!-- تأثير الخلفية بالأكواد (لون نبيتي غامق + دخان وبخار ضبابي + تساقط قطع الدجاج) -->
     <canvas id="matrix-canvas"></canvas>
 
     <!-- أزرار الترويسة: زر المنيو وزر تحويل اللغة -->
@@ -262,7 +261,7 @@
 
     <script src="script.js"></script>
 
-    <!-- كود الماتريكس -->
+    <!-- كود الخلفية الديناميكية: لون نبيتي غامق + بخار ودخان ضبابي متصاعد + تساقط عناصر الماتريكس -->
     <script>
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
@@ -274,6 +273,21 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
+        // إعداد جزيئات الدخان والبخار الضبابي
+        const smokeParticles = [];
+        const smokeCount = 35;
+        for (let i = 0; i < smokeCount; i++) {
+            smokeParticles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 80 + 40,
+                opacity: Math.random() * 0.15 + 0.05,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: -Math.random() * 0.6 - 0.2
+            });
+        }
+
+        // إعداد تساقط عناصر الماتريكس
         const items = ['🍗', '🍗', '🌶️', '🧄', '🥫', '🍟', '✨'];
         const fontSize = 18;
         const columns = Math.floor(canvas.width / (fontSize + 12)) || 10;
@@ -283,9 +297,42 @@
             drops[i] = Math.floor(Math.random() * -50); 
         }
 
-        function drawMatrix() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+        function drawScene() {
+            // 1. رسم الخلفية العميقة بلون نبيتي غامق مدرج
+            const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            grad.addColorStop(0, '#120003');
+            grad.addColorStop(0.5, '#260207');
+            grad.addColorStop(1, '#0d0002');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 2. رسم وتحريك الدخان والبخار الضبابي الأبيض/الرمادي
+            smokeParticles.forEach(p => {
+                ctx.save();
+                ctx.beginPath();
+                const pGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
+                pGrad.addColorStop(0, `rgba(255, 255, 255, ${p.opacity})`);
+                pGrad.addColorStop(0.5, `rgba(220, 220, 225, ${p.opacity * 0.5})`);
+                pGrad.addColorStop(1, 'rgba(200, 200, 200, 0)');
+                ctx.fillStyle = pGrad;
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                // تحديث موقع الدخان
+                p.x += p.vx;
+                p.y += p.vy;
+
+                // إعادة تدوير جزيئات الدخان عند خروجها من الشاشة
+                if (p.y + p.radius < 0) {
+                    p.y = canvas.height + p.radius;
+                    p.x = Math.random() * canvas.width;
+                }
+                if (p.x - p.radius > canvas.width) p.x = -p.radius;
+                if (p.x + p.radius < 0) p.x = canvas.width + p.radius;
+            });
+
+            // 3. رسم تساقط عناصر الماتريكس
             for (let i = 0; i < drops.length; i++) {
                 const text = items[Math.floor(Math.random() * items.length)];
                 const x = i * (fontSize + 12);
@@ -302,8 +349,11 @@
                 }
                 drops[i]++;
             }
+
+            requestAnimationFrame(drawScene);
         }
-        setInterval(drawMatrix, 50);
+
+        drawScene();
     </script>
 </body>
 </html>
