@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- قاموس الترجمات (i18n) ---
     const translations = {
         ar: {
             pageTitle: "مطعم البيك الشامي",
@@ -9,14 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
             aboutText: "مرحباً بكم في مطعم البيك الشامي! نقدم لكم أشهى وألذ المأكولات الشامية والوجبات السريعة المحضرة بأعلى معايير الجودة والنظافة، باستخدام أفضل المكونات والبهارات الأصلية لننقل لكم طعم الشام الحقيقي في كل وجبة.",
             slogan: '"أطيب من هيك .. ما في غير عند البيك"',
             subSlogan: "البيك الشامي .. الطعم السوري الأصلي",
+            directUploadText: "جميع طلباتك يتم رفعها بشكل مباشر",
+            cartTitle: "سلة الطلبات المباشرة",
+            confirmOrder: "تأكيد الطلب",
             mapBtn: "موقعنا على الخريطة",
             vcardBtn: "حفظ جهة الاتصال (vCard)",
             qrTitle: "رمز QR الخاص بالمنيو",
             qrDownload: "تحميل الـ QR Code",
             addToCart: "إضافة للسلة",
-            whatsappBtn: "اطلب الآن عبر الواتساب",
             
-            // الوجبات
             mixBox: "بوكس الميكس العائلي",
             farhaBox: "بوكس الفرحة",
             familyBox: "بوكس العيلة",
@@ -47,14 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
             aboutText: "Welcome to Al-Baik Al-Shami! We serve the finest Levantine cuisine and fast food prepared with the highest quality and cleanliness standards, using authentic spices to bring you the true taste of Syria.",
             slogan: '"Nothing beats the taste of Al-Baik"',
             subSlogan: "Al-Baik Al-Shami .. Authentic Syrian Taste",
+            directUploadText: "All your requests are uploaded directly",
+            cartTitle: "Direct Order Cart",
+            confirmOrder: "Confirm Order",
             mapBtn: "Our Location on Map",
             vcardBtn: "Save Contact (vCard)",
             qrTitle: "Menu QR Code",
             qrDownload: "Download QR Code",
             addToCart: "Add to Cart",
-            whatsappBtn: "Order Now via WhatsApp",
             
-            // Meals
             mixBox: "Family Mix Box",
             farhaBox: "Farha Box",
             familyBox: "Family Box",
@@ -88,11 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
         currentLang = (currentLang === 'ar') ? 'en' : 'ar';
         langToggleBtn.textContent = (currentLang === 'ar') ? 'EN' : 'عربي';
         
-        // تغيير اتجاه الصفحة
         document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
         document.documentElement.setAttribute('lang', currentLang);
 
-        // تحديث النصوص
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[currentLang][key]) {
@@ -113,29 +112,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const chefVideo = document.getElementById('chefVideo');
     const videoWrapper = document.getElementById('videoWrapper');
     const logo2Wrapper = document.getElementById('logo2Wrapper');
-    let videoPlayCount = 0;
 
     if (chefVideo) {
         chefVideo.addEventListener('ended', () => {
-            videoPlayCount++;
-            if (videoPlayCount < 2) {
-                chefVideo.play();
-            } else {
-                videoWrapper.style.opacity = '0';
+            videoWrapper.style.opacity = '0';
+            setTimeout(() => {
+                videoWrapper.style.display = 'none';
+                logo2Wrapper.style.display = 'flex';
                 setTimeout(() => {
-                    videoWrapper.style.display = 'none';
                     logo2Wrapper.style.opacity = '1';
-                }, 1000);
-            }
+                }, 50);
+            }, 800);
         });
     }
 
-    // 4. إظهار كرات الاختيار بعد 3 ثوانٍ
+    // 4. إظهار كرات الاختيار
     setTimeout(() => {
         document.querySelector('.floating-categories')?.classList.add('show');
     }, 3000);
 
-    // 5. التصفية التفاعلية بالصفوف عند الضغط على الكرات
+    // 5. التصفية التفاعلية بالصفوف
     const categoryBalls = document.querySelectorAll('.category-ball');
     const mainFeaturedRows = document.querySelectorAll('.main-featured-row');
     const categoryRows = document.querySelectorAll('[data-category-row]');
@@ -144,10 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ball.addEventListener('click', () => {
             const selectedCategory = ball.getAttribute('data-category');
 
-            // إخفاء الوجبات الرئيسية الأربعة
             mainFeaturedRows.forEach(row => row.classList.add('hidden-row'));
 
-            // إظهار صفوف القسم المختار
             categoryRows.forEach(row => {
                 if (row.getAttribute('data-category-row') === selectedCategory) {
                     row.classList.remove('hidden-row');
@@ -158,22 +152,93 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 6. فيديو الدجاج
-    const chickenVideo = document.getElementById('chickenVideo');
-    let chickenPlayCount = 0;
+    // 6. إدارة السلة المباشرة داخل الصفحة
+    let cart = [];
+    const cartBadge = document.getElementById('cartBadge');
+    const cartItemsList = document.getElementById('cartItemsList');
+    const sendCartWhatsapp = document.getElementById('sendCartWhatsapp');
 
-    if (chickenVideo) {
-        chickenVideo.addEventListener('ended', () => {
-            chickenPlayCount++;
-            if (chickenPlayCount < 2) {
-                chickenVideo.play();
-            } else {
-                chickenVideo.pause();
-            }
-        });
+    function updateCartUI() {
+        let totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+        if (cartBadge) cartBadge.textContent = totalCount;
+
+        if (cart.length > 0) {
+            cartItemsList.innerHTML = cart.map((item, index) => `
+                <div class="cart-item-row">
+                    <span>${item.name} (x${item.qty})</span>
+                    <button onclick="removeCartItem(${index})" class="remove-item-btn">&times;</button>
+                </div>
+            `).join('');
+        } else {
+            cartItemsList.innerHTML = '<p class="empty-cart-msg">السلة فارغة حالياً</p>';
+        }
     }
 
-    // 7. تحميل vCard
+    window.removeCartItem = function(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+    };
+
+    // 7. التحكم في أزرار الأعداد والإضافة للسلة
+    document.querySelectorAll('.qty-btn').forEach(group => {
+        const minus = group.querySelector('.minus');
+        const plus = group.querySelector('.plus');
+        const count = group.querySelector('span');
+
+        minus.addEventListener('click', (e) => {
+            e.stopPropagation();
+            let val = parseInt(count.textContent);
+            if (val > 1) count.textContent = --val;
+        });
+
+        plus.addEventListener('click', (e) => {
+            e.stopPropagation();
+            let val = parseInt(count.textContent);
+            count.textContent = ++val;
+        });
+    });
+
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON' && (e.target.classList.contains('minus') || e.target.classList.contains('plus'))) {
+                return;
+            }
+
+            const mealTitle = card.querySelector('h3')?.textContent || 'وجبة من المنيو';
+            const qty = parseInt(card.querySelector('.qty-btn span')?.textContent || '1');
+
+            const existingIndex = cart.findIndex(item => item.name === mealTitle);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += qty;
+            } else {
+                cart.push({ name: mealTitle, qty: qty });
+            }
+
+            updateCartUI();
+
+            // تأثير حركة سريع للكارت عند الإضافة
+            card.style.transform = 'scale(0.96)';
+            setTimeout(() => card.style.transform = '', 150);
+        });
+    });
+
+    // 8. إرسال الطلبات إلى الواتساب
+    sendCartWhatsapp?.addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('يرجى اختيار الوجبات أولاً');
+            return;
+        }
+
+        let message = "مرحباً مطعم البيك الشامي، أود تأكيد الطلبات التالية:\n";
+        cart.forEach((item, i) => {
+            message += `${i + 1}. ${item.name} - العدد: ${item.qty}\n`;
+        });
+
+        const whatsappUrl = `https://wa.me/201287307518?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    });
+
+    // 9. تحميل vCard
     document.getElementById('downloadVcardBtn')?.addEventListener('click', () => {
         const vcardData = 
 `BEGIN:VCARD
@@ -194,22 +259,5 @@ END:VCARD`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    });
-
-    // 8. أزرار التحكم بالكمية
-    document.querySelectorAll('.qty-btn').forEach(group => {
-        const minus = group.querySelector('.minus');
-        const plus = group.querySelector('.plus');
-        const count = group.querySelector('span');
-
-        minus.addEventListener('click', () => {
-            let val = parseInt(count.textContent);
-            if (val > 1) count.textContent = --val;
-        });
-
-        plus.addEventListener('click', () => {
-            let val = parseInt(count.textContent);
-            count.textContent = ++val;
-        });
     });
 });
