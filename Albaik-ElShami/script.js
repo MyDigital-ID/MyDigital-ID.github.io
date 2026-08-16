@@ -8,14 +8,19 @@ document.addEventListener('DOMContentLoaded', () => {
             aboutText: "مرحباً بكم في مطعم البيك الشامي! نقدم لكم أشهى وألذ المأكولات الشامية والوجبات السريعة المحضرة بأعلى معايير الجودة والنظافة، باستخدام أفضل المكونات والبهارات الأصلية لننقل لكم طعم الشام الحقيقي في كل وجبة.",
             slogan: '"أطيب من هيك .. ما في غير عند البيك"',
             subSlogan: "البيك الشامي .. الطعم السوري الأصلي",
-            directUploadText: "جميع طلباتك يتم رفعها بشكل مباشر",
+            directUploadText: "طلباتك يتم رفعها بشكل مباشر",
             cartTitle: "سلة الطلبات المباشرة",
-            confirmOrder: "تأكيد الطلب",
+            orderNowBtn: "اطلب الآن",
             mapBtn: "موقعنا على الخريطة",
             vcardBtn: "حفظ جهة الاتصال (vCard)",
             qrTitle: "رمز QR الخاص بالمنيو",
             qrDownload: "تحميل الـ QR Code",
             addToCart: "إضافة للسلة",
+            
+            menuCategoriesTitle: "الوجبات والعروض",
+            singleMeals: "وجبات الفرد",
+            twoMeals: "وجبات الفردين",
+            familyMeals: "وجبات العائلة",
             
             mixBox: "بوكس الميكس العائلي",
             farhaBox: "بوكس الفرحة",
@@ -47,14 +52,19 @@ document.addEventListener('DOMContentLoaded', () => {
             aboutText: "Welcome to Al-Baik Al-Shami! We serve the finest Levantine cuisine and fast food prepared with the highest quality and cleanliness standards, using authentic spices to bring you the true taste of Syria.",
             slogan: '"Nothing beats the taste of Al-Baik"',
             subSlogan: "Al-Baik Al-Shami .. Authentic Syrian Taste",
-            directUploadText: "All your requests are uploaded directly",
+            directUploadText: "Your orders are uploaded directly",
             cartTitle: "Direct Order Cart",
-            confirmOrder: "Confirm Order",
+            orderNowBtn: "Order Now",
             mapBtn: "Our Location on Map",
             vcardBtn: "Save Contact (vCard)",
             qrTitle: "Menu QR Code",
             qrDownload: "Download QR Code",
             addToCart: "Add to Cart",
+            
+            menuCategoriesTitle: "Meals & Offers",
+            singleMeals: "Single Meals",
+            twoMeals: "Two Persons Meals",
+            familyMeals: "Family Meals",
             
             mixBox: "Family Mix Box",
             farhaBox: "Farha Box",
@@ -131,24 +141,41 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.floating-categories')?.classList.add('show');
     }, 3000);
 
-    // 5. التصفية التفاعلية بالصفوف
+    // 5. التصفية التفاعلية بالصفوف (من الكرات الطافية وأزرار السايدبار)
     const categoryBalls = document.querySelectorAll('.category-ball');
+    const sidebarCatBtns = document.querySelectorAll('.sidebar-cat-btn');
     const mainFeaturedRows = document.querySelectorAll('.main-featured-row');
     const categoryRows = document.querySelectorAll('[data-category-row]');
+
+    function filterCategory(selectedCategory) {
+        mainFeaturedRows.forEach(row => row.classList.add('hidden-row'));
+
+        categoryRows.forEach(row => {
+            if (row.getAttribute('data-category-row') === selectedCategory) {
+                row.classList.remove('hidden-row');
+            } else {
+                row.classList.add('hidden-row');
+            }
+        });
+
+        const menuGrid = document.getElementById('menuGrid');
+        if (menuGrid) {
+            menuGrid.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 
     categoryBalls.forEach(ball => {
         ball.addEventListener('click', () => {
             const selectedCategory = ball.getAttribute('data-category');
+            filterCategory(selectedCategory);
+        });
+    });
 
-            mainFeaturedRows.forEach(row => row.classList.add('hidden-row'));
-
-            categoryRows.forEach(row => {
-                if (row.getAttribute('data-category-row') === selectedCategory) {
-                    row.classList.remove('hidden-row');
-                } else {
-                    row.classList.add('hidden-row');
-                }
-            });
+    sidebarCatBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const selectedCategory = btn.getAttribute('data-category');
+            filterCategory(selectedCategory);
+            sidebar.classList.remove('open');
         });
     });
 
@@ -179,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCartUI();
     };
 
-    // 7. التحكم في أزرار الأعداد والإضافة للسلة
+    // 7. التحكم في أزرار الأعداد والإضافة للسلة (عند الضغط في أي مكان داخل الكارت)
     document.querySelectorAll('.qty-btn').forEach(group => {
         const minus = group.querySelector('.minus');
         const plus = group.querySelector('.plus');

@@ -99,6 +99,48 @@ body {
 .slogan-sidebar { margin-top: 10px; color: #fff !important; font-weight: bold; text-align: center !important; }
 .sidebar-divider { border: 0; height: 1px; background: #ff4500; margin: 15px 0; }
 
+/* تنسيق قائمة الوجبات والعروض داخل السايدبار */
+.sidebar-menu-categories {
+    text-align: right;
+    margin: 10px 0;
+}
+[dir="ltr"] .sidebar-menu-categories {
+    text-align: left;
+}
+.sidebar-menu-categories h4 {
+    color: #ffaa00;
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.sidebar-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sidebar-menu-list li {
+    margin-bottom: 8px;
+}
+.sidebar-cat-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 69, 0, 0.4);
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: inherit;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+.sidebar-cat-btn:hover {
+    background: rgba(255, 69, 0, 0.3);
+    border-color: #ffaa00;
+    color: #ffaa00;
+}
+
 .sidebar-btn {
     display: block; width: 100%; background: rgba(255, 69, 0, 0.2);
     border: 1px solid #ff4500; color: white; padding: 10px; margin: 10px 0;
@@ -238,7 +280,17 @@ body {
     padding: 10px 0;
 }
 
-/* زر تأكيد الطلب للواتساب */
+/* تنسيق فيديو Chicken.mp4 داخل كارت السلة */
+.inline-chicken-video {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    margin: 12px 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* زر اطلب الآن */
 .confirm-order-btn {
     width: 100%;
     background: #25d366;
@@ -261,7 +313,7 @@ body {
     transform: scale(1.02);
 }
 
-/* العبارة المباشرة التي تقع أسفل زر التأكيد */
+/* العبارة المباشرة التي تقع أسفل زر اطلب الآن */
 .direct-upload-notice {
     text-align: center;
     margin-top: 12px;
@@ -285,10 +337,8 @@ body {
 
 /* الأسفل والفوتر */
 .bottom-section { text-align: center; margin: 20px auto 30px; max-width: 500px; width: 90%; }
-.bottom-video-box { position: relative; height: 200px; border: none !important; overflow: hidden; background: transparent !important; }
-.bottom-video-box video { width: 100%; height: 100%; object-fit: cover; display: block; border: none !important; }
 
-.pearl-text-container { margin-top: 20px; }
+.pearl-text-container { margin-top: 10px; }
 .pearl-text { color: #f8f9fa; text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); font-weight: bold; }
 .pearl-text.slogan { font-size: 1.15rem; margin-bottom: 5px; }
 .pearl-text.sub-slogan { font-size: 0.95rem; opacity: 0.9; }

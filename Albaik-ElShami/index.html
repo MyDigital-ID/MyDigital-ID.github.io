@@ -47,6 +47,18 @@
 
             <hr class="sidebar-divider">
 
+            <!-- إضافة قسم الوجبات والعروض داخل السايدبار -->
+            <div class="sidebar-menu-categories">
+                <h4 data-i18n="menuCategoriesTitle"><i class="fas fa-utensils"></i> الوجبات والعروض</h4>
+                <ul class="sidebar-menu-list">
+                    <li><button class="sidebar-cat-btn" data-category="single" data-i18n="singleMeals">وجبات الفرد</button></li>
+                    <li><button class="sidebar-cat-btn" data-category="two" data-i18n="twoMeals">وجبات الفردين</button></li>
+                    <li><button class="sidebar-cat-btn" data-category="family" data-i18n="familyMeals">وجبات العائلة</button></li>
+                </ul>
+            </div>
+
+            <hr class="sidebar-divider">
+
             <a href="https://maps.google.com/?q=7X3G%2BH93+Alexandria" target="_blank" class="sidebar-btn">
                 <i class="fas fa-map-marker-alt"></i> <span data-i18n="mapBtn">موقعنا على الخريطة</span>
             </a>
@@ -206,25 +218,26 @@
                 <p class="empty-cart-msg">السلة فارغة حالياً</p>
             </div>
 
+            <!-- تم نقل فيديو الدجاج ليكون بين السلة وزر الطلب مباشرة -->
+            <div class="video-wrapper bottom-video-box inline-chicken-video">
+                <video id="chickenVideo" autoplay muted playsinline loop>
+                    <source src="Assets/video/Chicken.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- زر الطلب الآن والعبارة المطلوبة تحته -->
             <button class="confirm-order-btn" id="sendCartWhatsapp">
-                <i class="fab fa-whatsapp"></i> <span data-i18n="confirmOrder">تأكيد الطلب</span>
+                <i class="fab fa-whatsapp"></i> <span data-i18n="orderNowBtn">اطلب الآن</span>
             </button>
 
-            <!-- العبارة التي طلبتها تحت زر تأكيد الطلب مباشرة -->
             <div class="direct-upload-notice">
-                <i class="fas fa-bolt"></i> <span data-i18n="directUploadText">جميع طلباتك يتم رفعها بشكل مباشر</span>
+                <i class="fas fa-bolt"></i> <span data-i18n="directUploadText">طلباتك يتم رفعها بشكل مباشر</span>
             </div>
         </div>
     </section>
 
-    <!-- فيديو الدجاج والشعارات -->
+    <!-- والشعارات في أسفل الصفحة -->
     <section class="bottom-section">
-        <div class="video-wrapper bottom-video-box">
-            <video id="chickenVideo" autoplay muted playsinline>
-                <source src="Assets/video/Chicken.mp4" type="video/mp4">
-            </video>
-        </div>
-
         <div class="pearl-text-container">
             <p class="pearl-text slogan" data-i18n="slogan">" أطيب من هيك .. ما في غير عند البيك "</p>
             <p class="pearl-text sub-slogan" data-i18n="subSlogan">البيك الشامي .. الطعم السوري الأصلي</p>
