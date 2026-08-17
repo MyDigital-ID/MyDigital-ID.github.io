@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dotsContainer = document.getElementById('dotsContainer');
     const bgCards = document.querySelectorAll('.bg-card');
 
-    // زمن عرض كل صورة
+    // زمن عرض كل صورة (1.5 ثانية)
     let currentSlide = 0;
     const slideDuration = 1500;
 
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.documentElement.setAttribute('lang', 'en');
             }
 
-            // ترجمة جميع العناصر التفاعلية
+            // ترجمة جميع العناصر التفاعلية والقائمة المنزلقة
             translatableElements.forEach(el => {
                 if (el.dataset[targetLang]) {
                     el.textContent = el.dataset[targetLang];
@@ -66,54 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. الربط والتحقق الذكي لإظهار زر العودة (Back) عند الدخول من صفحة عميل
-    const clientReturnBtn = document.getElementById('clientReturnBtn');
-    const returnIcon = document.getElementById('returnIcon');
-    const urlParams = new URLSearchParams(window.location.search);
-    const returnTarget = urlParams.get('return') || urlParams.get('returnUrl');
-
-    const clientRoutes = {
-        'Dr-Moustafa': 'https://mydigital-id.github.io/Dr-Moustafa/'
-    };
-
-    if (clientReturnBtn) {
-        let destinationUrl = '';
-
-        // 1. فحص هل هناك اسم عميل أو رابط ممرر في الـ URL
-        if (returnTarget && clientRoutes[returnTarget]) {
-            destinationUrl = clientRoutes[returnTarget];
-        } else if (returnTarget) {
-            destinationUrl = decodeURIComponent(returnTarget);
-        } 
-        // 2. فحص هل الزائر قادم من موقع خارجي حقيقي (مثل موقع د. مصطفى أو غيره)
-        else if (document.referrer && document.referrer.trim() !== '' && !document.referrer.includes(window.location.hostname)) {
-            destinationUrl = document.referrer;
-        }
-
-        // إظهار زر الرجوع فقط في حال وجود مصدر عودة حقيقي
-        if (destinationUrl) {
-            clientReturnBtn.href = destinationUrl;
-            clientReturnBtn.style.display = 'inline-flex';
-        }
-
-        // تحديث اتجاه السهم حسب اللغة
-        function updateReturnBtnDirection() {
-            const isAr = document.documentElement.getAttribute('lang') === 'ar';
-            if (returnIcon) {
-                returnIcon.className = isAr ? 'fas fa-arrow-right' : 'fas fa-arrow-left';
-            }
-        }
-        
-        updateReturnBtnDirection();
-
-        if (langToggle) {
-            langToggle.addEventListener('click', () => {
-                setTimeout(updateReturnBtnDirection, 50);
-            });
-        }
-    }
-
-    // 5. تجهيز نقاط الترقيم وتحديد الصور الخلفية للـ 3D Stack
+    // 4. تجهيز نقاط الترقيم وتحديد الصور الخلفية للـ 3D Stack
     if (slides.length > 0) {
         slides.forEach((_, index) => {
             const dot = document.createElement('div');
@@ -125,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const dots = document.querySelectorAll('.dot');
 
-    // 6. رفع الشعار وإظهار السلايدر بعد 4.8 ثانية
+    // 5. رفع الشعار وإظهار السلايدر بعد 4.8 ثانية
     setTimeout(() => {
         if (intro) intro.classList.add('move-up');
         if (mediaContainer) mediaContainer.classList.add('show');
@@ -136,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 4800);
 
-    // 7. دالة تحديث صور الكروت الخلفية 3D
+    // 6. دالة تحديث صور الكروت الخلفية 3D
     function updateBackgroundCards(index) {
         if (bgCards.length >= 3 && slides.length > 0) {
             const next1 = (index + 1) % slides.length;
@@ -149,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 8. تشغيل معرض الصور
+    // 7. تشغيل معرض الصور
     function startSlideshow() {
         const interval = setInterval(() => {
             if (slides[currentSlide]) {
@@ -172,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, slideDuration);
     }
 
-    // 9. التحول للفيديو
+    // 8. التحول للفيديو
     function switchToVideo() {
         if (slideshow) slideshow.style.display = 'none';
         
@@ -192,10 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 10. ثبات الصفحة بسلام بعد انتهاء الفيديو بدون أي توجيه تلقائي قسري
-    if (introVideo) {
-        introVideo.addEventListener('ended', () => {
-            console.log("انتهى العرض، الصفحة ثابتة وجاهزة للتحكم اليدوي.");
-        });
-    }
+    // 9. تم إيقاف التحويل التلقائي لمنع خطأ Server Error / 404
+    // سيظل الزائر داخل الصفحة لاستعراض المحتوى والتواصل، أو الضغط على زر الرجوع بنفسه.
 });

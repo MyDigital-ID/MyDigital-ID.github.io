@@ -58,8 +58,8 @@
                 <span id="langAr" class="lang-opt">AR</span>
             </div>
 
-            <!-- زر العودة لصفحة العميل (مخفي افتراضياً ولا يظهر إلا عند وجود مصدر خارجي) -->
-            <a id="clientReturnBtn" href="javascript:void(0);" onclick="goBackOrHome()" style="display: none; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.15); border: 1px solid #d4af37; color: #d4af37; padding: 4px 10px; border-radius: 20px; text-decoration: none; font-size: 0.75rem; font-weight: 600; transition: all 0.3s ease;">
+            <!-- زر العودة الآمن -->
+            <a id="clientReturnBtn" href="javascript:void(0);" onclick="goBackOrHome()" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(212, 175, 55, 0.15); border: 1px solid #d4af37; color: #d4af37; padding: 4px 10px; border-radius: 20px; text-decoration: none; font-size: 0.75rem; font-weight: 600; transition: all 0.3s ease;">
                 <i class="fas fa-arrow-left" id="returnIcon"></i>
                 <span id="returnBtnText" data-en="Back" data-ar="رجوع">Back</span>
             </a>
@@ -144,28 +144,24 @@
     <!-- Script File -->
     <script src="script.js?v=4"></script>
 
-    <!-- السكربت الآمن للتحقق من المصدر والتوجيه -->
+    <!-- سكربت الرجوع الآمن كلياً -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const returnBtn = document.getElementById('clientReturnBtn');
-            const urlParams = new URLSearchParams(window.location.search);
-            const returnUrl = urlParams.get('returnUrl');
-
-            if (returnUrl) {
-                if (returnBtn) returnBtn.style.display = 'inline-flex';
-            } else if (document.referrer && document.referrer.trim() !== '' && !document.referrer.includes(window.location.hostname)) {
-                if (returnBtn) returnBtn.style.display = 'inline-flex';
-            }
-        });
-
         function goBackOrHome() {
             const urlParams = new URLSearchParams(window.location.search);
             const returnUrl = urlParams.get('returnUrl');
 
+            // 1. إذا تم تمرير رابط محدد آمن صراحة عبر returnUrl
             if (returnUrl) {
                 window.location.href = decodeURIComponent(returnUrl);
-            } else if (document.referrer && document.referrer.trim() !== '' && !document.referrer.includes(window.location.hostname)) {
-                window.location.href = document.referrer;
+                return;
+            }
+
+            // 2. إذا كان للزائر سجل زيارة سابق في نفس التبويب، يرجع للخلف مباشرة
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // 3. إذا لم يكن هناك سجل سابق (فتح الرابط مباشرة)، لا يفعل شيئاً لمنع أخطاء السيرفر
+                console.log("No previous history page to go back to.");
             }
         }
     </script>
