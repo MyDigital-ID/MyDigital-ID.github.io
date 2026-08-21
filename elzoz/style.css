@@ -128,12 +128,26 @@ body.lang-en .img-en { display: block !important; }
     flex-wrap: wrap;
 }
 
+/* ترتيب اللوجو فوق الاسم في اللغة العربية وتكبير الحجم */
+html[dir="rtl"] .brand-container,
+body.lang-ar .brand-container {
+    flex-direction: column;
+    gap: 8px;
+}
+
 .header-brand-logo {
     display: inline-block !important;
-    height: 50px;
+    height: 75px;
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 0 8px rgba(255, 107, 0, 0.8));
+    transition: height 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .header-brand-logo {
+        height: 85px;
+    }
 }
 
 .brand-title {

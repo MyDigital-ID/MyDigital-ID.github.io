@@ -70,11 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgDrinks = document.getElementById('imgDrinks');
 
         if (imgSandwiches) imgSandwiches.src = isEn ? 'assets/images/Elzoz-Sandw-engl.png' : 'assets/images/Elzoz-sandwiches-arabic.png';
-        if (imgOffers) imgOffers.src = 'assets/images/Elzoz-offers-arabic.png';
+        if (imgOffers) imgOffers.src = isEn ? 'assets/images/Elzoz-offers.png' : 'assets/images/Elzoz-offers-arabic.png';
         if (imgRice) imgRice.src = isEn ? 'assets/images/Rice-Dishes-engl.png' : 'assets/images/Rice-Dishes-arabic.png';
         if (imgPasta) imgPasta.src = isEn ? 'assets/images/Pasta-engl.png' : 'assets/images/Pasta-arabic.png';
         if (imgSauces) imgSauces.src = isEn ? 'assets/images/Sauce-engl.png' : 'assets/images/Sauce-arabic.png';
-        if (imgDrinks) imgDrinks.src = isEn ? 'assets/images/Drinks-engl.png' : 'assets/images/Drinks-arabic.png';
+        if (imgDrinks) imgDrinks.src = isEn ? 'assets/images/Drinks-engl.png' : 'assets/images/Drinks-Arabic.png';
     }
 
     function translateAllItems(lang) {
