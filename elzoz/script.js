@@ -299,10 +299,20 @@ document.addEventListener('DOMContentLoaded', () => {
         splash.style.left = `${x}px`;
         splash.style.top = `${y}px`;
 
-        document.body.appendChild(splash);
+             document.body.appendChild(splash);
 
         setTimeout(() => {
             splash.remove();
         }, 600);
     }
+
+     const myDigitalBtn = document.getElementById('myDigitalIdBtn');
+    if (myDigitalBtn) {
+        myDigitalBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.open('https://mydigital-id.github.io/', '_blank');
+        });
+    }
 });
+       

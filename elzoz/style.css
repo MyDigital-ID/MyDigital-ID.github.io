@@ -198,6 +198,13 @@ body.lang-ar .brand-container {
     0% { transform: translateY(0); }
     100% { transform: translateY(-10px); }
 }
+/* تكبير الكرات للتابلت والديسك توب */
+@media (min-width: 768px) {
+  .category-ball {
+    width: 130px;
+    height: 130px;
+  }
+}
 
 /* =====================================================
    4. قسم الفيديو (العرض الرئيسي)
@@ -593,7 +600,37 @@ body.lang-ar .brand-container {
     align-items: center;
     justify-content: center;
     gap: 6px;
+    position: relative;
+    z-index: 9999;
 }
+
+.mydigital-link {
+    color: #00d2ff;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: 0.3s;
+    cursor: pointer;
+    position: relative;
+    z-index: 10000;
+}
+
+
+.mydigital-link {
+    color: #00d2ff;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: 0.3s;
+    cursor: pointer;
+    position: relative;
+    z-index: 10000; /* ضمان نقاء الضغطة للرابط */
+}
+
 
 .mydigital-link {
     color: #00d2ff;
