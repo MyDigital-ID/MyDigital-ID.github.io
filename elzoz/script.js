@@ -94,6 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.lang = currentLang;
         document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
+        if (currentLang === 'en') {
+            document.body.classList.add('lang-en');
+            document.body.classList.remove('lang-ar');
+        } else {
+            document.body.classList.add('lang-ar');
+            document.body.classList.remove('lang-en');
+        }
+
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
             if (translations[currentLang][key] !== undefined) {
@@ -123,15 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
     menuToggleBtn?.addEventListener('click', () => sidebar.classList.add('open'));
     closeSidebarBtn?.addEventListener('click', () => sidebar.classList.remove('open'));
 
-    // التحكم بالفيديو واللوجو الرئيسي
+    // التحكم بالفيديو الرئيسي (تثبيت آخر فريم وإلغاء اختفائه)
     const chefVideo = document.getElementById('chefVideo');
-    const videoWrapper = document.getElementById('videoWrapper');
-    const logo2Wrapper = document.getElementById('logo2Wrapper');
 
     chefVideo?.addEventListener('ended', () => {
-        videoWrapper.style.display = 'none';
-        logo2Wrapper.style.display = 'flex';
-        setTimeout(() => { logo2Wrapper.style.opacity = '1'; }, 50);
+        chefVideo.pause(); // يتوقف عند آخر لحظة في الفيديو وتظل ثابته
     });
 
     // فلترة الفئات
@@ -253,7 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
             splash.remove();
         }, 500);
     }
-});
 
     // =====================================================
     //  تأثير هجوم وانقضاض القرش مع طرطشة الماية السينمائية
@@ -282,11 +285,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function triggerSharkBreach(x, y) {
-        // تحديد مكان الانقضاض عند إحداثيات الضغطة
         attackShark.style.left = `${x}px`;
         attackShark.style.top = `${y}px`;
 
-        // إزالة الكلاس ثم إعادته لإعادة تشغيل الأنيميشن في كل ضغطة
         attackShark.classList.remove('active');
         void attackShark.offsetWidth; // Trigger Reflow
         attackShark.classList.add('active');
@@ -304,3 +305,4 @@ document.addEventListener('DOMContentLoaded', () => {
             splash.remove();
         }, 600);
     }
+});
