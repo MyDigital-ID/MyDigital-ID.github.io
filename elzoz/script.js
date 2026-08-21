@@ -1,318 +1,190 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. العناصر الرئيسية
+    const intro = document.getElementById('intro');
+    const mediaContainer = document.getElementById('mediaContainer');
+    const slideshow = document.getElementById('slideshow');
+    const videoSection = document.getElementById('videoSection');
+    const introVideo = document.getElementById('introVideo');
+    const contactSection = document.getElementById('contactSection');
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('dotsContainer');
+    const bgCards = document.querySelectorAll('.bg-card');
 
-    const langToggleBtn = document.getElementById('langToggleBtn');
+    // زمن عرض كل صورة
+    let currentSlide = 0;
+    const slideDuration = 1500;
 
-    const translations = {
-        ar: {
-            pageTitle: 'سندويتشات الزوز | ELZOZ SANDWICHES',
-            restaurantName: 'سندويتشات الزوز',
-            aboutTitle: 'عن سندويتشات الزوز',
-            aboutText: 'مرحباً بكم في مطعم سندويتشات الزوز ❤️ نقدم لكم أشهى وألذ السندويتشات والأطباق البحرية الطازجة.',
-            slogan: '"عند الزوز .. السندويتشات بتبوظ"',
-            addressTitle: 'العنوان',
-            addressText: 'الإسكندرية سيدي بشر الترام - شارع خالد بن الوليد الرئيسي - أمام جزارة الثورة',
-            menuCategoriesTitle: 'القائمة والوجبات',
-            homeMeal: 'الرئيسية',
-            singleMeals: 'وجبات الفرد',
-            offersTitle: 'عروض الزوز',
-            sandwichesTitle: 'السندويتشات',
-            riceTitle: 'أطباق الأرز',
-            pastaTitle: 'المكرونات',
-            soupsTitle: 'الشوربة والأطباق',
-            saucesTitle: 'الصوصات',
-            drinksTitle: 'المشروبات',
-            mapBtn: 'موقعنا على الخريطة',
-            vcardBtn: 'حفظ جهة الاتصال (vCard)',
-            qrTitle: 'رمز QR',
-            addToCart: 'إضافة للسلة',
-            cartTitle: 'سلة الطلبات المباشرة',
-            emptyCartMsg: 'السلة فارغة حالياً',
-            orderNowBtn: 'تأكيد الطلبات',
-            directUploadText: 'طلباتك يتم رفعها بشكل مباشر'
-        },
-        en: {
-            pageTitle: 'ELZOZ SANDWICHES',
-            restaurantName: 'ELZOZ SANDWICHES',
-            aboutTitle: 'About El Zoz Sandwiches',
-            aboutText: 'Welcome to El Zoz Sandwiches ❤️ We offer the finest fresh seafood sandwiches and dishes.',
-            slogan: '"At El Zoz .. Sandwiches Overload!"',
-            addressTitle: 'Address',
-            addressText: 'Sidi Bishr Tram, Khaled Ibn El Waleed St, Alexandria',
-            menuCategoriesTitle: 'Menu & Meals',
-            homeMeal: 'Home',
-            singleMeals: 'Single Meals',
-            offersTitle: 'ELZOZ Offers',
-            sandwichesTitle: 'Sandwiches',
-            riceTitle: 'Rice Dishes',
-            pastaTitle: 'Pasta Dishes',
-            soupsTitle: 'Soups & Dishes',
-            saucesTitle: 'Sauces',
-            drinksTitle: 'Drinks',
-            mapBtn: 'Location Map',
-            vcardBtn: 'Save Contact (vCard)',
-            qrTitle: 'Menu QR',
-            addToCart: 'Add to Cart',
-            cartTitle: 'Live Order Cart',
-            emptyCartMsg: 'The cart is empty',
-            orderNowBtn: 'Confirm Orders',
-            directUploadText: 'Your order is sent directly'
-        }
-    };
+    // 2. التحكم في القائمة المنزلقة (Side Drawer Menu)
+    const openDrawerBtn = document.getElementById('openDrawerBtn');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    const sideDrawer = document.getElementById('sideDrawer');
+    const menuOverlay = document.getElementById('menuOverlay');
 
-    function updateCategoryBallImages(lang) {
-        const isEn = lang === 'en';
-        
-        const imgSandwiches = document.getElementById('imgSandwiches');
-        const imgOffers = document.getElementById('imgOffers');
-        const imgRice = document.getElementById('imgRice');
-        const imgPasta = document.getElementById('imgPasta');
-        const imgSauces = document.getElementById('imgSauces');
-        const imgDrinks = document.getElementById('imgDrinks');
-
-        if (imgSandwiches) imgSandwiches.src = isEn ? 'assets/images/Elzoz-Sandw-engl.png' : 'assets/images/Elzoz-sandwiches-arabic.png';
-        if (imgOffers) imgOffers.src = isEn ? 'assets/images/Elzoz-offers.png' : 'assets/images/Elzoz-offers-arabic.png';
-        if (imgRice) imgRice.src = isEn ? 'assets/images/Rice-Dishes-engl.png' : 'assets/images/Rice-Dishes-arabic.png';
-        if (imgPasta) imgPasta.src = isEn ? 'assets/images/Pasta-engl.png' : 'assets/images/Pasta-arabic.png';
-        if (imgSauces) imgSauces.src = isEn ? 'assets/images/Sauce-engl.png' : 'assets/images/Sauce-arabic.png';
-        if (imgDrinks) imgDrinks.src = isEn ? 'assets/images/Drinks-engl.png' : 'assets/images/Drinks-Arabic.png';
+    function openMenu() {
+        sideDrawer.classList.add('open');
+        menuOverlay.classList.add('active');
     }
 
-    function translateAllItems(lang) {
-        document.querySelectorAll('[data-ar]').forEach(el => {
-            const arText = el.getAttribute('data-ar');
-            const enText = el.getAttribute('data-en');
-            if (lang === 'en' && enText) {
-                el.textContent = enText;
-            } else if (arText) {
-                el.textContent = arText;
-            }
-        });
+    function closeMenu() {
+        sideDrawer.classList.remove('open');
+        menuOverlay.classList.remove('active');
     }
 
-    function applyLanguage(lang) {
-        const currentLang = lang === 'en' ? 'en' : 'ar';
-        document.documentElement.lang = currentLang;
-        document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    if (openDrawerBtn) openDrawerBtn.addEventListener('click', openMenu);
+    if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeMenu);
+    if (menuOverlay) menuOverlay.addEventListener('click', closeMenu);
 
-        if (currentLang === 'en') {
-            document.body.classList.add('lang-en');
-            document.body.classList.remove('lang-ar');
-        } else {
-            document.body.classList.add('lang-ar');
-            document.body.classList.remove('lang-en');
-        }
+    // 3. تفعيل تبديل اللغة (Language Switcher System)
+    const langToggle = document.getElementById('langToggle');
+    const langEn = document.getElementById('langEn');
+    const langAr = document.getElementById('langAr');
+    const translatableElements = document.querySelectorAll('[data-en]');
 
-        document.querySelectorAll('[data-i18n]').forEach(element => {
-            const key = element.getAttribute('data-i18n');
-            if (translations[currentLang][key] !== undefined) {
-                element.textContent = translations[currentLang][key];
-            }
-        });
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+            const isCurrentEn = langEn.classList.contains('active');
+            const targetLang = isCurrentEn ? 'ar' : 'en';
 
-        translateAllItems(currentLang);
-        updateCategoryBallImages(currentLang);
-
-        if (langToggleBtn) langToggleBtn.textContent = currentLang === 'ar' ? 'EN' : 'AR';
-        localStorage.setItem('elzozLanguage', currentLang);
-    }
-
-    langToggleBtn?.addEventListener('click', () => {
-        const currentLang = localStorage.getItem('elzozLanguage') || 'ar';
-        applyLanguage(currentLang === 'ar' ? 'en' : 'ar');
-    });
-
-    applyLanguage(localStorage.getItem('elzozLanguage') || 'ar');
-
-    // التحكم بالقائمة الجانبية Sidebar
-    const menuToggleBtn = document.getElementById('menuToggleBtn');
-    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
-    const sidebar = document.getElementById('sidebar');
-
-    menuToggleBtn?.addEventListener('click', () => sidebar.classList.add('open'));
-    closeSidebarBtn?.addEventListener('click', () => sidebar.classList.remove('open'));
-
-    // التحكم بالفيديو الرئيسي (تثبيت آخر فريم وإلغاء اختفائه)
-    const chefVideo = document.getElementById('chefVideo');
-
-    chefVideo?.addEventListener('ended', () => {
-        chefVideo.pause(); // يتوقف عند آخر لحظة في الفيديو وتظل ثابته
-    });
-
-    // فلترة الفئات
-    const allCategoryElements = document.querySelectorAll('[data-category-row]');
-    function filterCategory(selectedCategory) {
-        allCategoryElements.forEach(element => {
-            if (element.getAttribute('data-category-row') === selectedCategory) {
-                element.classList.remove('hidden-row');
+            if (targetLang === 'ar') {
+                langEn.classList.remove('active');
+                langAr.classList.add('active');
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
             } else {
-                element.classList.add('hidden-row');
+                langAr.classList.remove('active');
+                langEn.classList.add('active');
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
             }
+
+            // ترجمة جميع العناصر التفاعلية
+            translatableElements.forEach(el => {
+                if (el.dataset[targetLang]) {
+                    el.textContent = el.dataset[targetLang];
+                }
+            });
         });
-        document.getElementById('menuGrid')?.scrollIntoView({ behavior: 'smooth' });
     }
 
-    document.querySelectorAll('.category-ball, .sidebar-cat-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterCategory(btn.getAttribute('data-category'));
-            sidebar.classList.remove('open');
-        });
-    });
+    // 4. تجهيز زر العودة الذكي لصفحة العميل
+    const clientReturnBtn = document.getElementById('clientReturnBtn');
+    const returnBtnText = document.getElementById('returnBtnText');
+    const returnIcon = document.getElementById('returnIcon');
+    const urlParams = new URLSearchParams(window.location.search);
+    const returnTarget = urlParams.get('return');
 
-    // السلة
-    let cart = [];
-    const cartBadge = document.getElementById('cartBadge');
-    const cartItemsList = document.getElementById('cartItemsList');
-
-    function updateCartUI() {
-        let totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-        if (cartBadge) cartBadge.textContent = totalCount;
-
-        if (cart.length > 0) {
-            cartItemsList.innerHTML = cart.map((item, index) => `
-                <div class="cart-item-row" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                    <span>${item.name} (x${item.qty})</span>
-                    <button onclick="removeCartItem(${index})" style="background:#ff4d4d;color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;">&times;</button>
-                </div>
-            `).join('');
-        } else {
-            const isEn = localStorage.getItem('elzozLanguage') === 'en';
-            cartItemsList.innerHTML = `<p class="empty-cart-msg">${isEn ? 'The cart is empty' : 'السلة فارغة حالياً'}</p>`;
-        }
-    }
-
-    window.removeCartItem = function(index) {
-        cart.splice(index, 1);
-        updateCartUI();
+    const clientRoutes = {
+        'Dr-Moustafa': 'https://mydigital-id.github.io/Dr-Moustafa/'
     };
 
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('minus')) {
-            const count = e.target.nextElementSibling;
-            let val = parseInt(count.textContent);
-            if (val > 1) count.textContent = --val;
-        } else if (e.target.classList.contains('plus')) {
-            const count = e.target.previousElementSibling;
-            let val = parseInt(count.textContent);
-            count.textContent = ++val;
-        } else if (e.target.classList.contains('add-to-cart')) {
-            const parent = e.target.closest('.card') || e.target.closest('.sandwich-item');
-            const title = parent.querySelector('h3')?.textContent || parent.querySelector('.sandwich-name')?.textContent;
-            const qty = parseInt(parent.querySelector('.qty-btn span')?.textContent || '1');
-
-            const exist = cart.find(item => item.name === title);
-            if (exist) { exist.qty += qty; } else { cart.push({ name: title, qty }); }
-            updateCartUI();
+    if (clientReturnBtn) {
+        if (returnTarget && clientRoutes[returnTarget]) {
+            clientReturnBtn.href = clientRoutes[returnTarget];
+        } else if (document.referrer && document.referrer.includes('mydigital-id.github.io')) {
+            clientReturnBtn.href = document.referrer;
+        } else {
+            clientReturnBtn.href = 'https://mydigital-id.github.io/Dr-Moustafa/';
         }
-    });
 
-    document.getElementById('sendCartWhatsapp')?.addEventListener('click', () => {
-        if (cart.length === 0) return alert('اختر طلباتك أولاً');
-        let msg = 'طلبات جديدة من الموقع:\n';
-        cart.forEach((item, i) => { msg += `${i + 1}. ${item.name} - العدد: ${item.qty}\n`; });
-        window.open(`https://wa.me/201041514004?text=${encodeURIComponent(msg)}`, '_blank');
-    });
-
-    // =====================================================
-    //  تأثيرات طرطشة الماية وهجوم لفة الضهر السريعة للقرش
-    // =====================================================
-    const shark = document.querySelector('.squid') || document.querySelector('.fish1');
-    const targetInteractiveElements = document.querySelectorAll('.category-ball, .card, .add-to-cart, .sidebar-cat-btn');
-
-    targetInteractiveElements.forEach(element => {
-        element.addEventListener('click', function (e) {
-            const clickX = e.clientX;
-            const clickY = e.clientY;
-
-            // 1. إنشاء طرطشة الماية مكان الضغط
-            createSplash(clickX, clickY);
-
-            // 2. تفعيل هجوم ولفة القرش
-            if (shark) {
-                shark.classList.add('shark-strike');
-                shark.style.left = `${clickX}px`;
-                shark.style.top = `${clickY}px`;
-
-                setTimeout(() => {
-                    shark.classList.add('shark-turn');
-                }, 150);
-
-                setTimeout(() => {
-                    shark.classList.remove('shark-strike', 'shark-turn');
-                    shark.style.left = '';
-                    shark.style.top = '';
-                }, 650);
+        function updateReturnBtnDirection() {
+            const isAr = document.documentElement.getAttribute('lang') === 'ar';
+            if (returnIcon) {
+                returnIcon.className = isAr ? 'fas fa-arrow-right' : 'fas fa-arrow-left';
             }
+        }
+        
+        updateReturnBtnDirection();
+
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                setTimeout(updateReturnBtnDirection, 50);
+            });
+        }
+    }
+
+    // 5. تجهيز نقاط الترقيم وتحديد الصور الخلفية للـ 3D Stack
+    if (slides.length > 0) {
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            if (dotsContainer) dotsContainer.appendChild(dot);
         });
-    });
+        updateBackgroundCards(0);
+    }
+    const dots = document.querySelectorAll('.dot');
 
-    function createSplash(x, y) {
-        const splash = document.createElement('div');
-        splash.className = 'water-splash';
-        splash.style.left = `${x}px`;
-        splash.style.top = `${y}px`;
+    // 6. رفع الشعار وإظهار السلايدر بعد 4.8 ثانية
+    setTimeout(() => {
+        if (intro) intro.classList.add('move-up');
+        if (mediaContainer) mediaContainer.classList.add('show');
+        
+        if (slides.length > 0) {
+            slides[0].classList.add('active');
+            startSlideshow();
+        }
+    }, 4800);
 
-        document.body.appendChild(splash);
+    // 7. دالة تحديث صور الكروت الخلفية 3D
+    function updateBackgroundCards(index) {
+        if (bgCards.length >= 3 && slides.length > 0) {
+            const next1 = (index + 1) % slides.length;
+            const next2 = (index + 2) % slides.length;
+            const next3 = (index + 3) % slides.length;
 
-        setTimeout(() => {
-            splash.remove();
-        }, 500);
+            bgCards[0].style.backgroundImage = `url(${slides[next1].src})`;
+            bgCards[1].style.backgroundImage = `url(${slides[next2].src})`;
+            bgCards[2].style.backgroundImage = `url(${slides[next3].src})`;
+        }
     }
 
-    // =====================================================
-    //  تأثير هجوم وانقضاض القرش مع طرطشة الماية السينمائية
-    // =====================================================
+    // 8. تشغيل معرض الصور
+    function startSlideshow() {
+        const interval = setInterval(() => {
+            if (slides[currentSlide]) {
+                slides[currentSlide].classList.remove('active');
+                slides[currentSlide].classList.add('exit');
+                if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+            }
 
-    // إنشاء عنصر القرش الخاص بالهجوم وإضافته للـ Body
-    const attackShark = document.createElement('div');
-    attackShark.className = 'attacking-shark';
-    attackShark.innerHTML = '🦈';
-    document.body.appendChild(attackShark);
+            currentSlide++;
 
-    // العناصر التي عند الضغط عليها يتم تفعيل الهجوم
-    const interactiveElements = document.querySelectorAll('.category-ball, .card, .add-to-cart, .sidebar-cat-btn, .confirm-order-btn');
-
-    interactiveElements.forEach(element => {
-        element.addEventListener('click', function (e) {
-            const clickX = e.clientX;
-            const clickY = e.clientY;
-
-            // 1. إظهار انقضاض القرش من الأسفل نحو موقع الضغطة مباشرة
-            triggerSharkBreach(clickX, clickY);
-
-            // 2. إحداث انفجار وطرطشة الماية في مكان الضغط
-            createWaterSplash(clickX, clickY);
-        });
-    });
-
-    function triggerSharkBreach(x, y) {
-        attackShark.style.left = `${x}px`;
-        attackShark.style.top = `${y}px`;
-
-        attackShark.classList.remove('active');
-        void attackShark.offsetWidth; // Trigger Reflow
-        attackShark.classList.add('active');
+            if (currentSlide < slides.length) {
+                slides[currentSlide].classList.add('active');
+                if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+                updateBackgroundCards(currentSlide);
+            } else {
+                clearInterval(interval);
+                if (slideshow) slideshow.classList.add('fade-out');
+                setTimeout(switchToVideo, 800);
+            }
+        }, slideDuration);
     }
 
-    function createWaterSplash(x, y) {
-        const splash = document.createElement('div');
-        splash.className = 'water-splash';
-        splash.style.left = `${x}px`;
-        splash.style.top = `${y}px`;
+    // 9. التحول للفيديو
+    function switchToVideo() {
+        if (slideshow) slideshow.style.display = 'none';
+        
+        if (videoSection) {
+            videoSection.style.display = 'block';
+            setTimeout(() => {
+                videoSection.classList.add('fade-in');
+            }, 50);
+        }
 
-             document.body.appendChild(splash);
+        if (introVideo) {
+            introVideo.play().catch(err => console.log("Auto-play waiting:", err));
+        }
 
-        setTimeout(() => {
-            splash.remove();
-        }, 600);
+        if (contactSection) {
+            contactSection.classList.add('show');
+        }
     }
 
-     const myDigitalBtn = document.getElementById('myDigitalIdBtn');
-    if (myDigitalBtn) {
-        myDigitalBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            window.open('https://mydigital-id.github.io/', '_blank');
+    // 10. عدم التوجيه القسري تلقائياً بعد انتهاء الفيديو
+    if (introVideo) {
+        introVideo.addEventListener('ended', () => {
+            console.log("انتهى العرض، الزائر يعاين الصفحة كاملة وبإمكانه العودة يدوياً عبر أيقونة العودة.");
         });
     }
 });
-       
