@@ -69,12 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgSauces = document.getElementById('imgSauces');
         const imgDrinks = document.getElementById('imgDrinks');
 
-        if (imgSandwiches) imgSandwiches.src = isEn ? 'Assets/images/Elzoz-Sandw-engl.png' : 'Assets/images/Elzoz-sandwiches-arabic.png';
-        if (imgOffers) imgOffers.src = 'Assets/images/Elzoz-offers-arabic.png';
-        if (imgRice) imgRice.src = isEn ? 'Assets/images/Rice-Dishes-engl.png' : 'Assets/images/Rice-Dishes-arabic.png';
-        if (imgPasta) imgPasta.src = isEn ? 'Assets/images/Pasta-engl.png' : 'Assets/images/Pasta-arabic.png';
-        if (imgSauces) imgSauces.src = isEn ? 'Assets/images/Sauce-engl.png' : 'Assets/images/Sauce-arabic.png';
-        if (imgDrinks) imgDrinks.src = isEn ? 'Assets/images/Drinks-engl.png' : 'Assets/images/Drinks-arabic.png';
+        if (imgSandwiches) imgSandwiches.src = isEn ? 'assets/images/Elzoz-Sandw-engl.png' : 'assets/images/Elzoz-sandwiches-arabic.png';
+        if (imgOffers) imgOffers.src = 'assets/images/Elzoz-offers-arabic.png';
+        if (imgRice) imgRice.src = isEn ? 'assets/images/Rice-Dishes-engl.png' : 'assets/images/Rice-Dishes-arabic.png';
+        if (imgPasta) imgPasta.src = isEn ? 'assets/images/Pasta-engl.png' : 'assets/images/Pasta-arabic.png';
+        if (imgSauces) imgSauces.src = isEn ? 'assets/images/Sauce-engl.png' : 'assets/images/Sauce-arabic.png';
+        if (imgDrinks) imgDrinks.src = isEn ? 'assets/images/Drinks-engl.png' : 'assets/images/Drinks-arabic.png';
     }
 
     function translateAllItems(lang) {
