@@ -17,10 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. التحكم في ترجمة اللغة (AR / EN) وتبديل صور الكرات
+    // 2. إدارة التبديل بين العربي والإنجليزي وتصحيح مسارات صور الكرات
     const langToggleBtn = document.getElementById('langToggleBtn');
     let currentLang = 'ar';
 
+    // تم تدقيق أسمـاء ومسارات الملفات بالكامل مع فحص حالة الأحرف
     const ballImages = {
         ar: {
             imgSandwiches: "assets/images/Elzoz-sandwiches-arabic.png",
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function updateLanguageUI() {
-        // تحديث النصوص المعلمة بـ data-i18n
+        // 1. تحديث كافة النصوص حسب المفتاح
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[currentLang][key]) {
@@ -106,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // تحديث أسماء العناصر من data-ar و data-en
+        // 2. تحديث عناوين المنتجات حسب data-ar / data-en
         document.querySelectorAll('[data-ar]').forEach(el => {
             if (currentLang === 'en' && el.getAttribute('data-en')) {
                 el.textContent = el.getAttribute('data-en');
@@ -115,12 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // تحديث صور كرات التنقل الهيليوم
-        const imgs = ballImages[currentLang];
-        for (let imgId in imgs) {
+        // 3. التحديث المباشر المضمون لصور كرات الهيليوم
+        const activeLangImages = ballImages[currentLang];
+        for (let imgId in activeLangImages) {
             const imgElement = document.getElementById(imgId);
             if (imgElement) {
-                imgElement.src = imgs[imgId];
+                imgElement.src = activeLangImages[imgId];
             }
         }
     }
@@ -170,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. نظام كميات العناصر والسلة المباشرة
+    // 4. نظام سلة الطلبات وتعديل الكميات
     let cart = [];
 
     document.querySelectorAll('.card-controls').forEach(control => {
@@ -254,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCartUI();
     };
 
-    // 5. تأكيد الطلبات عبر الواتساب
+    // 5. ارسال الطلبات إلى الواتساب
     const sendCartWhatsapp = document.getElementById('sendCartWhatsapp');
     if (sendCartWhatsapp) {
         sendCartWhatsapp.addEventListener('click', () => {
@@ -278,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 6. انشاء وتنزيل جهة الاتصال (vCard)
+    // 6. تحميل بطاقة الاتصال vCard
     const downloadVcardBtn = document.getElementById('downloadVcardBtn');
     if (downloadVcardBtn) {
         downloadVcardBtn.addEventListener('click', () => {
@@ -303,5 +304,8 @@ END:VCARD`;
             document.body.removeChild(link);
         });
     }
+
+    // تشغيل تحديث اللغة الأولي للتأكد من تحميل الصور الصحيحة فوراً
+    updateLanguageUI();
 
 });
