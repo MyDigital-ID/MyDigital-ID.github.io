@@ -1,431 +1,275 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. العناصر الرئيسية
-    const intro = document.getElementById('intro');
-    const mediaContainer = document.getElementById('mediaContainer');
-    const slideshow = document.getElementById('slideshow');
-    const videoSection = document.getElementById('videoSection');
-    const introVideo = document.getElementById('introVideo');
-    const contactSection = document.getElementById('contactSection');
-    const slides = document.querySelectorAll('.slide');
-    const dotsContainer = document.getElementById('dotsContainer');
-    const bgCards = document.querySelectorAll('.bg-card');
+    // 1. إدارة القائمة الجانبية (Sidebar)
+    const menuToggleBtn = document.getElementById('menuToggleBtn');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+    const sidebar = document.getElementById('sidebar');
 
-    // زمن عرض كل صورة
-    let currentSlide = 0;
-    const slideDuration = 1500;
-
-
-    // 2. التحكم في القائمة المنزلقة (Side Drawer Menu)
-    const openDrawerBtn = document.getElementById('openDrawerBtn');
-    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
-    const sideDrawer = document.getElementById('sideDrawer');
-    const menuOverlay = document.getElementById('menuOverlay');
-
-    function openMenu() {
-        sideDrawer.classList.add('open');
-        menuOverlay.classList.add('active');
-    }
-
-    function closeMenu() {
-        sideDrawer.classList.remove('open');
-        menuOverlay.classList.remove('active');
-    }
-
-    if (openDrawerBtn) {
-        openDrawerBtn.addEventListener('click', openMenu);
-    }
-
-    if (closeDrawerBtn) {
-        closeDrawerBtn.addEventListener('click', closeMenu);
-    }
-
-    if (menuOverlay) {
-        menuOverlay.addEventListener('click', closeMenu);
-    }
-
-
-    // 3. تفعيل تبديل اللغة (Language Switcher System)
-    const langToggle = document.getElementById('langToggle');
-    const langEn = document.getElementById('langEn');
-    const langAr = document.getElementById('langAr');
-    const translatableElements = document.querySelectorAll('[data-en]');
-
-    if (langToggle) {
-
-        langToggle.addEventListener('click', () => {
-
-            const isCurrentEn =
-                langEn.classList.contains('active');
-
-            const targetLang =
-                isCurrentEn ? 'ar' : 'en';
-
-            if (targetLang === 'ar') {
-
-                langEn.classList.remove('active');
-                langAr.classList.add('active');
-
-                document.documentElement.setAttribute(
-                    'dir',
-                    'rtl'
-                );
-
-                document.documentElement.setAttribute(
-                    'lang',
-                    'ar'
-                );
-
-            } else {
-
-                langAr.classList.remove('active');
-                langEn.classList.add('active');
-
-                document.documentElement.setAttribute(
-                    'dir',
-                    'ltr'
-                );
-
-                document.documentElement.setAttribute(
-                    'lang',
-                    'en'
-                );
-            }
-
-            // ترجمة جميع العناصر التفاعلية
-            translatableElements.forEach(el => {
-
-                if (el.dataset[targetLang]) {
-
-                    el.textContent =
-                        el.dataset[targetLang];
-
-                }
-
-            });
-
+    if (menuToggleBtn && sidebar) {
+        menuToggleBtn.addEventListener('click', () => {
+            sidebar.classList.add('open');
         });
-
     }
 
+    if (closeSidebarBtn && sidebar) {
+        closeSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+        });
+    }
 
-    // 4. زر العودة الذكي
-    // لا يوجد أي توجيه افتراضي إلى Dr-Moustafa
-    // يتم استخدام الرابط القادم من معامل return فقط
+    // 2. التحكم في ترجمة اللغة (AR / EN)
+    const langToggleBtn = document.getElementById('langToggleBtn');
+    let currentLang = 'ar';
 
-    const clientReturnBtn =
-        document.getElementById('clientReturnBtn');
-
-    const returnIcon =
-        document.getElementById('returnIcon');
-
-    const urlParams =
-        new URLSearchParams(window.location.search);
-
-    const returnTarget =
-        urlParams.get('return');
-
-
-    const clientRoutes = {
-
-        'MyDigital-ID':
-            'https://mydigital-id.github.io/',
-
-        'mydigital-id':
-            'https://mydigital-id.github.io/'
-
+    const translations = {
+        ar: {
+            pageTitle: "سندويتشات الزوز | ELZOZ SANDWICHES",
+            restaurantName: "سندويتشات الزوز",
+            aboutTitle: "عن سندويتشات الزوز",
+            aboutText: "مرحباً بكم في مطعم سندويتشات الزوز ❤️ نقدم لكم أشهى وألذ السندويتشات والأطباق البحرية الطازجة من الجمبري والسبيط والفيليه بأعلى معايير الجودة.",
+            slogan: '"عند الزوز .. السندويتشات بتبوظ"',
+            addressTitle: "العنوان",
+            addressText: "الإسكندرية - 29-33 شارع خالد بن الوليد الرئيسي (أمام أحمد الطيب للإطارات)",
+            menuCategoriesTitle: "القائمة والوجبات",
+            homeMeal: "الرئيسية",
+            singleMeals: "وجبات الفرد",
+            offersTitle: "عروض الزوز",
+            sandwichesTitle: "السندويتشات",
+            riceTitle: "أطباق الأرز",
+            pastaTitle: "المكرونات",
+            soupsTitle: "الشوربة والأطباق",
+            saucesTitle: "الصوصات",
+            drinksTitle: "المشروبات",
+            mapBtn: "موقعنا على الخريطة",
+            vcardBtn: "حفظ جهة الاتصال (vCard)",
+            qrTitle: "رمز QR",
+            addToCart: "إضافة للسلة",
+            cartTitle: "سلة الطلبات المباشرة",
+            emptyCartMsg: "السلة فارغة حالياً",
+            orderNowBtn: "تأكيد الطلبات عبر الواتساب",
+            directUploadText: "طلباتك يتم رفعها بشكل مباشر"
+        },
+        en: {
+            pageTitle: "ELZOZ SANDWICHES",
+            restaurantName: "Elzoz Sandwiches",
+            aboutTitle: "About Elzoz Sandwiches",
+            aboutText: "Welcome to Elzoz Sandwiches ❤️ We offer the best fresh seafood dishes, shrimp, squid, and fillet with the highest quality standards.",
+            slogan: '"At Elzoz .. Deliciousness Overflows"',
+            addressTitle: "Address",
+            addressText: "Alexandria - 29-33 Khalid Ibn Al-Walid St. (In front of Ahmed El-Tayeb Tires)",
+            menuCategoriesTitle: "Menu Categories",
+            homeMeal: "Home",
+            singleMeals: "Single Meals",
+            offersTitle: "Elzoz Offers",
+            sandwichesTitle: "Sandwiches",
+            riceTitle: "Rice Dishes",
+            pastaTitle: "Pasta Dishes",
+            soupsTitle: "Soups & Dishes",
+            saucesTitle: "Sauces",
+            drinksTitle: "Drinks",
+            mapBtn: "Location on Map",
+            vcardBtn: "Save Contact (vCard)",
+            qrTitle: "QR Code",
+            addToCart: "Add to Cart",
+            cartTitle: "Live Direct Cart",
+            emptyCartMsg: "Your cart is currently empty",
+            orderNowBtn: "Confirm Order via WhatsApp",
+            directUploadText: "Your order is instantly submitted"
+        }
     };
 
+    if (langToggleBtn) {
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            langToggleBtn.textContent = currentLang === 'ar' ? 'EN' : 'عربي';
+            document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', currentLang);
 
-    if (clientReturnBtn) {
-
-        if (
-            returnTarget &&
-            clientRoutes[returnTarget]
-        ) {
-
-            clientReturnBtn.href =
-                clientRoutes[returnTarget];
-
-        }
-
-
-        function updateReturnBtnDirection() {
-
-            const isAr =
-                document.documentElement.getAttribute(
-                    'lang'
-                ) === 'ar';
-
-            if (returnIcon) {
-
-                returnIcon.className =
-                    isAr
-                        ? 'fas fa-arrow-right'
-                        : 'fas fa-arrow-left';
-
-            }
-
-        }
-
-
-        updateReturnBtnDirection();
-
-
-        if (langToggle) {
-
-            langToggle.addEventListener(
-                'click',
-                () => {
-
-                    setTimeout(
-                        updateReturnBtnDirection,
-                        50
-                    );
-
+            // تحديث نصوص الواجهة
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
                 }
-            );
+            });
 
-        }
-
+            // تحديث أسماء السندويتشات والكروت
+            document.querySelectorAll('[data-ar]').forEach(el => {
+                if (currentLang === 'en' && el.getAttribute('data-en')) {
+                    el.textContent = el.getAttribute('data-en');
+                } else if (currentLang === 'ar' && el.getAttribute('data-ar')) {
+                    el.textContent = el.getAttribute('data-ar');
+                }
+            });
+        });
     }
 
+    // 3. التنقل بين أقسام المنيو والعودة للرئيسية
+    const allCategoryRows = document.querySelectorAll('[data-category-row]');
+    const categoryBtns = document.querySelectorAll('[data-category]');
+    const goHomeBtn = document.getElementById('goHomeBtn');
 
-    // 5. تجهيز نقاط الترقيم
-    // وتحديد الصور الخلفية للـ 3D Stack
-
-    if (slides.length > 0) {
-
-        slides.forEach((_, index) => {
-
-            const dot =
-                document.createElement('div');
-
-            dot.classList.add('dot');
-
-            if (index === 0) {
-                dot.classList.add('active');
+    function showCategory(catName) {
+        allCategoryRows.forEach(row => {
+            if (row.getAttribute('data-category-row') === catName) {
+                row.classList.remove('hidden-row');
+            } else {
+                row.classList.add('hidden-row');
             }
-
-            if (dotsContainer) {
-                dotsContainer.appendChild(dot);
-            }
-
         });
 
-        updateBackgroundCards(0);
+        if (sidebar && sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+        }
 
+        window.scrollTo({ top: document.getElementById('menuGrid').offsetTop - 20, behavior: 'smooth' });
     }
 
+    categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const cat = btn.getAttribute('data-category');
+            if (cat) showCategory(cat);
+        });
+    });
 
-    const dots =
-        document.querySelectorAll('.dot');
-
-
-    // 6. رفع الشعار وإظهار السلايدر بعد 4.8 ثانية
-
-    setTimeout(() => {
-
-        if (intro) {
-            intro.classList.add('move-up');
-        }
-
-        if (mediaContainer) {
-            mediaContainer.classList.add('show');
-        }
-
-
-        if (slides.length > 0) {
-
-            slides[0].classList.add('active');
-
-            startSlideshow();
-
-        }
-
-    }, 4800);
-
-
-    // 7. دالة تحديث صور الكروت الخلفية 3D
-
-    function updateBackgroundCards(index) {
-
-        if (
-            bgCards.length >= 3 &&
-            slides.length > 0
-        ) {
-
-            const next1 =
-                (index + 1) % slides.length;
-
-            const next2 =
-                (index + 2) % slides.length;
-
-            const next3 =
-                (index + 3) % slides.length;
-
-
-            bgCards[0].style.backgroundImage =
-                `url(${slides[next1].src})`;
-
-            bgCards[1].style.backgroundImage =
-                `url(${slides[next2].src})`;
-
-            bgCards[2].style.backgroundImage =
-                `url(${slides[next3].src})`;
-
-        }
-
+    if (goHomeBtn) {
+        goHomeBtn.addEventListener('click', () => {
+            showCategory('home');
+        });
     }
 
+    // 4. نظام كميات العناصر والسلة المباشرة
+    let cart = [];
 
-    // 8. تشغيل معرض الصور
+    document.querySelectorAll('.card-controls').forEach(control => {
+        const minusBtn = control.querySelector('.minus');
+        const plusBtn = control.querySelector('.plus');
+        const qtySpan = control.querySelector('span');
+        const addBtn = control.querySelector('.add-to-cart');
 
-    function startSlideshow() {
+        let qty = 1;
 
-        const interval =
-            setInterval(() => {
-
-                if (slides[currentSlide]) {
-
-                    slides[currentSlide]
-                        .classList
-                        .remove('active');
-
-                    slides[currentSlide]
-                        .classList
-                        .add('exit');
-
-                    if (dots[currentSlide]) {
-
-                        dots[currentSlide]
-                            .classList
-                            .remove('active');
-
-                    }
-
+        if (minusBtn) {
+            minusBtn.addEventListener('click', () => {
+                if (qty > 1) {
+                    qty--;
+                    qtySpan.textContent = qty;
                 }
+            });
+        }
 
+        if (plusBtn) {
+            plusBtn.addEventListener('click', () => {
+                qty++;
+                qtySpan.textContent = qty;
+            });
+        }
 
-                currentSlide++;
+        if (addBtn) {
+            addBtn.addEventListener('click', () => {
+                const parent = control.closest('.card') || control.closest('.sandwich-item');
+                let itemName = '';
+                
+                const nameEl = parent.querySelector('h3') || parent.querySelector('.sandwich-name');
+                if (nameEl) itemName = nameEl.textContent.trim();
 
+                addToCart(itemName, qty);
+                qty = 1;
+                qtySpan.textContent = 1;
+            });
+        }
+    });
 
-                if (
-                    currentSlide <
-                    slides.length
-                ) {
-
-                    slides[currentSlide]
-                        .classList
-                        .add('active');
-
-
-                    if (dots[currentSlide]) {
-
-                        dots[currentSlide]
-                            .classList
-                            .add('active');
-
-                    }
-
-
-                    updateBackgroundCards(
-                        currentSlide
-                    );
-
-                } else {
-
-                    clearInterval(interval);
-
-
-                    if (slideshow) {
-
-                        slideshow
-                            .classList
-                            .add('fade-out');
-
-                    }
-
-
-                    setTimeout(
-                        switchToVideo,
-                        800
-                    );
-
-                }
-
-            }, slideDuration);
-
+    function addToCart(name, quantity) {
+        const existing = cart.find(item => item.name === name);
+        if (existing) {
+            existing.quantity += quantity;
+        } else {
+            cart.push({ name: name, quantity: quantity });
+        }
+        updateCartUI();
     }
 
+    function updateCartUI() {
+        const cartBadge = document.getElementById('cartBadge');
+        const cartItemsList = document.getElementById('cartItemsList');
 
-    // 9. التحول للفيديو
+        const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+        if (cartBadge) cartBadge.textContent = totalCount;
 
-    function switchToVideo() {
+        if (!cartItemsList) return;
 
-        if (slideshow) {
-            slideshow.style.display = 'none';
+        if (cart.length === 0) {
+            cartItemsList.innerHTML = `<p class="empty-cart-msg">${translations[currentLang].emptyCartMsg}</p>`;
+            return;
         }
 
-
-        if (videoSection) {
-
-            videoSection.style.display =
-                'block';
-
-
-            setTimeout(() => {
-
-                videoSection
-                    .classList
-                    .add('fade-in');
-
-            }, 50);
-
-        }
-
-
-        if (introVideo) {
-
-            introVideo
-                .play()
-                .catch(
-                    err =>
-                        console.log(
-                            "Auto-play waiting:",
-                            err
-                        )
-                );
-
-        }
-
-
-        if (contactSection) {
-
-            contactSection
-                .classList
-                .add('show');
-
-        }
-
+        cartItemsList.innerHTML = '';
+        cart.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'cart-item-row';
+            div.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #eee;";
+            div.innerHTML = `
+                <span>${item.name} <strong>x${item.quantity}</strong></span>
+                <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer;"><i class="fas fa-trash"></i></button>
+            `;
+            cartItemsList.appendChild(div);
+        });
     }
 
+    window.removeFromCart = function(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+    };
 
-    // 10. عدم التوجيه القسري تلقائياً بعد انتهاء الفيديو
-
-    if (introVideo) {
-
-        introVideo.addEventListener(
-            'ended',
-            () => {
-
-                console.log(
-                    "انتهى العرض، الزائر يعاين الصفحة كاملة وبإمكانه العودة يدوياً عبر أيقونة العودة."
-                );
-
+    // 5. تأكيد الطلبات عبر الواتساب
+    const sendCartWhatsapp = document.getElementById('sendCartWhatsapp');
+    if (sendCartWhatsapp) {
+        sendCartWhatsapp.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert(currentLang === 'ar' ? 'السلة فارغة حالياً!' : 'Cart is empty!');
+                return;
             }
-        );
 
+            let msg = currentLang === 'ar' 
+                ? "*طلب جديد من موقع سندويتشات الزوز:* \n\n" 
+                : "*New Order from Elzoz Website:* \n\n";
+
+            cart.forEach(item => {
+                msg += `• ${item.name} (العدد: ${item.quantity})\n`;
+            });
+
+            msg += currentLang === 'ar' ? "\nيرجى التأكيد والبدء في التحضير!" : "\nPlease confirm my order!";
+
+            const whatsappUrl = `https://wa.me/201041514004?text=${encodeURIComponent(msg)}`;
+                window.open(whatsappUrl, '_blank');
+        });
+    }
+
+    // 6. انشاء وتنزيل جهة الاتصال (vCard) للمطعم تلقائياً دون ارتباط بأي موقع خارجي
+    const downloadVcardBtn = document.getElementById('downloadVcardBtn');
+    if (downloadVcardBtn) {
+        downloadVcardBtn.addEventListener('click', () => {
+            const vcardData = 
+`BEGIN:VCARD
+VERSION:3.0
+FN:مطعم سندويتشات الزوز
+ORG:ELZOZ SANDWICHES
+TEL;TYPE=WORK,VOICE:033555552
+TEL;TYPE=CELL,VOICE:+201041514004
+ADR;TYPE=WORK:;;29-33 شارع خالد بن الوليد;الإسكندرية;;;مصر
+NOTE:عند الزوز .. السندويتشات بتبوظ
+END:VCARD`;
+
+            const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'Elzoz_Sandwiches.vcf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
     }
 
 });

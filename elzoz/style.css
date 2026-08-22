@@ -36,7 +36,6 @@ body.lang-en .img-en {
     display: block !important;
 }
 
-
 /* =====================================================
    1. تأثيرات أعماق البحار
    ===================================================== */
@@ -106,11 +105,9 @@ body.lang-en .img-en {
         transform: translateY(0) scale(0.8);
         opacity: 0;
     }
-
     50% {
         opacity: 0.8;
     }
-
     100% {
         transform: translateY(-110vh) scale(1.2);
         opacity: 0;
@@ -151,11 +148,9 @@ body.lang-en .img-en {
         left: -10%;
         transform: scaleX(-1) translateY(0);
     }
-
     50% {
         transform: scaleX(-1) translateY(-20px);
     }
-
     100% {
         left: 110%;
         transform: scaleX(-1) translateY(0);
@@ -167,17 +162,14 @@ body.lang-en .img-en {
         right: -10%;
         transform: scaleX(1) translateY(0);
     }
-
     50% {
         transform: scaleX(1) translateY(25px);
     }
-
     100% {
         right: 110%;
         transform: scaleX(1) translateY(0);
     }
 }
-
 
 /* =====================================================
    2. الهيدر والعنوان
@@ -207,6 +199,30 @@ body.lang-en .img-en {
     transition: 0.3s;
 }
 
+.home-btn {
+    background: rgba(0, 40, 85, 0.85);
+    border: 2px solid #00d2ff;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.menu-toggle-btn:hover,
+.lang-toggle-btn:hover,
+.home-btn:hover {
+    background: #00d2ff;
+    color: #001026;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.8);
+}
+
 .main-header {
     text-align: center;
     padding: 70px 10px 15px 10px;
@@ -221,8 +237,6 @@ body.lang-en .img-en {
     gap: 12px;
     flex-wrap: wrap;
 }
-
-/* ترتيب اللوجو فوق الاسم في اللغة العربية وتكبير الحجم */
 
 html[dir="rtl"] .brand-container,
 body.lang-ar .brand-container {
@@ -240,30 +254,20 @@ body.lang-ar .brand-container {
 }
 
 @media (min-width: 768px) {
-
     .header-brand-logo {
         height: 85px;
     }
-
 }
 
 .brand-title {
     font-size: 2rem;
     font-weight: 900;
     line-height: 1.2;
-    background: linear-gradient(
-        135deg,
-        #ffffff 10%,
-        #ff9e00 55%,
-        #ff5500 100%
-    ) !important;
+    background: linear-gradient(135deg, #ffffff 10%, #ff9e00 55%, #ff5500 100%) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
-    filter: drop-shadow(
-        0 0 12px rgba(255, 107, 0, 0.6)
-    ) !important;
+    filter: drop-shadow(0 0 12px rgba(255, 107, 0, 0.6)) !important;
 }
-
 
 /* =====================================================
    3. كرات التنقل الهيليوم
@@ -283,11 +287,7 @@ body.lang-ar .brand-container {
     width: 95px;
     height: 95px;
     border-radius: 50%;
-    background: radial-gradient(
-        circle at 30% 30%,
-        #00d2ff,
-        #003366
-    );
+    background: radial-gradient(circle at 30% 30%, #00d2ff, #003366);
     box-shadow: 0 8px 20px rgba(0, 210, 255, 0.4);
     cursor: pointer;
     display: flex;
@@ -305,28 +305,20 @@ body.lang-ar .brand-container {
 }
 
 @keyframes floatAnim {
-
     0% {
         transform: translateY(0);
     }
-
     100% {
         transform: translateY(-10px);
     }
-
 }
 
-/* تكبير الكرات للتابلت والديسك توب */
-
 @media (min-width: 768px) {
-
     .category-ball {
         width: 130px;
         height: 130px;
     }
-
 }
-
 
 /* =====================================================
    4. قسم الفيديو
@@ -359,7 +351,6 @@ body.lang-ar .brand-container {
     height: 100%;
     object-fit: cover;
 }
-
 
 /* =====================================================
    الصفحة الرئيسية
@@ -410,7 +401,6 @@ body.lang-ar .brand-container {
     border-radius: 12px;
 }
 
-
 /* =====================================================
    5. القوائم والكروت
    ===================================================== */
@@ -425,10 +415,7 @@ body.lang-ar .brand-container {
 
 .grid-row {
     display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(260px, 1fr)
-    );
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
     margin-bottom: 20px;
 }
@@ -445,6 +432,12 @@ body.lang-ar .brand-container {
     text-align: center;
     backdrop-filter: blur(8px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #00d2ff;
 }
 
 .card img {
@@ -488,11 +481,7 @@ body.lang-ar .brand-container {
 }
 
 .add-to-cart {
-    background: linear-gradient(
-        45deg,
-        #0077ff,
-        #00d2ff
-    );
+    background: linear-gradient(45deg, #0077ff, #00d2ff);
     border: none;
     color: #fff;
     padding: 8px 14px;
@@ -500,6 +489,11 @@ body.lang-ar .brand-container {
     font-weight: bold;
     cursor: pointer;
     flex-grow: 1;
+    transition: opacity 0.3s ease;
+}
+
+.add-to-cart:hover {
+    opacity: 0.9;
 }
 
 .sandwiches-section {
@@ -546,7 +540,6 @@ body.lang-ar .brand-container {
     font-weight: 600;
     color: #e0f7fc;
 }
-
 
 /* =====================================================
    6. القائمة الجانبية Sidebar
@@ -659,7 +652,6 @@ body.lang-ar .brand-container {
     border-radius: 8px;
     margin-top: 8px;
 }
-
 
 /* =====================================================
    7. السلة والفوتر
@@ -786,7 +778,6 @@ body.lang-ar .brand-container {
     text-shadow: 0 0 10px #00d2ff;
 }
 
-
 /* =====================================================
    8. تأثيرات طرطشة الماية والقرش
    ===================================================== */
@@ -801,9 +792,7 @@ body.lang-ar .brand-container {
     transform: translate(-50%, -50%) scale(0.1);
     animation: splashBreach 0.6s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
     z-index: 10000;
-    box-shadow:
-        0 0 25px rgba(0, 210, 255, 1),
-        inset 0 0 15px rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 25px rgba(0, 210, 255, 1), inset 0 0 15px rgba(255, 255, 255, 0.9);
 }
 
 .water-splash::before,
@@ -824,64 +813,45 @@ body.lang-ar .brand-container {
 }
 
 .water-splash::after {
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.8) 0%,
-        rgba(0, 210, 255, 0) 70%
-    );
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(0, 210, 255, 0) 70%);
     animation: splashBurst 0.4s ease-out forwards;
 }
 
 @keyframes splashBreach {
-
     0% {
         opacity: 1;
         transform: translate(-50%, -50%) scale(0.2);
     }
-
     50% {
         opacity: 0.9;
     }
-
     100% {
         opacity: 0;
         transform: translate(-50%, -50%) scale(4);
     }
-
 }
 
 @keyframes splashSparks {
-
     0% {
         transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
         opacity: 1;
     }
-
     100% {
         transform: translate(-50%, -50%) scale(2.8) rotate(90deg);
         opacity: 0;
     }
-
 }
 
 @keyframes splashBurst {
-
     0% {
         transform: translate(-50%, -50%) scale(0.1);
         opacity: 1;
     }
-
     100% {
         transform: translate(-50%, -50%) scale(3);
         opacity: 0;
     }
-
 }
-
-
-/* =====================================================
-   القرش الهجومي
-   ===================================================== */
 
 .attacking-shark {
     position: fixed;
@@ -890,50 +860,68 @@ body.lang-ar .brand-container {
     z-index: 9999;
     transform: translate(-50%, -50%) scale(0.2) rotate(-15deg);
     opacity: 0;
-    filter: drop-shadow(
-        0 0 20px rgba(0, 210, 255, 0.9)
-    );
+    filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.9));
     transition: none;
 }
 
 .attacking-shark.active {
-    animation: sharkBreachAnim 1s
-        cubic-bezier(0.175, 0.885, 0.32, 1.275)
-        forwards;
+    animation: sharkBreachAnim 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 @keyframes sharkBreachAnim {
-
     0% {
         opacity: 0;
-        transform:
-            translate(-50%, 100px)
-            scale(0.3)
-            rotate(-30deg);
+        transform: translate(-50%, 100px) scale(0.3) rotate(-30deg);
     }
-
     40% {
         opacity: 1;
-        transform:
-            translate(-50%, -50%)
-            scale(1.6)
-            rotate(10deg);
+        transform: translate(-50%, -50%) scale(1.6) rotate(10deg);
     }
-
     70% {
         opacity: 1;
-        transform:
-            translate(-50%, -60%)
-            scale(1.4)
-            rotate(-5deg);
+        transform: translate(-50%, -60%) scale(1.4) rotate(-5deg);
     }
-
     100% {
         opacity: 0;
-        transform:
-            translate(-50%, 40px)
-            scale(0.8)
-            rotate(20deg);
+        transform: translate(-50%, 40px) scale(0.8) rotate(20deg);
     }
+}
+/* تكبير اللوجو العلوي درجتين */
+.header-brand-logo {
+    height: 65px !important; /* تكبير الحجم بنسبة ملحوظة */
+    max-height: 85px !important;
+    width: auto !important;
+    object-fit: contain;
+}
 
+/* إلغاء التموضع الثابت السابق لزر الرئيسية وتنسيقه أسفل السلة وفوق الفيسبوك */
+.home-bottom-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px auto 15px auto;
+    width: 100%;
+}
+
+.go-home-btn {
+    position: static !important; /* إلغاء الـ fixed لتنزل مع انسيابية الصفحة */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10, 25, 47, 0.85);
+    color: #fff;
+    border: 1px solid rgba(0, 210, 255, 0.4);
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.go-home-btn:hover {
+    background: #00d2ff;
+    color: #0a192f;
+    transform: translateY(-2px);
 }
