@@ -17,26 +17,6 @@ body {
 }
 
 /* =====================================================
-   تبديل الصور بين العربي والإنجليزي
-   ===================================================== */
-
-body.lang-ar .img-en {
-    display: none !important;
-}
-
-body.lang-ar .img-ar {
-    display: block !important;
-}
-
-body.lang-en .img-ar {
-    display: none !important;
-}
-
-body.lang-en .img-en {
-    display: block !important;
-}
-
-/* =====================================================
    1. تأثيرات أعماق البحار
    ===================================================== */
 
@@ -61,57 +41,16 @@ body.lang-en .img-en {
     animation: rise 12s infinite ease-in;
 }
 
-.bubble:nth-child(1) {
-    width: 40px;
-    height: 40px;
-    left: 10%;
-    animation-duration: 8s;
-}
-
-.bubble:nth-child(2) {
-    width: 20px;
-    height: 20px;
-    left: 30%;
-    animation-duration: 12s;
-    animation-delay: 2s;
-}
-
-.bubble:nth-child(3) {
-    width: 50px;
-    height: 50px;
-    left: 55%;
-    animation-duration: 10s;
-    animation-delay: 4s;
-}
-
-.bubble:nth-child(4) {
-    width: 25px;
-    height: 25px;
-    left: 75%;
-    animation-duration: 14s;
-    animation-delay: 1s;
-}
-
-.bubble:nth-child(5) {
-    width: 35px;
-    height: 35px;
-    left: 90%;
-    animation-duration: 9s;
-    animation-delay: 3s;
-}
+.bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; animation-duration: 8s; }
+.bubble:nth-child(2) { width: 20px; height: 20px; left: 30%; animation-duration: 12s; animation-delay: 2s; }
+.bubble:nth-child(3) { width: 50px; height: 50px; left: 55%; animation-duration: 10s; animation-delay: 4s; }
+.bubble:nth-child(4) { width: 25px; height: 25px; left: 75%; animation-duration: 14s; animation-delay: 1s; }
+.bubble:nth-child(5) { width: 35px; height: 35px; left: 90%; animation-duration: 9s; animation-delay: 3s; }
 
 @keyframes rise {
-    0% {
-        transform: translateY(0) scale(0.8);
-        opacity: 0;
-    }
-    50% {
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(-110vh) scale(1.2);
-        opacity: 0;
-    }
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
 }
 
 .sea-creature {
@@ -120,59 +59,27 @@ body.lang-en .img-en {
     filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.8));
     opacity: 0.8;
     z-index: 2;
-    transition: all 0.3s ease;
 }
 
-.fish1 {
-    top: 20%;
-    animation: swimRight 18s linear infinite;
-}
-
-.fish2 {
-    top: 60%;
-    animation: swimLeft 22s linear infinite;
-}
-
-.shrimp {
-    top: 40%;
-    animation: swimRight 25s linear infinite;
-}
-
-.squid {
-    top: 80%;
-    animation: swimLeft 20s linear infinite;
-}
+.fish1 { top: 20%; animation: swimRight 18s linear infinite; }
+.fish2 { top: 60%; animation: swimLeft 22s linear infinite; }
+.shrimp { top: 40%; animation: swimRight 25s linear infinite; }
+.squid { top: 80%; animation: swimLeft 20s linear infinite; }
 
 @keyframes swimRight {
-    0% {
-        left: -10%;
-        transform: scaleX(-1) translateY(0);
-    }
-    50% {
-        transform: scaleX(-1) translateY(-20px);
-    }
-    100% {
-        left: 110%;
-        transform: scaleX(-1) translateY(0);
-    }
+    0% { left: -10%; transform: scaleX(-1) translateY(0); }
+    50% { transform: scaleX(-1) translateY(-20px); }
+    100% { left: 110%; transform: scaleX(-1) translateY(0); }
 }
 
 @keyframes swimLeft {
-    0% {
-        right: -10%;
-        transform: scaleX(1) translateY(0);
-    }
-    50% {
-        transform: scaleX(1) translateY(25px);
-    }
-    100% {
-        right: 110%;
-        transform: scaleX(1) translateY(0);
-    }
+    0% { right: -10%; transform: scaleX(1) translateY(0); }
+    50% { transform: scaleX(1) translateY(25px); }
+    100% { right: 110%; transform: scaleX(1) translateY(0); }
 }
 
 /* =====================================================
-   2. الهيدر والعنوان
+   2. الهيدر والعنوان والتكبير لأعلى
    ===================================================== */
 
 .header-controls {
@@ -199,68 +106,36 @@ body.lang-en .img-en {
     transition: 0.3s;
 }
 
-.home-btn {
-    background: rgba(0, 40, 85, 0.85);
-    border: 2px solid #00d2ff;
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.menu-toggle-btn:hover,
-.lang-toggle-btn:hover,
-.home-btn:hover {
-    background: #00d2ff;
-    color: #001026;
-    box-shadow: 0 0 20px rgba(0, 210, 255, 0.8);
-}
-
 .main-header {
     text-align: center;
-    padding: 70px 10px 15px 10px;
+    padding: 20px 10px 10px 10px; /* تم رفع العناصر لأعلى */
     position: relative;
     z-index: 5;
 }
 
 .brand-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-html[dir="rtl"] .brand-container,
-body.lang-ar .brand-container {
-    flex-direction: column;
-    gap: 8px;
+    gap: 5px;
 }
 
 .header-brand-logo {
-    display: inline-block !important;
-    height: 75px;
-    width: auto;
+    height: 110px !important; /* تكبير اللوجو الرئيسي */
+    width: auto !important;
     object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(255, 107, 0, 0.8));
-    transition: height 0.3s ease;
+    filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.6));
 }
 
 @media (min-width: 768px) {
     .header-brand-logo {
-        height: 85px;
+        height: 135px !important;
     }
 }
 
 .brand-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 900;
     line-height: 1.2;
     background: linear-gradient(135deg, #ffffff 10%, #ff9e00 55%, #ff5500 100%) !important;
@@ -278,7 +153,7 @@ body.lang-ar .brand-container {
     justify-content: center;
     align-items: center;
     gap: 15px;
-    margin: 20px 0;
+    margin: 15px 0;
     position: relative;
     z-index: 5;
 }
@@ -301,16 +176,12 @@ body.lang-ar .brand-container {
 .category-ball img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; /* ضبط الأبعاد تماماً لمنع تشوه الصور داخل الكرات */
 }
 
 @keyframes floatAnim {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-10px);
-    }
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
 }
 
 @media (min-width: 768px) {
@@ -353,7 +224,7 @@ body.lang-ar .brand-container {
 }
 
 /* =====================================================
-   الصفحة الرئيسية
+   5. ضبط مقاسات وإطارات الصور (الكروت والأقسام)
    ===================================================== */
 
 .home-showcase-container {
@@ -379,10 +250,14 @@ body.lang-ar .brand-container {
     color: #ffffff;
 }
 
-.showcase-img-large {
+/* موحد بأسلوب التناسق التام لكل إطارات العرض */
+.showcase-img-large,
+.showcase-img-small,
+.card img,
+.cat-banner-img {
     width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: contain;
+    aspect-ratio: 16 / 10;
+    object-fit: cover; /* لملء الكرت بأسلوب احترافي دون تشوه */
     background: #020a18;
     border-radius: 12px;
 }
@@ -392,18 +267,6 @@ body.lang-ar .brand-container {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
-
-.showcase-img-small {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: contain;
-    background: #020a18;
-    border-radius: 12px;
-}
-
-/* =====================================================
-   5. القوائم والكروت
-   ===================================================== */
 
 .menu-container {
     max-width: 1100px;
@@ -440,18 +303,9 @@ body.lang-ar .brand-container {
     border-color: #00d2ff;
 }
 
-.card img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: contain;
-    background: #020a18;
-    border-radius: 12px;
-    margin-bottom: 10px;
-}
-
 .card h3 {
     font-size: 1.2rem;
-    margin-bottom: 10px;
+    margin: 10px 0;
     color: #e0f7fc;
 }
 
@@ -492,10 +346,6 @@ body.lang-ar .brand-container {
     transition: opacity 0.3s ease;
 }
 
-.add-to-cart:hover {
-    opacity: 0.9;
-}
-
 .sandwiches-section {
     background: rgba(3, 27, 62, 0.75);
     border: 1px solid rgba(0, 210, 255, 0.3);
@@ -509,14 +359,6 @@ body.lang-ar .brand-container {
     margin-bottom: 15px;
     border-radius: 12px;
     overflow: hidden;
-}
-
-.cat-banner-img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: contain;
-    background: #020a18;
-    border-radius: 12px;
 }
 
 .section-title {
@@ -542,7 +384,7 @@ body.lang-ar .brand-container {
 }
 
 /* =====================================================
-   6. القائمة الجانبية Sidebar
+   6. Sidebar والقوائم والفوتر
    ===================================================== */
 
 .sidebar {
@@ -571,16 +413,8 @@ body.lang-ar .brand-container {
     cursor: pointer;
 }
 
-.sidebar h3,
-.sidebar h4 {
+.sidebar h3, .sidebar h4 {
     color: #ff8800 !important;
-    text-shadow: 0 0 8px rgba(255, 136, 0, 0.4);
-}
-
-.slogan-sidebar {
-    color: #ffc107 !important;
-    font-style: italic;
-    margin-top: 5px;
 }
 
 .sidebar-divider {
@@ -588,20 +422,6 @@ body.lang-ar .brand-container {
     height: 1px;
     background: rgba(0, 210, 255, 0.3);
     margin: 15px 0;
-}
-
-.phone-landline {
-    margin-top: 8px;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-.phone-landline a {
-    color: #00d2ff;
-    text-decoration: none;
-    font-size: 1.1rem;
-    direction: ltr;
-    display: inline-block;
 }
 
 .sidebar-menu-list {
@@ -620,13 +440,6 @@ body.lang-ar .brand-container {
     text-align: right;
     margin-bottom: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.sidebar-cat-btn:hover {
-    background: #ff8800 !important;
-    color: #000000 !important;
-    box-shadow: 0 0 12px rgba(255, 136, 0, 0.8) !important;
 }
 
 .sidebar-btn {
@@ -642,20 +455,6 @@ body.lang-ar .brand-container {
     text-decoration: none;
     font-weight: bold;
 }
-
-.qr-container {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.qr-container img {
-    border-radius: 8px;
-    margin-top: 8px;
-}
-
-/* =====================================================
-   7. السلة والفوتر
-   ===================================================== */
 
 .inpage-cart-section {
     max-width: 500px;
@@ -708,11 +507,26 @@ body.lang-ar .brand-container {
     gap: 8px;
 }
 
-.direct-upload-notice {
-    text-align: center;
-    font-size: 0.85rem;
-    color: #00d2ff;
-    margin-top: 10px;
+.home-bottom-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px auto 15px auto;
+    width: 100%;
+}
+
+.go-home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10, 25, 47, 0.85);
+    color: #fff;
+    border: 1px solid rgba(0, 210, 255, 0.4);
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .main-footer {
@@ -720,8 +534,6 @@ body.lang-ar .brand-container {
     padding: 25px 15px;
     border-top: 1px solid rgba(0, 210, 255, 0.2);
     margin-top: 40px;
-    position: relative;
-    z-index: 5;
 }
 
 .facebook-link {
@@ -734,18 +546,7 @@ body.lang-ar .brand-container {
     background: #1877f2;
     color: #ffffff;
     font-size: 1.4rem;
-    box-shadow: 0 0 12px rgba(24, 119, 242, 0.6);
-    transition: transform 0.3s ease;
     margin-bottom: 10px;
-}
-
-.facebook-link:hover {
-    transform: scale(1.1);
-}
-
-.copyright {
-    color: #888;
-    font-size: 0.9rem;
 }
 
 .mydigital-footer {
@@ -756,172 +557,10 @@ body.lang-ar .brand-container {
     align-items: center;
     justify-content: center;
     gap: 6px;
-    position: relative;
-    z-index: 9999;
 }
 
 .mydigital-link {
     color: #00d2ff;
     text-decoration: none;
     font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    transition: 0.3s;
-    cursor: pointer;
-    position: relative;
-    z-index: 10000;
-}
-
-.mydigital-link:hover {
-    color: #ffffff;
-    text-shadow: 0 0 10px #00d2ff;
-}
-
-/* =====================================================
-   8. تأثيرات طرطشة الماية والقرش
-   ===================================================== */
-
-.water-splash {
-    position: fixed;
-    pointer-events: none;
-    width: 20px;
-    height: 20px;
-    border: 4px solid rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0.1);
-    animation: splashBreach 0.6s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
-    z-index: 10000;
-    box-shadow: 0 0 25px rgba(0, 210, 255, 1), inset 0 0 15px rgba(255, 255, 255, 0.9);
-}
-
-.water-splash::before,
-.water-splash::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.water-splash::before {
-    border: 3px dashed rgba(255, 255, 255, 0.8);
-    animation: splashSparks 0.5s ease-out forwards;
-}
-
-.water-splash::after {
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(0, 210, 255, 0) 70%);
-    animation: splashBurst 0.4s ease-out forwards;
-}
-
-@keyframes splashBreach {
-    0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(0.2);
-    }
-    50% {
-        opacity: 0.9;
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(4);
-    }
-}
-
-@keyframes splashSparks {
-    0% {
-        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(2.8) rotate(90deg);
-        opacity: 0;
-    }
-}
-
-@keyframes splashBurst {
-    0% {
-        transform: translate(-50%, -50%) scale(0.1);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(3);
-        opacity: 0;
-    }
-}
-
-.attacking-shark {
-    position: fixed;
-    font-size: 4rem;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%) scale(0.2) rotate(-15deg);
-    opacity: 0;
-    filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.9));
-    transition: none;
-}
-
-.attacking-shark.active {
-    animation: sharkBreachAnim 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-@keyframes sharkBreachAnim {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, 100px) scale(0.3) rotate(-30deg);
-    }
-    40% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.6) rotate(10deg);
-    }
-    70% {
-        opacity: 1;
-        transform: translate(-50%, -60%) scale(1.4) rotate(-5deg);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, 40px) scale(0.8) rotate(20deg);
-    }
-}
-/* تكبير اللوجو العلوي درجتين */
-.header-brand-logo {
-    height: 65px !important; /* تكبير الحجم بنسبة ملحوظة */
-    max-height: 85px !important;
-    width: auto !important;
-    object-fit: contain;
-}
-
-/* إلغاء التموضع الثابت السابق لزر الرئيسية وتنسيقه أسفل السلة وفوق الفيسبوك */
-.home-bottom-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 25px auto 15px auto;
-    width: 100%;
-}
-
-.go-home-btn {
-    position: static !important; /* إلغاء الـ fixed لتنزل مع انسيابية الصفحة */
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(10, 25, 47, 0.85);
-    color: #fff;
-    border: 1px solid rgba(0, 210, 255, 0.4);
-    padding: 10px 22px;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-}
-
-.go-home-btn:hover {
-    background: #00d2ff;
-    color: #0a192f;
-    transform: translateY(-2px);
 }

@@ -17,9 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. التحكم في ترجمة اللغة (AR / EN)
+    // 2. التحكم في ترجمة اللغة (AR / EN) وتبديل صور الكرات
     const langToggleBtn = document.getElementById('langToggleBtn');
     let currentLang = 'ar';
+
+    const ballImages = {
+        ar: {
+            imgSandwiches: "assets/images/Elzoz-sandwiches-arabic.png",
+            imgOffers: "assets/images/Elzoz-offers-arabic.png",
+            imgRice: "assets/images/Rice-Dishes-arabic.png",
+            imgPasta: "assets/images/Pasta-arabic.png",
+            imgSauces: "assets/images/Sauce-arabic.png",
+            imgDrinks: "assets/images/Drinks-arabic.png"
+        },
+        en: {
+            imgSandwiches: "assets/images/Elzoz-sandwiches-english.png",
+            imgOffers: "assets/images/Elzoz-offers-english.png",
+            imgRice: "assets/images/Rice-Dishes-english.png",
+            imgPasta: "assets/images/Pasta-english.png",
+            imgSauces: "assets/images/Sauce-english.png",
+            imgDrinks: "assets/images/Drinks-english.png"
+        }
+    };
 
     const translations = {
         ar: {
@@ -78,6 +97,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    function updateLanguageUI() {
+        // تحديث النصوص المعلمة بـ data-i18n
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[currentLang][key]) {
+                el.textContent = translations[currentLang][key];
+            }
+        });
+
+        // تحديث أسماء العناصر من data-ar و data-en
+        document.querySelectorAll('[data-ar]').forEach(el => {
+            if (currentLang === 'en' && el.getAttribute('data-en')) {
+                el.textContent = el.getAttribute('data-en');
+            } else if (currentLang === 'ar' && el.getAttribute('data-ar')) {
+                el.textContent = el.getAttribute('data-ar');
+            }
+        });
+
+        // تحديث صور كرات التنقل الهيليوم
+        const imgs = ballImages[currentLang];
+        for (let imgId in imgs) {
+            const imgElement = document.getElementById(imgId);
+            if (imgElement) {
+                imgElement.src = imgs[imgId];
+            }
+        }
+    }
+
     if (langToggleBtn) {
         langToggleBtn.addEventListener('click', () => {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
@@ -85,22 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
             document.documentElement.setAttribute('lang', currentLang);
 
-            // تحديث نصوص الواجهة
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[currentLang][key]) {
-                    el.textContent = translations[currentLang][key];
-                }
-            });
-
-            // تحديث أسماء السندويتشات والكروت
-            document.querySelectorAll('[data-ar]').forEach(el => {
-                if (currentLang === 'en' && el.getAttribute('data-en')) {
-                    el.textContent = el.getAttribute('data-en');
-                } else if (currentLang === 'ar' && el.getAttribute('data-ar')) {
-                    el.textContent = el.getAttribute('data-ar');
-                }
-            });
+            updateLanguageUI();
         });
     }
 
@@ -242,11 +274,11 @@ document.addEventListener('DOMContentLoaded', () => {
             msg += currentLang === 'ar' ? "\nيرجى التأكيد والبدء في التحضير!" : "\nPlease confirm my order!";
 
             const whatsappUrl = `https://wa.me/201041514004?text=${encodeURIComponent(msg)}`;
-                window.open(whatsappUrl, '_blank');
+            window.open(whatsappUrl, '_blank');
         });
     }
 
-    // 6. انشاء وتنزيل جهة الاتصال (vCard) للمطعم تلقائياً دون ارتباط بأي موقع خارجي
+    // 6. انشاء وتنزيل جهة الاتصال (vCard)
     const downloadVcardBtn = document.getElementById('downloadVcardBtn');
     if (downloadVcardBtn) {
         downloadVcardBtn.addEventListener('click', () => {
