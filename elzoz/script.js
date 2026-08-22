@@ -17,11 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. إدارة التبديل بين العربي والإنجليزي وتصحيح مسارات صور الكرات
+    // 2. إدارة التبديل بين العربي والإنجليزي وتصحيح مسارات صور الكرات بحسب GitHub
     const langToggleBtn = document.getElementById('langToggleBtn');
     let currentLang = 'ar';
 
-    // تم تدقيق أسمـاء ومسارات الملفات بالكامل مع فحص حالة الأحرف
+    // تم تعديل المسارات لتطابق أسماء الملفات تماماً على GitHub (مع مراعاة حالة الأحرف)
     const ballImages = {
         ar: {
             imgSandwiches: "assets/images/Elzoz-sandwiches-arabic.png",
@@ -29,15 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
             imgRice: "assets/images/Rice-Dishes-arabic.png",
             imgPasta: "assets/images/Pasta-arabic.png",
             imgSauces: "assets/images/Sauce-arabic.png",
-            imgDrinks: "assets/images/Drinks-arabic.png"
+            imgDrinks: "assets/images/Drinks-Arabic.png"
         },
         en: {
-            imgSandwiches: "assets/images/Elzoz-sandwiches-english.png",
-            imgOffers: "assets/images/Elzoz-offers-english.png",
-            imgRice: "assets/images/Rice-Dishes-english.png",
-            imgPasta: "assets/images/Pasta-english.png",
-            imgSauces: "assets/images/Sauce-english.png",
-            imgDrinks: "assets/images/Drinks-english.png"
+            imgSandwiches: "assets/images/Elzoz-Sandw-engl.png",
+            imgOffers: "assets/images/Elzoz-offers.png",
+            imgRice: "assets/images/Rice-Dishes-engl.png",
+            imgPasta: "assets/images/Pasta-engl.png",
+            imgSauces: "assets/images/Sauce-engl.png",
+            imgDrinks: "assets/images/Drinks-engl.png"
         }
     };
 
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             aboutText: "مرحباً بكم في مطعم سندويتشات الزوز ❤️ نقدم لكم أشهى وألذ السندويتشات والأطباق البحرية الطازجة من الجمبري والسبيط والفيليه بأعلى معايير الجودة.",
             slogan: '"عند الزوز .. السندويتشات بتبوظ"',
             addressTitle: "العنوان",
-            addressText: "الإسكندرية - 29-33 شارع خالد بن الوليد الرئيسي (أمام أحمد الطيب للإطارات)",
+            addressText: "الإسكندرية - سيدى بشر ترام، شارع خالد بن الوليد، المنتزه",
             menuCategoriesTitle: "القائمة والوجبات",
             homeMeal: "الرئيسية",
             singleMeals: "وجبات الفرد",
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             drinksTitle: "المشروبات",
             mapBtn: "موقعنا على الخريطة",
             vcardBtn: "حفظ جهة الاتصال (vCard)",
-            qrTitle: "رمز QR",
+            qrTitle: "رمز QR للموقع",
             addToCart: "إضافة للسلة",
             cartTitle: "سلة الطلبات المباشرة",
             emptyCartMsg: "السلة فارغة حالياً",
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             aboutText: "Welcome to Elzoz Sandwiches ❤️ We offer the best fresh seafood dishes, shrimp, squid, and fillet with the highest quality standards.",
             slogan: '"At Elzoz .. Deliciousness Overflows"',
             addressTitle: "Address",
-            addressText: "Alexandria - 29-33 Khalid Ibn Al-Walid St. (In front of Ahmed El-Tayeb Tires)",
+            addressText: "Alexandria - Sidi Bishr Tram, Khalid Ibn Al-Walid St., El Montazah",
             menuCategoriesTitle: "Menu Categories",
             homeMeal: "Home",
             singleMeals: "Single Meals",
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
             drinksTitle: "Drinks",
             mapBtn: "Location on Map",
             vcardBtn: "Save Contact (vCard)",
-            qrTitle: "QR Code",
+            qrTitle: "Website QR Code",
             addToCart: "Add to Cart",
             cartTitle: "Live Direct Cart",
             emptyCartMsg: "Your cart is currently empty",
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function updateLanguageUI() {
-        // 1. تحديث كافة النصوص حسب المفتاح
+        // 1. تحديث النصوص التي تحتوي على data-i18n
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[currentLang][key]) {
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 2. تحديث عناوين المنتجات حسب data-ar / data-en
+        // 2. تحديث عناوين البطاقات حسب data-ar / data-en
         document.querySelectorAll('[data-ar]').forEach(el => {
             if (currentLang === 'en' && el.getAttribute('data-en')) {
                 el.textContent = el.getAttribute('data-en');
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 3. التحديث المباشر المضمون لصور كرات الهيليوم
+        // 3. تحديث صور كرات الأقسام الدائرية
         const activeLangImages = ballImages[currentLang];
         for (let imgId in activeLangImages) {
             const imgElement = document.getElementById(imgId);
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. التنقل بين أقسام المنيو والعودة للرئيسية
+    // 3. التنقل بين أقسام المنيو
     const allCategoryRows = document.querySelectorAll('[data-category-row]');
     const categoryBtns = document.querySelectorAll('[data-category]');
     const goHomeBtn = document.getElementById('goHomeBtn');
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. نظام سلة الطلبات وتعديل الكميات
+    // 4. إدارة سلة الطلبات وتعديل الكميات
     let cart = [];
 
     document.querySelectorAll('.card-controls').forEach(control => {
@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCartUI();
     };
 
-    // 5. ارسال الطلبات إلى الواتساب
+    // 5. إرسال الطلبات إلى الواتساب
     const sendCartWhatsapp = document.getElementById('sendCartWhatsapp');
     if (sendCartWhatsapp) {
         sendCartWhatsapp.addEventListener('click', () => {
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 6. تحميل بطاقة الاتصال vCard
+    // 6. تحميل vCard
     const downloadVcardBtn = document.getElementById('downloadVcardBtn');
     if (downloadVcardBtn) {
         downloadVcardBtn.addEventListener('click', () => {
@@ -290,7 +290,7 @@ FN:مطعم سندويتشات الزوز
 ORG:ELZOZ SANDWICHES
 TEL;TYPE=WORK,VOICE:033555552
 TEL;TYPE=CELL,VOICE:+201041514004
-ADR;TYPE=WORK:;;29-33 شارع خالد بن الوليد;الإسكندرية;;;مصر
+ADR;TYPE=WORK:;;شارع خالد بن الوليد;الإسكندرية;;;مصر
 NOTE:عند الزوز .. السندويتشات بتبوظ
 END:VCARD`;
 
@@ -305,7 +305,7 @@ END:VCARD`;
         });
     }
 
-    // تشغيل تحديث اللغة الأولي للتأكد من تحميل الصور الصحيحة فوراً
+    // تشغيل التحديث الأولي لتحميل الصور والتراجم الصحيحة فور تحميل الصفحة
     updateLanguageUI();
 
 });
