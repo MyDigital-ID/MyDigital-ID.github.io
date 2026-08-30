@@ -59,7 +59,7 @@ const ZONES = [
     icon: "🍗",
     name_ar: "ركن الدجاج المشوي",
     name_en: "Grilled Chicken Zone",
-    header: "assets/images/chicken-zone.jpg",
+    header: "assets/images/chicken-header.jpg",
     type: "simple",
     items: [
       { name_ar: "فرخة تركي", name_en: "Turkish Chicken", price: 350, img: "assets/images/Turkish-chicken.png" },
@@ -122,7 +122,7 @@ const ZONES = [
     icon: "🍖",
     name_ar: "ركن اللحوم المجهزة",
     name_en: "Prepared Meats Zone",
-    header: "assets/images/meat-zone2.jpg",
+    header: "assets/images/preparedmeat-header.jpg",
     type: "weight",
     weights: [1, 0.75, 0.5],
     items: [
@@ -149,7 +149,7 @@ const ZONES = [
       { name_ar: "عرض ملوك الحواوشي", name_en: "Hawawshi Kings Offer", img: "assets/images/melok-elhawawshi.png" },
       { name_ar: "ريش مشوية", name_en: "Grilled Ribs", img: "assets/images/Reiash-griled.jpg" },
       { name_ar: "الطرب المشوي", name_en: "Grilled Tarb", img: "assets/images/Tarb-griled.png" },
-      { name_ar: "اللحوم المجهزة", name_en: "Prepared Meats", img: "assets/images/meat-zone2.jpg" },
+      { name_ar: "اللحوم المجهزة", name_en: "Prepared Meats", img: "assets/images/Lehoom-mogahza-zone.jpg" },
       { name_ar: "إسأل عن عروض العزومات", name_en: "Ask About Our Party Offers", img: "assets/images/Arood-elazooma.jpg" },
       { name_ar: "برجر مشوي", name_en: "Grilled Burger", img: "assets/images/Burger-griled.jpg" }
     ]
