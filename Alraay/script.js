@@ -149,7 +149,7 @@ const ZONES = [
       { name_ar: "عرض ملوك الحواوشي", name_en: "Hawawshi Kings Offer", img: "assets/images/melok-elhawawshi.png" },
       { name_ar: "ريش مشوية", name_en: "Grilled Ribs", img: "assets/images/Reiash-griled.jpg" },
       { name_ar: "الطرب المشوي", name_en: "Grilled Tarb", img: "assets/images/Tarb-griled.png" },
-      { name_ar: "اللحوم المجهزة", name_en: "Prepared Meats", img: "assets/images/Lehoom-mogahza-zone.jpg" },
+      { name_ar: "اللحوم المجهزة", name_en: "Prepared Meats", img: "assets/images/meat-zone2.jpg" },
       { name_ar: "إسأل عن عروض العزومات", name_en: "Ask About Our Party Offers", img: "assets/images/Arood-elazooma.jpg" },
       { name_ar: "برجر مشوي", name_en: "Grilled Burger", img: "assets/images/Burger-griled.jpg" }
     ]
@@ -266,6 +266,20 @@ function renderZoneGrid() {
 --------------------------------------------------------- */
 let currentZone = null;
 
+/* Some mobile browsers keep "coasting" (momentum scroll) or reflow the
+   page as images load, which can silently override a single scrollTo(0,0)
+   right after navigating — especially on tall pages like "عروضنا" or when
+   the tapped card was near the bottom of a scrolled page. Re-assert the
+   top position for a short window to guarantee it sticks. */
+function forceScrollTop() {
+  const start = Date.now();
+  function step() {
+    window.scrollTo(0, 0);
+    if (Date.now() - start < 400) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
 function openZone(zoneId, silent) {
   const zone = ZONES.find(z => z.id === zoneId);
   if (!zone) return;
@@ -327,7 +341,7 @@ function openZone(zoneId, silent) {
   if (!silent) {
     document.getElementById("homePage").classList.remove("active");
     document.getElementById("zonePage").classList.add("active");
-    requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, 0)));
+    forceScrollTop();
   }
 }
 
@@ -343,7 +357,7 @@ function goHome() {
   currentZone = null;
   document.getElementById("zonePage").classList.remove("active");
   document.getElementById("homePage").classList.add("active");
-  requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, 0)));
+  forceScrollTop();
 }
 
 document.getElementById("homeBtn").addEventListener("click", () => {
@@ -359,12 +373,12 @@ window.addEventListener("popstate", (event) => {
     openZone(zoneId, true);
     document.getElementById("homePage").classList.remove("active");
     document.getElementById("zonePage").classList.add("active");
-    requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, 0)));
+    forceScrollTop();
   } else {
     document.getElementById("zonePage").classList.remove("active");
     document.getElementById("homePage").classList.add("active");
     currentZone = null;
-    requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, 0)));
+    forceScrollTop();
   }
 });
 
