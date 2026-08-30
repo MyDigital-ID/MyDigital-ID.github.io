@@ -21,8 +21,8 @@ const ZONES = [
     header: "assets/images/Hawashi-zone.jpg",
     type: "variant",
     groups: [
-      { name_ar: "حواوشي لحمة", name_en: "Meat Hawawshi", prices: [130, 140, 160, 180] },
-      { name_ar: "حواوشي سجق", name_en: "Sogok Hawawshi", prices: [130, 140, 160, 180] },
+      { name_ar: "حواوشي لحمة", name_en: "Meat Hawawshi", prices: [140, 160, 180] },
+      { name_ar: "حواوشي سجق", name_en: "Sogok Hawawshi", prices: [140, 160, 180] },
       { name_ar: "حواوشي بسطرمة", name_en: "Pastrami Hawawshi", prices: [160, 180, 200] },
       { name_ar: "حواوشي ميكس", name_en: "Mix Hawawshi", prices: [160, 180, 200] },
       { name_ar: "حواوشي جبنة", name_en: "Cheese Hawawshi", prices: [140, 160, 180] }
@@ -102,6 +102,7 @@ const ZONES = [
     name_en: "Fresh Meat Zone",
     header: "assets/images/Meat-zone.jpg",
     type: "weight",
+    weights: [1, 0.75, 0.5],
     items: [
       { name_ar: "لحم مفروم", name_en: "Minced Meat", price: 480 },
       { name_ar: "لحم مكعبات", name_en: "Beef Cubes", price: 500 },
@@ -123,6 +124,7 @@ const ZONES = [
     name_en: "Prepared Meats Zone",
     header: "assets/images/meat-zone2.jpg",
     type: "weight",
+    weights: [1, 0.75, 0.5],
     items: [
       { name_ar: "سجق مخصوص", name_en: "Special Seasoned Sogok", price: 400 },
       { name_ar: "سجق عادي", name_en: "Regular Sogok", price: 380 },
@@ -254,7 +256,7 @@ function renderZoneGrid() {
     const card = document.createElement("button");
     card.className = "zone-card";
     card.innerHTML = `<span class="zone-label">${t(zone.name_ar, zone.name_en)}</span>`;
-    card.onclick = () => openZone(zone.id);
+    card.onclick = () => navigateToZone(zone.id);
     grid.appendChild(card);
   });
 }
@@ -312,7 +314,7 @@ function openZone(zoneId, silent) {
   }
 
   if (zone.type === "weight") {
-    zone.items.forEach((item, idx) => renderWeightItem(container, `${zone.id}-${idx}`, item));
+    zone.items.forEach((item, idx) => renderWeightItem(container, `${zone.id}-${idx}`, item, zone.weights));
   }
 
   if (zone.type === "gallery") {
@@ -325,16 +327,50 @@ function openZone(zoneId, silent) {
   if (!silent) {
     document.getElementById("homePage").classList.remove("active");
     document.getElementById("zonePage").classList.add("active");
-    window.scrollTo(0, 0);
+    requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, 0)));
   }
 }
 
-document.getElementById("homeBtn").addEventListener("click", () => {
+/* Navigate to a zone from a user click: switch the view AND record a
+   history entry, so the device/browser back button returns to the
+   home page instead of leaving the site entirely. */
+function navigateToZone(zoneId) {
+  openZone(zoneId);
+  history.pushState({ zone: zoneId }, "", "#" + zoneId);
+}
+
+function goHome() {
   currentZone = null;
   document.getElementById("zonePage").classList.remove("active");
   document.getElementById("homePage").classList.add("active");
-  window.scrollTo(0, 0);
+  requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, 0)));
+}
+
+document.getElementById("homeBtn").addEventListener("click", () => {
+  goHome();
+  history.pushState({ zone: null }, "", location.pathname);
 });
+
+/* Back/forward button support: respond to real browser navigation
+   instead of only to our own buttons. */
+window.addEventListener("popstate", (event) => {
+  const zoneId = event.state && event.state.zone;
+  if (zoneId) {
+    openZone(zoneId, true);
+    document.getElementById("homePage").classList.remove("active");
+    document.getElementById("zonePage").classList.add("active");
+    requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, 0)));
+  } else {
+    document.getElementById("zonePage").classList.remove("active");
+    document.getElementById("homePage").classList.add("active");
+    currentZone = null;
+    requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, 0)));
+  }
+});
+
+// Establish a baseline "home" history entry so the very first back-press
+// has something predictable to land on instead of exiting the page.
+history.replaceState({ zone: null }, "", location.pathname);
 
 /* simple qty item: id, {name_ar,name_en,price,img} */
 function renderSimpleItem(container, id, item) {
@@ -363,10 +399,24 @@ function renderSimpleItem(container, id, item) {
 }
 
 /* weight item: price per kg, weight select + packaging note */
-function renderWeightItem(container, id, item) {
-  let weight = 1; // kg
+const WEIGHT_LABELS = {
+  1: { ar: "كيلو كامل", en: "1 kg" },
+  0.75: { ar: "كيلو إلا ربع", en: "0.75 kg" },
+  0.5: { ar: "نصف كيلو", en: "0.5 kg" }
+};
+
+function renderWeightItem(container, id, item, weightsList) {
+  const weights = weightsList && weightsList.length ? weightsList : [1, 0.5];
+  let weight = weights[0];
   let qty = 0;
   let packaging = "whole"; // 'half' | 'whole'
+
+  const weightButtonsHtml = weights
+    .map((w, i) => {
+      const label = WEIGHT_LABELS[w] || { ar: `${w} كيلو`, en: `${w} kg` };
+      return `<button class="opt-btn w-opt${i === 0 ? " selected" : ""}" data-w="${w}">${t(label.ar, label.en)}</button>`;
+    })
+    .join("");
 
   const row = document.createElement("div");
   row.className = "item-row";
@@ -374,8 +424,7 @@ function renderWeightItem(container, id, item) {
     <span class="item-name">${t(item.name_ar, item.name_en)}</span>
     <span class="item-price unit-price">${item.price} ${t("جنيه / كيلو","EGP / kg")}</span>
     <div class="item-options weight-opts">
-      <button class="opt-btn w-opt selected" data-w="1">${t("كيلو كامل","1 kg")}</button>
-      <button class="opt-btn w-opt" data-w="0.5">${t("نصف كيلو","0.5 kg")}</button>
+      ${weightButtonsHtml}
     </div>
     <div class="item-options pack-opts">
       <button class="opt-btn p-opt selected" data-p="whole">${t("تعبئة كيلو كامل","Whole pack")}</button>
@@ -418,7 +467,8 @@ function renderWeightItem(container, id, item) {
     if (qty === 0) qty = 1;
     qtySpan.textContent = qty;
     const packLabel = packaging === "whole" ? t("تعبئة كاملة","whole pack") : t("تعبئة منفصلة","separate packs");
-    const wLabel = weight === 1 ? t("١ كيلو","1kg") : t("نصف كيلو","0.5kg");
+    const wLabelInfo = WEIGHT_LABELS[weight] || { ar: `${weight} كيلو`, en: `${weight} kg` };
+    const wLabel = t(wLabelInfo.ar, wLabelInfo.en);
     const name = `${t(item.name_ar, item.name_en)} (${wLabel} - ${packLabel})`;
     addToCart(`${id}-${weight}-${packaging}`, name, item.price * weight, qty);
   };
@@ -458,6 +508,15 @@ if (logoVideo) {
     if (logoVideo.duration && isFinite(logoVideo.duration)) {
       logoVideo.currentTime = logoVideo.duration;
     }
+  });
+}
+
+/* ---------------------------------------------------------
+   PWA — register service worker (installable app)
+--------------------------------------------------------- */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("service-worker.js").catch(() => {});
   });
 }
 
