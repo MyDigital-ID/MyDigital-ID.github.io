@@ -24,13 +24,13 @@
         { "id": "boftaik", "name": "بفتيك", "price": 850, "image": "assets/images/Boftaik.jpg", "byWeight": false },
         { "id": "kofta", "name": "كفته", "price": 600, "image": "assets/images/Kofta-grilled.jpg", "byWeight": false },
         { "id": "tarb", "name": "طرب", "price": 640, "image": "assets/images/Tarb-grilled.png", "byWeight": false },
-        { "id": "sogok", "name": "سدق", "price": 600, "image": "assets/images/Tarb-grilمشو.jpg", "byWeight": false },
+        { "id": "sogok", "name": "سدق", "price": 600, "image": "assets/images/Sdok-grilled.jpg", "byWeight": false },
         { "id": "kebda", "name": "كبده مشويه", "price": 650, "image": "assets/images/Kebda-grilled.png", "byWeight": false },
         { "id": "chicken-coal", "name": "فراخ مشويه على الفحم", "price": 340, "image": "assets/images/Chicken-grilled.jpg", "byWeight": false },
         { "id": "chicken-shish", "name": "فراخ مشويه شيش طاووق", "price": 340, "image": "assets/images/Chicken-shish.png", "byWeight": false },
         { "id": "baneh-kg", "name": "كيلو بانيه مشوي", "price": 440, "image": "assets/images/Baneh-grilled.png", "byWeight": true, "weights": [1, 0.5, 0.25] },
         { "id": "shish-kg", "name": "كيلو شيش طاووق", "price": 440, "image": "assets/images/Shish-grilled.jpg", "byWeight": true, "weights": [1, 0.5, 0.25] },
-        { "id": "chicken-kofta-kg", "name": "كيلو كفته فراخ", "price": 440, "image": "assets/images/Chicken-koفرن.jpg", "byWeight": true, "weights": [1, 0.5, 0.25] },
+        { "id": "chicken-kofta-kg", "name": "كيلو كفته فراخ", "price": 440, "image": "assets/images/Chicken-kofta.jpg", "byWeight": true, "weights": [1, 0.5, 0.25] },
         { "id": "chicken-oven-potato", "name": "فرخه فرن مع البطاطس", "price": 400, "image": "assets/images/Chicken-potatos.png", "byWeight": false }
       ]
     },
