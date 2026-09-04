@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>مشويات أبو خميس</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#3a1015">
+<link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="smoke-layer">
+  <div class="plume"></div>
+  <div class="plume"></div>
+  <div class="plume"></div>
+  <div class="plume"></div>
+</div>
+
+<div id="app" class="page">
+
+  <div class="topbar">
+    <button class="icon-btn" onclick="toggleSidebar(true)">☰</button>
+    <span class="brand-mark" id="brand-mark">مشويات أبو خميس</span>
+    <span style="width:40px"></span>
+  </div>
+
+  <div id="home-view" class="active">
+    <div class="hero">
+      <div class="hero-video-frame">
+        <video id="hero-video" autoplay muted playsinline poster="assets/logo/Logo-main.png">
+          <source src="assets/video/video.mp4" type="video/mp4">
+        </video>
+        <div class="pulse-ring"></div>
+      </div>
+      <h1>مشويات أبو خميس</h1>
+      <div class="since">SINCE 1988</div>
+      <p class="tagline">ألذ المشويات الطازجة على الفحم، بخبرة أكتر من جيل في فن الشوي</p>
+    </div>
+
+    <div class="category-grid" id="category-grid"></div>
+  </div>
+
+  <div id="zones-container"></div>
+
+  <div class="cart-section" id="cart-section">
+    <h3>🛒 سلة الطلبات</h3>
+    <div id="cart-items"></div>
+    <div class="cart-total"><span>الإجمالي</span><span id="cart-total-amount">0 ج</span></div>
+    <a class="whatsapp-btn" id="whatsapp-order-btn" href="#" target="_blank">
+      <span>📲</span><span>تأكيد الطلب عبر واتساب</span>
+    </a>
+    <div class="whatsapp-caption" id="whatsapp-caption">طلباتك تصلنا بشكل مباشر</div>
+  </div>
+
+  <div class="site-footer">
+    <div class="rights" id="footer-rights">جميع الحقوق محفوظة لمشويات أبو خميس</div>
+    <a class="fingerprint-link" id="footer-fingerprint" href="#" target="_blank">👆</a>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar(false)"></div>
+<div class="sidebar" id="sidebar">
+  <button class="icon-btn" onclick="toggleSidebar(false)">✕</button>
+  <h3>عننا</h3>
+  <img class="sidebar-art" src="assets/images/Art-grilled.png" alt="مشويات أبو خميس" onerror="this.style.display='none'">
+  <p id="sidebar-about"></p>
+  <h3>تواصل معنا</h3>
+  <div class="contact-line">📱 <a id="sidebar-whatsapp" href="#" target="_blank"></a></div>
+  <h3>موقعنا</h3>
+  <iframe class="map-frame" id="map-frame" loading="lazy" style="border:0"></iframe>
+  <p><a id="sidebar-map-link" href="#" target="_blank">فتح في خرائط جوجل ↗</a></p>
+</div>
+
+<!-- Bottom nav -->
+<div class="bottom-nav">
+  <button data-nav="home" class="active" onclick="goHome()"><span class="nav-icon">🏠</span>الرئيسية</button>
+  <button data-nav="offers" onclick="openOffersOrFirstZone()"><span class="nav-icon">🎉</span>العزومات</button>
+  <button data-nav="cart" onclick="scrollToCart()"><span class="nav-icon">🛒</span>السلة<span class="cart-badge" id="cart-badge">0</span></button>
+  <button data-nav="menu" onclick="toggleSidebar(true)"><span class="nav-icon">☰</span>القائمة</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
