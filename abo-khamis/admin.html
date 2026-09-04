@@ -33,7 +33,10 @@
   <h1>لوحة تحكم مشويات أبو خميس</h1>
   <p>سجّل دخولك باستخدام GitHub Personal Access Token (صلاحية القراءة/الكتابة على الريبو فقط).</p>
   <label>GitHub Token</label>
-  <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx">
+  <div style="display:flex; gap:6px; align-items:center;">
+    <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" style="flex:1;">
+    <button type="button" class="secondary" onclick="toggleTokenVisibility()" style="white-space:nowrap;">👁 عرض</button>
+  </div>
   <button onclick="login()">دخول</button>
   <div id="login-status"></div>
 </div>
@@ -59,10 +62,10 @@
 </div>
 
 <script>
-const OWNER = 'REPLACE_GITHUB_OWNER';
-const REPO = 'REPLACE_GITHUB_REPO';
+const OWNER = 'MyDigital-ID';
+const REPO = 'MyDigital-ID.github.io';
 const BRANCH = 'main';
-const PATH = 'data.json';
+const PATH = 'abo-khamis/data.json';
 
 let TOKEN = localStorage.getItem('abu_khamis_gh_token') || '';
 let DATA = null;
@@ -70,6 +73,11 @@ let FILE_SHA = null;
 
 function apiHeaders() {
   return { 'Authorization': 'Bearer ' + TOKEN, 'Accept': 'application/vnd.github+json' };
+}
+
+function toggleTokenVisibility() {
+  const input = document.getElementById('token-input');
+  input.type = input.type === 'password' ? 'text' : 'password';
 }
 
 async function login() {
