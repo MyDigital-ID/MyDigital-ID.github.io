@@ -38,6 +38,7 @@
       "id": "sandwiches",
       "title": "السندوتشات",
       "icon": "🥙",
+      "headerImages": ["assets/images/Sandwich-zone.png"],
       "type": "items-with-images",
       "items": [
         { "id": "sw-kofta", "name": "كفته", "price": 40, "image": "assets/images/Sandwich-kofta.jpg" },
