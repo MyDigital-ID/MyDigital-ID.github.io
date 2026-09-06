@@ -25,7 +25,7 @@
         {
           "id": "riesh",
           "name": "ريش ضاني",
-          "price": 950,
+          "price": 1000,
           "image": "assets/images/Reiash.jpg",
           "byWeight": false
         },
@@ -39,7 +39,7 @@
         {
           "id": "boftaik",
           "name": "بفتيك",
-          "price": 850,
+          "price": 900,
           "image": "assets/images/Boftaik.jpg",
           "byWeight": false
         },
@@ -142,31 +142,31 @@
         {
           "id": "sw-kofta",
           "name": "كفته",
-          "price": 40,
+          "price": 50,
           "image": "assets/images/Sandwich-kofta.jpg"
         },
         {
           "id": "sw-sogok",
           "name": "سدق",
-          "price": 40,
+          "price": 50,
           "image": "assets/images/Sandwich-sodok.jpg"
         },
         {
           "id": "sw-shish",
           "name": "شيش طاووق",
-          "price": 40,
+          "price": 50,
           "image": "assets/images/Sandwich-shish.jpg"
         },
         {
           "id": "sw-baneh",
           "name": "بانيه مشوي",
-          "price": 40,
+          "price": 50,
           "image": "assets/images/Sandwich-banih.png"
         },
         {
           "id": "sw-kebda",
           "name": "كبده مشويه",
-          "price": 40,
+          "price": 50,
           "image": "assets/images/Sandwich-kebda.png"
         },
         {
@@ -203,7 +203,7 @@
         {
           "id": "meal-quarter-chicken",
           "name": "ربع فرخه مشويه مع أرز أو مكرونة صلصه",
-          "price": 140
+          "price": 120
         },
         {
           "id": "meal-shish",
@@ -254,7 +254,7 @@
         {
           "id": "rice-basmati",
           "name": "أرز بسمتي",
-          "price": 45
+          "price": 30
         }
       ]
     },
@@ -323,37 +323,37 @@
         {
           "id": "tagine-chicken-potato",
           "name": "طاجن فراخ بالبطاطس مع الأرز والسلطات والخبز",
-          "price": 120
+          "price": 140
         },
         {
           "id": "tagine-meat-potato",
           "name": "طاجن لحمه بالبطاطس مع الأرز والسلطات والخبز",
-          "price": 120
+          "price": 150
         },
         {
           "id": "tagine-chicken-okra",
           "name": "طاجن فراخ مع الباميه والأرز والسلطات والخبز",
-          "price": 120
+          "price": 150
         },
         {
           "id": "tagine-meat-okra",
           "name": "طاجن لحمه مع الباميه والأرز والسلطات والخبز",
-          "price": 120
+          "price": 160
         },
         {
           "id": "tagine-chicken-molokhia",
           "name": "طاجن الفراخ مع الأرز والملوخية مع السلطات والخبز",
-          "price": 120
+          "price": 160
         },
         {
           "id": "tagine-meat-molokhia",
-          "name": "طاجن اللحمه مع الأرز والملوخية مع السلطات والخبز",
-          "price": 120
+          "name": "",
+          "price": 0
         },
         {
           "id": "tagine-chicken-veg",
           "name": "طاجن الفراخ مع خضروات من اختيارك مع السلطات والخبز",
-          "price": 120
+          "price": 160
         },
         {
           "id": "tagine-meat-veg",
