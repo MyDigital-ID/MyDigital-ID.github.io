@@ -18,11 +18,40 @@ function renderShell() {
   document.getElementById('footer-rights').textContent = SITE.footerRights;
   document.getElementById('footer-fingerprint').href = SITE.poweredByLink;
   document.getElementById('sidebar-about').textContent = SITE.about;
-  document.getElementById('sidebar-whatsapp').textContent = SITE.whatsappDisplay;
-  document.getElementById('sidebar-whatsapp').href = 'https://wa.me/' + SITE.whatsapp;
+  renderWhatsappLinks();
   const mapFrame = document.getElementById('map-frame');
   mapFrame.src = `https://maps.google.com/maps?q=${SITE.coordinates.lat},${SITE.coordinates.lng}&z=16&output=embed`;
   document.getElementById('sidebar-map-link').href = `https://maps.google.com/?q=${SITE.coordinates.lat},${SITE.coordinates.lng}`;
+}
+
+function getWhatsappNumbers() {
+  // SITE.whatsapp / SITE.whatsappDisplay can be a single string (old format)
+  // or an array of strings (new format, multiple numbers).
+  const numbers = Array.isArray(SITE.whatsapp) ? SITE.whatsapp : [SITE.whatsapp];
+  const displays = Array.isArray(SITE.whatsappDisplay) ? SITE.whatsappDisplay : [SITE.whatsappDisplay];
+  return numbers.map((num, i) => ({ num, display: displays[i] || num }));
+}
+
+function renderWhatsappLinks() {
+  const original = document.getElementById('sidebar-whatsapp');
+  if (!original) return;
+  const numbers = getWhatsappNumbers();
+  const wrap = document.createElement('div');
+  wrap.id = 'sidebar-whatsapp';
+  wrap.style.display = 'flex';
+  wrap.style.flexWrap = 'wrap';
+  wrap.style.gap = '10px';
+  wrap.style.justifyContent = 'center';
+  numbers.forEach(({ num, display }) => {
+    const a = document.createElement('a');
+    a.className = original.className;
+    a.href = 'https://wa.me/' + num;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = display;
+    wrap.appendChild(a);
+  });
+  original.replaceWith(wrap);
 }
 
 function renderHome() {
@@ -210,12 +239,13 @@ function renderCart() {
   badge.classList.toggle('show', count > 0);
 
   const waLink = document.getElementById('whatsapp-order-btn');
+  const primaryNumber = getWhatsappNumbers()[0].num;
   if (cart.length === 0) {
-    waLink.href = 'https://wa.me/' + SITE.whatsapp;
+    waLink.href = 'https://wa.me/' + primaryNumber;
   } else {
     const lines = cart.map(c => `${c.name}${c.weightLabel ? ' (' + c.weightLabel + ')' : ''} × ${c.qty} = ${money(c.price * c.qty)}`);
     const msg = 'طلب جديد من ' + SITE.siteName + ':\n' + lines.join('\n') + '\nالإجمالي: ' + money(total);
-    waLink.href = 'https://wa.me/' + SITE.whatsapp + '?text=' + encodeURIComponent(msg);
+    waLink.href = 'https://wa.me/' + primaryNumber + '?text=' + encodeURIComponent(msg);
   }
 }
 
