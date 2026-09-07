@@ -1,31 +1,77 @@
-const CACHE_NAME = 'abu-khamis-v1';
-const CORE_ASSETS = ['index.html', 'style.css', 'script.js', 'data.json', 'manifest.json'];
+const CACHE_NAME = 'abu-khamis-v2';
 
-self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_ASSETS)).catch(() => {}));
+const CORE_ASSETS = [
+  'index.html',
+  'style.css',
+  'script.js',
+  'manifest.json'
+];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(CORE_ASSETS))
+      .catch(() => {})
+  );
+
   self.skipWaiting();
 });
 
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))))
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys
+          .filter((key) => key !== CACHE_NAME)
+          .map((key) => caches.delete(key))
+      )
+    )
   );
+
   self.clients.claim();
 });
 
-// Network-first: always try the network so updates show immediately.
-// Cache is only a fallback for offline use.
-self.addEventListener('fetch', (e) => {
-  if (e.request.method !== 'GET') return;
-  e.respondWith(
-    fetch(e.request)
-      .then(response => {
+self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
+  const url = new URL(event.request.url);
+
+  // data.json: always try the network first.
+  // The cache is used only when the device is offline.
+  if (url.pathname.endsWith('/data.json')) {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' })
+        .then((response) => {
+          if (response && response.ok) {
+            const clone = response.clone();
+
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, clone);
+            });
+          }
+
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+
+    return;
+  }
+
+  // All other GET requests: Network First.
+  event.respondWith(
+    fetch(event.request)
+      .then((response) => {
         if (response && response.ok) {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, clone);
+          });
         }
+
         return response;
       })
-      .catch(() => caches.match(e.request))
+      .catch(() => caches.match(event.request))
   );
 });
