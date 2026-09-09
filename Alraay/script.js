@@ -2,159 +2,63 @@
    جزارة الراعي | ALRAAY BUTCHERY - script.js
    ========================================================= */
 
-const WHATSAPP_NUMBER = "201095786333";
+let WHATSAPP_NUMBER = "201095786333";
+let MARKET = {};
 
 let currentLang = "ar"; // 'ar' | 'en'
 
 /* ---------------------------------------------------------
-   DATA: zones + products
+   DATA: zones + products — loaded at runtime from data.json
+   (so the admin panel can edit prices/items without touching this file)
    type: "simple"  -> qty only
    type: "variant" -> grouped fixed-price options (e.g. Hawawshi sizes)
    type: "weight"  -> price per kg, weight select (0.5/1) + packaging note
 --------------------------------------------------------- */
-const ZONES = [
-  {
-    id: "hawawshi",
-    icon: "🥙",
-    name_ar: "ركن الحواوشي",
-    name_en: "Hawawshi Zone",
-    header: "assets/images/Hawashi-zone.jpg",
-    type: "variant",
-    groups: [
-      { name_ar: "حواوشي لحمة", name_en: "Meat Hawawshi", prices: [140, 160, 180] },
-      { name_ar: "حواوشي سجق", name_en: "Sogok Hawawshi", prices: [140, 160, 180] },
-      { name_ar: "حواوشي بسطرمة", name_en: "Pastrami Hawawshi", prices: [160, 180, 200] },
-      { name_ar: "حواوشي ميكس", name_en: "Mix Hawawshi", prices: [160, 180, 200] },
-      { name_ar: "حواوشي جبنة", name_en: "Cheese Hawawshi", prices: [140, 160, 180] }
-    ],
-    extraSimple: [
-      { name_ar: "كيلو حواوشي لحمة مخصوص", name_en: "Special Meat Hawawshi (1kg)", price: 660 },
-      { name_ar: "كيلو حواوشي سجق مخصوص", name_en: "Special Sogok Hawawshi (1kg)", price: 600 },
-      { name_ar: "كيلو حواوشي سكنتين", name_en: "Double Blade Hawawshi (1kg)", price: 720 },
-      { name_ar: "عرض ملوك الحواوشي (٤ قطع: لحمة وسجق) - بدلاً من ٥٦٠ جنيه", name_en: "Hawawshi Kings Offer (4 pcs: meat & sogok) - instead of 560 EGP", price: 440 }
-    ]
-  },
-  {
-    id: "grills",
-    icon: "🍢",
-    name_ar: "ركن المشويات",
-    name_en: "Grills Zone",
-    header: "assets/images/Griled-zone.jpg",
-    type: "simple",
-    items: [
-      { name_ar: "كيلو شيش طاووق", name_en: "Shish Taouk (1kg)", price: 600, img: "assets/images/Shishtawwq.jpg" },
-      { name_ar: "كيلو ريش", name_en: "Grilled Ribs (1kg)", price: 700, img: "assets/images/Reiash-griled.jpg" },
-      { name_ar: "كيلو كفتة", name_en: "Grilled Kofta (1kg)", price: 480, img: "assets/images/Kofta-griled.png" },
-      { name_ar: "كيلو مشكل", name_en: "Mix Grill (1kg)", price: 600, img: "assets/images/Mixgriled.png" },
-      { name_ar: "كيلو لحمة مشوية", name_en: "Grilled Meat (1kg)", price: 650, img: "" },
-      { name_ar: "كيلو فيلتو", name_en: "Grilled Filet (1kg)", price: 700, img: "" },
-      { name_ar: "كيلو طرب", name_en: "Grilled Tarb (1kg)", price: 650, img: "assets/images/Tarb-griled.png" },
-      { name_ar: "كيلو كبدة", name_en: "Grilled Liver (1kg)", price: 700, img: "" },
-      { name_ar: "كيلو برجر", name_en: "Grilled Burger (1kg)", price: 500, img: "" },
-      { name_ar: "كيلو سجق مشوي", name_en: "Grilled Sogok (1kg)", price: 500, img: "assets/images/Sogaq-griled.png" }
-    ]
-  },
-  {
-    id: "chicken",
-    icon: "🍗",
-    name_ar: "ركن الدجاج المشوي",
-    name_en: "Grilled Chicken Zone",
-    header: "assets/images/chicken-header.jpg",
-    type: "simple",
-    items: [
-      { name_ar: "فرخة تركي", name_en: "Turkish Chicken", price: 350, img: "assets/images/Turkish-chicken.png" },
-      { name_ar: "فرخة مشوية على الفحم", name_en: "Charcoal Grilled Chicken", price: 350, img: "assets/images/Chicken-griled.jpg" }
-    ]
-  },
-  {
-    id: "sandwiches",
-    icon: "🥪",
-    name_ar: "ركن السندويتشات",
-    name_en: "Sandwiches Zone",
-    header: "assets/images/sandwiches-zone.jpg",
-    type: "simple",
-    items: [
-      { name_ar: "سندويتش لحمة", name_en: "Meat Sandwich", price: 110 },
-      { name_ar: "سندويتش كفتة", name_en: "Kofta Sandwich", price: 60 },
-      { name_ar: "سندويتش طرب", name_en: "Tarb Sandwich", price: 100 },
-      { name_ar: "سندويتش كبدة", name_en: "Liver Sandwich", price: 115 },
-      { name_ar: "سندويتش سجق / برجر", name_en: "Sogok / Burger Sandwich", price: 90 }
-    ]
-  },
-  {
-    id: "twagen",
-    icon: "🍲",
-    name_ar: "ركن الطواجن",
-    name_en: "Casseroles Zone",
-    header: "assets/images/Twagen-zone.jpg",
-    type: "simple",
-    items: [
-      { name_ar: "ورقة لحمة", name_en: "Meat Foil Sheet", price: 650 },
-      { name_ar: "بورمة لحمة", name_en: "Meat Borma Casserole", price: 650 },
-      { name_ar: "طاجن عصاعيص", name_en: "Oxtail Casserole", price: 600 },
-      { name_ar: "برام أرز", name_en: "Rice Casserole", price: 250 }
-    ]
-  },
-  {
-    id: "freshmeat",
-    icon: "🥩",
-    name_ar: "ركن اللحوم الطازجة",
-    name_en: "Fresh Meat Zone",
-    header: "assets/images/Meat-zone.jpg",
-    type: "weight",
-    weights: [1, 0.75, 0.5],
-    items: [
-      { name_ar: "لحم مفروم", name_en: "Minced Meat", price: 480 },
-      { name_ar: "لحم مكعبات", name_en: "Beef Cubes", price: 500 },
-      { name_ar: "انتركوت", name_en: "Entrecôte / Ribeye", price: 520 },
-      { name_ar: "بفتيك", name_en: "Beef Escalope", price: 500 },
-      { name_ar: "روستو", name_en: "Beef Roast", price: 500 },
-      { name_ar: "فيلتو", name_en: "Tenderloin Filet", price: 680 },
-      { name_ar: "كبدة", name_en: "Fresh Liver", price: 580 },
-      { name_ar: "قلوب", name_en: "Hearts", price: 480 },
-      { name_ar: "كلاوي", name_en: "Kidneys", price: 480 },
-      { name_ar: "مزاليكيا", name_en: "Mazaleekya", price: 480 },
-      { name_ar: "عصاعيص", name_en: "Oxtail", price: 500 }
-    ]
-  },
-  {
-    id: "preparedmeat",
-    icon: "🍖",
-    name_ar: "ركن اللحوم المجهزة",
-    name_en: "Prepared Meats Zone",
-    header: "assets/images/preparedmeat-header.jpg",
-    type: "weight",
-    weights: [1, 0.75, 0.5],
-    items: [
-      { name_ar: "سجق مخصوص", name_en: "Special Seasoned Sogok", price: 400 },
-      { name_ar: "سجق عادي", name_en: "Regular Sogok", price: 380 },
-      { name_ar: "برجر مجهز", name_en: "Prepared Burger Patty", price: 400 },
-      { name_ar: "كفتة متبلة", name_en: "Marinated Kofta", price: 480 }
-    ]
-  },
-  {
-    id: "offers",
-    icon: "⭐",
-    name_ar: "عروضنا",
-    name_en: "Our Offers",
-    header: "",
-    type: "gallery",
-    items: [
-      { name_ar: "كفتة مشوية", name_en: "Grilled Kofta", img: "assets/images/Kofta-griled.png" },
-      { name_ar: "سجق مشوي", name_en: "Grilled Sogok", img: "assets/images/Sogaq-griled.png" },
-      { name_ar: "شيش طاووق", name_en: "Shish Taouk", img: "assets/images/Shishtaowq-dish.png" },
-      { name_ar: "فرخة تركي", name_en: "Turkish Chicken", img: "assets/images/Turkish-chicken.png" },
-      { name_ar: "فرخة مشوية على الفحم", name_en: "Charcoal Grilled Chicken", img: "assets/images/Chicken-griled.jpg" },
-      { name_ar: "مشكل الراعي", name_en: "Alraay Mix Grill", img: "assets/images/meshakel-alraai.jpg" },
-      { name_ar: "عرض ملوك الحواوشي", name_en: "Hawawshi Kings Offer", img: "assets/images/melok-elhawawshi.png" },
-      { name_ar: "ريش مشوية", name_en: "Grilled Ribs", img: "assets/images/Reiash-griled.jpg" },
-      { name_ar: "الطرب المشوي", name_en: "Grilled Tarb", img: "assets/images/Tarb-griled.png" },
-      { name_ar: "اللحوم المجهزة", name_en: "Prepared Meats", img: "assets/images/Lehoom-mogahza-zone.jpg" },
-      { name_ar: "إسأل عن عروض العزومات", name_en: "Ask About Our Party Offers", img: "assets/images/Arood-elazooma.jpg" },
-      { name_ar: "برجر مشوي", name_en: "Grilled Burger", img: "assets/images/Burger-griled.jpg" }
-    ]
+[]; // populated by loadSiteData() from data.json at startup
+
+/* Fetch data.json (zones + market info) and apply it before the first render.
+   Falls back to an empty state (with a console warning) if the fetch fails,
+   so a missing/broken data.json doesn't leave the page stuck blank forever. */
+async function loadSiteData() {
+  try {
+    const res = await fetch("data.json", { cache: "no-store" });
+    const data = await res.json();
+    ZONES = data.zones || [];
+    MARKET = data.market || {};
+    WHATSAPP_NUMBER = MARKET.whatsappNumber || WHATSAPP_NUMBER;
+  } catch (e) {
+    console.error("Failed to load data.json", e);
   }
-];
+}
+
+/* Push market info (about text, phone numbers, address, footer rights)
+   from data.json into the page, in both languages, then let
+   applyStaticTranslations() pick the one to display. */
+function applyMarketInfo() {
+  const aboutEl = document.getElementById("aboutText");
+  if (aboutEl && MARKET.aboutAr) {
+    aboutEl.setAttribute("data-ar", MARKET.aboutAr);
+    aboutEl.setAttribute("data-en", MARKET.aboutEn || MARKET.aboutAr);
+  }
+  const addressEl = document.getElementById("addressText");
+  if (addressEl && MARKET.addressAr) {
+    addressEl.setAttribute("data-ar", MARKET.addressAr);
+    addressEl.setAttribute("data-en", MARKET.addressEn || MARKET.addressAr);
+  }
+  const footerEl = document.getElementById("footerRights");
+  if (footerEl && MARKET.footerRightsAr) {
+    footerEl.setAttribute("data-ar", MARKET.footerRightsAr);
+    footerEl.setAttribute("data-en", MARKET.footerRightsEn || MARKET.footerRightsAr);
+  }
+  const phoneList = document.getElementById("phoneList");
+  if (phoneList && MARKET.phones) {
+    const callItems = MARKET.phones.map(p => `<li>📞 <a href="tel:+2${p}">${p}</a></li>`).join("");
+    const waItem = `<li>💬 <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener">
+        <span data-ar="واتساب مباشر" data-en="Direct WhatsApp">واتساب مباشر</span>: +${WHATSAPP_NUMBER}
+      </a></li>`;
+    phoneList.innerHTML = callItems + waItem;
+  }
+}
 
 /* ---------------------------------------------------------
    CART
@@ -275,10 +179,15 @@ function forceScrollTop() {
   const start = Date.now();
   function step() {
     window.scrollTo(0, 0);
-    if (Date.now() - start < 400) requestAnimationFrame(step);
+    if (Date.now() - start < 700) requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
 }
+
+/* Safari/Chrome can restore the previous scroll position when a page is
+   served from the back/forward cache (bfcache) instead of firing our own
+   navigation code — this catches that case too. */
+window.addEventListener("pageshow", () => forceScrollTop());
 
 function openZone(zoneId, silent) {
   const zone = ZONES.find(z => z.id === zoneId);
@@ -537,6 +446,10 @@ if ("serviceWorker" in navigator) {
 /* ---------------------------------------------------------
    INIT
 --------------------------------------------------------- */
-applyStaticTranslations();
-renderZoneGrid();
-renderCart();
+(async function init() {
+  await loadSiteData();
+  applyMarketInfo();
+  applyStaticTranslations();
+  renderZoneGrid();
+  renderCart();
+})();

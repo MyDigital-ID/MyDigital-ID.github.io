@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم جزارة الراعي (الموقع)</title>
+<style>
+  :root{ --orange:#f5820c; --bg:#0f1626; --bg-soft:#161f36; --line:#2a3555; --text:#fff; }
+  *{box-sizing:border-box;}
+  body{font-family:'Cairo','Tahoma',sans-serif;background:var(--bg);color:var(--text);margin:0;direction:rtl;}
+  .wrap{max-width:780px;margin:0 auto;padding:20px 16px 60px;}
+  h1{font-size:19px;color:var(--orange);}
+  .card{background:var(--bg-soft);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px;}
+  label{display:block;font-size:13px;font-weight:700;margin:10px 0 4px;color:#c7cede;}
+  input[type=text],input[type=password],input[type=number],textarea{
+    width:100%;padding:10px;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;font-size:14px;
+    background:#0f1626;color:#fff;
+  }
+  input[type=password]{-webkit-text-security:disc;}
+  .row{display:flex;gap:10px;flex-wrap:wrap;}
+  .row > *{flex:1;min-width:110px;}
+  button{cursor:pointer;border:none;border-radius:8px;padding:10px 16px;font-weight:700;font-size:14px;font-family:inherit;}
+  .btn-primary{background:var(--orange);color:#fff;}
+  .btn-danger{background:#3a1f1f;color:#ff8a7a;}
+  .btn-ghost{background:#232d4d;color:#fff;}
+  .btn-small{padding:6px 10px;font-size:12.5px;}
+  .toggle-eye{background:none;border:1.5px solid var(--line);padding:8px 10px;color:#fff;}
+  .top-row{display:flex;gap:8px;align-items:center;}
+  .item-box{border:1px dashed var(--line);border-radius:8px;padding:10px;margin-top:8px;}
+  .zone-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+  .zone-title{font-weight:800;color:var(--orange);}
+  .hidden{display:none;}
+  .status{font-size:13px;margin-top:8px;}
+  .status.ok{color:#5fd97a;}
+  .status.err{color:#ff6b6b;}
+  small{color:#8a93ad;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>لوحة تحكم جزارة الراعي — نسخة الموقع</h1>
+  <p style="font-size:13px;color:#8a93ad;">هذه لوحة منفصلة عن لوحة تحكم نسخة التطبيق (PWA) — بتتحكم في ملف data.json الخاص بالموقع فقط.</p>
+
+  <!-- Login -->
+  <div class="card" id="loginCard">
+    <p>الصق GitHub Personal Access Token بتاعك (Contents: Read & Write على الريبو ده فقط)</p>
+    <label>GitHub Token</label>
+    <div class="top-row">
+      <input type="password" id="tokenInput" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="ghp_xxxxxxxx">
+      <button class="toggle-eye" id="toggleEye">👁</button>
+    </div>
+    <button class="btn-primary" id="loginBtn" style="margin-top:12px;">دخول</button>
+    <div class="status" id="loginStatus"></div>
+  </div>
+
+  <!-- Panel -->
+  <div id="panel" class="hidden">
+    <div class="card">
+      <div class="top-row" style="justify-content:space-between;">
+        <strong>معلومات المحل</strong>
+        <button class="btn-ghost btn-small" id="changeTokenBtn">🔑 تغيير التوكن</button>
+      </div>
+      <label>رقم واتساب الطلبات (بدون +، مثال 201095786333)</label>
+      <input type="text" id="mktWhatsapp">
+      <label>نص "عننا" (عربي)</label>
+      <textarea id="mktAboutAr" rows="2"></textarea>
+      <label>نص "عننا" (English)</label>
+      <textarea id="mktAboutEn" rows="2"></textarea>
+      <label>العنوان (عربي)</label>
+      <input type="text" id="mktAddressAr">
+      <label>العنوان (English)</label>
+      <input type="text" id="mktAddressEn">
+      <label>أرقام الهاتف (رقم في كل سطر، بدون +2)</label>
+      <textarea id="mktPhones" rows="3"></textarea>
+      <label>جميع الحقوق محفوظة لـ... (عربي)</label>
+      <input type="text" id="mktRightsAr">
+      <label>Rights text (English)</label>
+      <input type="text" id="mktRightsEn">
+    </div>
+
+    <div class="card">
+      <strong>الأركان والأصناف</strong>
+      <div id="zonesRoot"></div>
+    </div>
+
+    <button class="btn-primary" id="saveBtn" style="width:100%;padding:14px;">💾 حفظ كل التغييرات</button>
+    <div class="status" id="saveStatus"></div>
+  </div>
+</div>
+
+<script>
+/* ==== EDIT THESE 4 CONSTANTS TO MATCH THE REAL REPO WHERE THIS WEBSITE (NOT the PWA app) LIVES ==== */
+const GITHUB_OWNER  = 'MyDigital-ID';
+const GITHUB_REPO   = 'MyDigital-ID.github.io';
+const GITHUB_BRANCH = 'main';
+const GITHUB_PATH   = 'Alraay/data.json';
+/* ==================================================================================================== */
+
+let TOKEN = localStorage.getItem('alraay_web_gh_token') || '';
+let FILE_SHA = null;
+let DATA = null;
+
+document.getElementById('toggleEye').addEventListener('click', ()=>{
+  const inp = document.getElementById('tokenInput');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+});
+
+document.getElementById('loginBtn').addEventListener('click', async ()=>{
+  const t = document.getElementById('tokenInput').value.trim();
+  if(!t){ setLoginStatus('من فضلك الصق التوكن', true); return; }
+  TOKEN = t;
+  const ok = await loadData();
+  if(ok){
+    localStorage.setItem('alraay_web_gh_token', TOKEN);
+    document.getElementById('loginCard').classList.add('hidden');
+    document.getElementById('panel').classList.remove('hidden');
+  }
+});
+
+document.getElementById('changeTokenBtn').addEventListener('click', ()=>{
+  localStorage.removeItem('alraay_web_gh_token');
+  TOKEN = '';
+  document.getElementById('panel').classList.add('hidden');
+  document.getElementById('loginCard').classList.remove('hidden');
+  document.getElementById('tokenInput').value = '';
+});
+
+document.getElementById('saveBtn').addEventListener('click', saveData);
+
+async function ghFetch(method, body){
+  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
+  const opts = {
+    method,
+    headers: {
+      'Authorization': `Bearer ${TOKEN}`,
+      'Accept': 'application/vnd.github+json'
+    }
+  };
+  if(body) opts.body = JSON.stringify(body);
+  const res = await fetch(method === 'GET' ? `${url}?ref=${GITHUB_BRANCH}` : url, opts);
+  return res;
+}
+
+function utf8ToBase64(str){ return btoa(unescape(encodeURIComponent(str))); }
+function base64ToUtf8(str){ return decodeURIComponent(escape(atob(str))); }
+
+async function loadData(){
+  setLoginStatus('جارِ التحميل...', false);
+  try{
+    const res = await ghFetch('GET');
+    if(!res.ok){
+      setLoginStatus('فشل الدخول - تأكد من التوكن وصلاحياته (كود ' + res.status + ')', true);
+      return false;
+    }
+    const json = await res.json();
+    FILE_SHA = json.sha;
+    DATA = JSON.parse(base64ToUtf8(json.content));
+    renderPanel();
+    return true;
+  }catch(e){
+    setLoginStatus('حصل خطأ: ' + e.message, true);
+    return false;
+  }
+}
+
+async function saveData(){
+  setSaveStatus('جارِ الحفظ...', false);
+  collectMarketForm();
+  try{
+    const res = await ghFetch('PUT', {
+      message: 'admin: update alraay website data.json',
+      content: utf8ToBase64(JSON.stringify(DATA, null, 2)),
+      sha: FILE_SHA,
+      branch: GITHUB_BRANCH
+    });
+    if(!res.ok){
+      const t = await res.text();
+      setSaveStatus('فشل الحفظ (' + res.status + ')', true);
+      console.error(t);
+      return;
+    }
+    const json = await res.json();
+    FILE_SHA = json.content.sha;
+    setSaveStatus('تم الحفظ بنجاح ✅', false);
+  }catch(e){
+    setSaveStatus('حصل خطأ: ' + e.message, true);
+  }
+}
+
+function setLoginStatus(msg, isErr){
+  const el = document.getElementById('loginStatus');
+  el.textContent = msg; el.className = 'status ' + (isErr ? 'err' : 'ok');
+}
+function setSaveStatus(msg, isErr){
+  const el = document.getElementById('saveStatus');
+  el.textContent = msg; el.className = 'status ' + (isErr ? 'err' : 'ok');
+}
+
+/* ---------- Render ---------- */
+function renderPanel(){
+  const m = DATA.market || {};
+  document.getElementById('mktWhatsapp').value = m.whatsappNumber || '';
+  document.getElementById('mktAboutAr').value = m.aboutAr || '';
+  document.getElementById('mktAboutEn').value = m.aboutEn || '';
+  document.getElementById('mktAddressAr').value = m.addressAr || '';
+  document.getElementById('mktAddressEn').value = m.addressEn || '';
+  document.getElementById('mktPhones').value = (m.phones || []).join('\n');
+  document.getElementById('mktRightsAr').value = m.footerRightsAr || '';
+  document.getElementById('mktRightsEn').value = m.footerRightsEn || '';
+
+  const root = document.getElementById('zonesRoot');
+  root.innerHTML = '';
+  (DATA.zones || []).forEach((zone, zi)=>{
+    const box = document.createElement('div');
+    box.className = 'item-box';
+    box.innerHTML = `
+      <div class="zone-header" data-toggle="${zi}">
+        <span class="zone-title">${zone.name_ar}</span>
+        <span>▾</span>
+      </div>
+      <div class="zone-body hidden" id="zoneBody-${zi}"></div>
+    `;
+    root.appendChild(box);
+    box.querySelector('.zone-header').addEventListener('click', ()=>{
+      document.getElementById('zoneBody-' + zi).classList.toggle('hidden');
+    });
+    renderZoneBody(zone, zi);
+  });
+}
+
+function renderZoneBody(zone, zi){
+  const body = document.getElementById('zoneBody-' + zi);
+  body.innerHTML = '';
+
+  if(zone.type === 'simple' || zone.type === 'weight'){
+    (zone.items || []).forEach((item, ii)=>{
+      body.appendChild(buildSimpleItemRow(item, () => {
+        zone.items.splice(ii,1); renderZoneBody(zone, zi);
+      }, zone.type === 'weight'));
+    });
+    const addBtn = document.createElement('button');
+    addBtn.className = 'btn-ghost btn-small';
+    addBtn.textContent = '+ إضافة صنف';
+    addBtn.style.marginTop = '8px';
+    addBtn.addEventListener('click', ()=>{
+      zone.items = zone.items || [];
+      zone.items.push({ name_ar: 'صنف جديد', name_en: '', price: 0 });
+      renderZoneBody(zone, zi);
+    });
+    body.appendChild(addBtn);
+  }
+
+  else if(zone.type === 'variant'){
+    (zone.groups || []).forEach((group, gi)=>{
+      const row = document.createElement('div');
+      row.className = 'item-box';
+      row.innerHTML = `
+        <label>اسم المجموعة</label>
+        <input type="text" data-g-name value="${escapeHtml(group.name_ar)}">
+        <label>الأسعار (مفصولة بفاصلة، بنفس ترتيب الأحجام)</label>
+        <input type="text" data-g-prices value="${(group.prices||[]).join(', ')}">
+        <button class="btn-danger btn-small" data-g-remove style="margin-top:8px;">🗑 حذف المجموعة</button>
+      `;
+      row.querySelector('[data-g-name]').addEventListener('input', e=> group.name_ar = e.target.value);
+      row.querySelector('[data-g-prices]').addEventListener('input', e=>{
+        group.prices = e.target.value.split(',').map(s=>parseFloat(s.trim())||0);
+      });
+      row.querySelector('[data-g-remove]').addEventListener('click', ()=>{
+        zone.groups.splice(gi,1); renderZoneBody(zone, zi);
+      });
+      body.appendChild(row);
+    });
+    const addGroupBtn = document.createElement('button');
+    addGroupBtn.className = 'btn-ghost btn-small';
+    addGroupBtn.textContent = '+ إضافة مجموعة';
+    addGroupBtn.style.marginTop = '8px';
+    addGroupBtn.addEventListener('click', ()=>{
+      zone.groups = zone.groups || [];
+      zone.groups.push({ name_ar: 'مجموعة جديدة', name_en: '', prices: [0] });
+      renderZoneBody(zone, zi);
+    });
+    body.appendChild(addGroupBtn);
+
+    const extraTitle = document.createElement('div');
+    extraTitle.innerHTML = '<label style="margin-top:14px;">أصناف مخصوصة بالكيلو</label>';
+    body.appendChild(extraTitle);
+    (zone.extraSimple || []).forEach((item, ii)=>{
+      body.appendChild(buildSimpleItemRow(item, () => {
+        zone.extraSimple.splice(ii,1); renderZoneBody(zone, zi);
+      }, false));
+    });
+    const addExtraBtn = document.createElement('button');
+    addExtraBtn.className = 'btn-ghost btn-small';
+    addExtraBtn.textContent = '+ إضافة صنف مخصوص';
+    addExtraBtn.style.marginTop = '8px';
+    addExtraBtn.addEventListener('click', ()=>{
+      zone.extraSimple = zone.extraSimple || [];
+      zone.extraSimple.push({ name_ar: 'صنف جديد', name_en: '', price: 0 });
+      renderZoneBody(zone, zi);
+    });
+    body.appendChild(addExtraBtn);
+  }
+
+  else if(zone.type === 'gallery'){
+    body.innerHTML = '<small>عناصر هذا الركن (عروضنا) صور بدون سعر — عدّل الاسم فقط، والصور تتغير برفعها على GitHub مباشرة.</small>';
+    (zone.items || []).forEach((item, ii)=>{
+      const row = document.createElement('div');
+      row.className = 'item-box';
+      row.innerHTML = `
+        <label>الاسم</label>
+        <input type="text" data-name value="${escapeHtml(item.name_ar)}">
+        <button class="btn-danger btn-small" data-remove style="margin-top:8px;">🗑 حذف</button>
+      `;
+      row.querySelector('[data-name]').addEventListener('input', e=> item.name_ar = e.target.value);
+      row.querySelector('[data-remove]').addEventListener('click', ()=>{
+        zone.items.splice(ii,1); renderZoneBody(zone, zi);
+      });
+      body.appendChild(row);
+    });
+  }
+}
+
+function buildSimpleItemRow(item, onRemove, isWeight){
+  const row = document.createElement('div');
+  row.className = 'item-box';
+  row.innerHTML = `
+    <div class="row">
+      <div><label>اسم الصنف</label><input type="text" data-name value="${escapeHtml(item.name_ar)}"></div>
+      <div><label>${isWeight ? 'سعر الكيلو الكامل' : 'السعر'}</label><input type="number" data-price value="${item.price || 0}"></div>
+    </div>
+    <button class="btn-danger btn-small" data-remove style="margin-top:8px;">🗑 حذف</button>
+  `;
+  row.querySelector('[data-name]').addEventListener('input', e=> item.name_ar = e.target.value);
+  row.querySelector('[data-price]').addEventListener('input', e=> item.price = parseFloat(e.target.value || 0));
+  row.querySelector('[data-remove]').addEventListener('click', onRemove);
+  return row;
+}
+
+function collectMarketForm(){
+  DATA.market = DATA.market || {};
+  DATA.market.whatsappNumber = document.getElementById('mktWhatsapp').value.trim();
+  DATA.market.aboutAr = document.getElementById('mktAboutAr').value;
+  DATA.market.aboutEn = document.getElementById('mktAboutEn').value;
+  DATA.market.addressAr = document.getElementById('mktAddressAr').value;
+  DATA.market.addressEn = document.getElementById('mktAddressEn').value;
+  DATA.market.phones = document.getElementById('mktPhones').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  DATA.market.footerRightsAr = document.getElementById('mktRightsAr').value;
+  DATA.market.footerRightsEn = document.getElementById('mktRightsEn').value;
+  // zones/items are already live-bound to DATA via their input listeners above
+}
+
+function escapeHtml(str){
+  return String(str || '').replace(/[&<>"']/g, s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+}
+
+if(TOKEN){
+  document.getElementById('tokenInput').value = TOKEN;
+  loadData().then(ok=>{
+    if(ok){
+      document.getElementById('loginCard').classList.add('hidden');
+      document.getElementById('panel').classList.remove('hidden');
+    }
+  });
+}
+</script>
+</body>
+</html>
