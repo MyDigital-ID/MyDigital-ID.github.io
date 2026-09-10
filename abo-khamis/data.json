@@ -340,17 +340,17 @@
         {
           "id": "regular",
           "name": "عادي",
-          "price": 100
+          "price": 60
         },
         {
           "id": "special",
           "name": "مخصوص",
-          "price": 120
+          "price": 100
         },
         {
           "id": "special-pizza",
           "name": "مخصوص وش بيتزا",
-          "price": 140
+          "price": 120
         }
       ],
       "items": [
