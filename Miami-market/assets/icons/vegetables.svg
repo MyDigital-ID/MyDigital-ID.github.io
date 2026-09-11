@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="vegGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#81C784"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </linearGradient>
+    <linearGradient id="vegGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB74D"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="24" cy="30" rx="10" ry="14" fill="url(#vegGrad1)" 
+           stroke="#1B5E20" stroke-width="1.5" transform="rotate(-20 24 30)"/>
+  <ellipse cx="42" cy="34" rx="9" ry="13" fill="url(#vegGrad1)" 
+           stroke="#1B5E20" stroke-width="1.5" transform="rotate(20 42 34)"/>
+  <circle cx="32" cy="44" r="8" fill="url(#vegGrad2)" 
+          stroke="#BF360C" stroke-width="1.5"/>
+  <path d="M24 18 Q22 12 26 10" stroke="#2E7D32" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M42 22 Q46 16 44 12" stroke="#2E7D32" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M32 36 Q30 30 34 28" stroke="#2E7D32" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

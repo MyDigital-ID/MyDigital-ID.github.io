@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="oilGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#AED581"/>
+      <stop offset="100%" stop-color="#558B2F"/>
+    </linearGradient>
+  </defs>
+  <rect x="26" y="8" width="12" height="8" fill="#33691E"/>
+  <rect x="22" y="16" width="20" height="6" rx="2" fill="#4CAF50"/>
+  <path d="M20 22 L44 22 L46 46 Q46 54 38 54 L26 54 Q18 54 18 46 Z" 
+        fill="url(#oilGrad)" stroke="#33691E" stroke-width="2"/>
+  <ellipse cx="32" cy="38" rx="10" ry="6" fill="#FFF59D" opacity="0.4"/>
+  <path d="M24 30 Q32 26 40 30" stroke="#FFF59D" stroke-width="1.5" 
+        fill="none" opacity="0.7"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="canGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B0BEC5"/>
+      <stop offset="50%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#90A4AE"/>
+    </linearGradient>
+    <linearGradient id="canLabel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E53935"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="32" cy="14" rx="16" ry="4" fill="#CFD8DC" stroke="#546E7A" stroke-width="1.5"/>
+  <rect x="16" y="14" width="32" height="36" fill="url(#canGrad)" 
+        stroke="#546E7A" stroke-width="1.5"/>
+  <rect x="16" y="24" width="32" height="16" fill="url(#canLabel)"/>
+  <ellipse cx="32" cy="50" rx="16" ry="4" fill="#90A4AE" stroke="#546E7A" stroke-width="1.5"/>
+  <circle cx="32" cy="32" r="5" fill="#FFEB3B" opacity="0.9"/>
+  <text x="32" y="35" text-anchor="middle" font-size="6" font-weight="bold" fill="#B71C1C">TOMATO</text>
+</svg>

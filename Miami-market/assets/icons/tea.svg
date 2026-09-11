@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="cupGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#ECEFF1"/>
+    </linearGradient>
+    <linearGradient id="teaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A1887F"/>
+      <stop offset="100%" stop-color="#5D4037"/>
+    </linearGradient>
+  </defs>
+  <path d="M14 22 L50 22 L46 46 Q46 52 40 52 L24 52 Q18 52 18 46 Z" 
+        fill="url(#cupGrad)" stroke="#455A64" stroke-width="2"/>
+  <path d="M18 30 L46 30 L44 44 Q44 48 40 48 L24 48 Q20 48 20 44 Z" 
+        fill="url(#teaGrad)"/>
+  <path d="M50 30 Q58 30 58 38 Q58 46 50 46" fill="none" 
+        stroke="#455A64" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M26 14 Q24 10 26 6" stroke="#B0BEC5" stroke-width="1.5" fill="none" opacity="0.7"/>
+  <path d="M32 14 Q30 9 32 4" stroke="#B0BEC5" stroke-width="1.5" fill="none" opacity="0.7"/>
+  <path d="M38 14 Q36 10 38 6" stroke="#B0BEC5" stroke-width="1.5" fill="none" opacity="0.7"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="meatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E57373"/>
+      <stop offset="100%" stop-color="#C62828"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="32" cy="38" rx="22" ry="15" fill="url(#meatGrad)" 
+           stroke="#8E0000" stroke-width="2"/>
+  <ellipse cx="32" cy="36" rx="16" ry="10" fill="#FFCDD2" opacity="0.5"/>
+  <path d="M14 20 Q22 8 32 12 Q42 8 50 20" fill="none" 
+        stroke="#8E0000" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="32" cy="10" r="4" fill="#FFAB91" stroke="#8E0000" stroke-width="1.5"/>
+  <circle cx="22" cy="34" r="1.5" fill="#8E0000" opacity="0.4"/>
+  <circle cx="42" cy="38" r="1.5" fill="#8E0000" opacity="0.4"/>
+  <circle cx="32" cy="42" r="1.5" fill="#8E0000" opacity="0.4"/>
+</svg>
