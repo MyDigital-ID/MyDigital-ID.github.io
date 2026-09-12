@@ -7,8 +7,8 @@
     <title>ميامي ماركت - طلباتك أوامر</title>
     
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="assets/Miami-logo.png" type="image/png">
-    <link rel="apple-touch-icon" href="assets/Miami-logo.png">
+    <link rel="icon" href="assets/images/Miami-logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/images/Miami-logo.png">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -18,7 +18,7 @@
 <!-- ============ شاشة البداية (Splash Screen) ============ -->
 <div id="splashScreen" class="splash-screen">
     <div class="splash-image-wrapper">
-        <img src="assets/Miami-market.png" alt="ميامي ماركت" class="splash-image">
+        <img src="assets/images/Miami-market.png" alt="ميامي ماركت" class="splash-image">
     </div>
     <p class="splash-welcome">يسعدنا خدمتكم</p>
 </div>
@@ -26,7 +26,7 @@
 <!-- ============ القائمة الجانبية ============ -->
 <aside id="sidebar" class="sidebar">
     <div class="sidebar-header">
-        <img src="assets/Miami-logo.png" alt="ميامي ماركت" class="sidebar-logo-img">
+        <img src="assets/images/Miami-logo.png" alt="ميامي ماركت" class="sidebar-logo-img">
         <button class="icon-btn" onclick="closeSidebar()" aria-label="إغلاق">
             <i class="fas fa-times"></i>
         </button>
@@ -55,7 +55,7 @@
             <i class="fas fa-bars"></i>
         </button>
         <div class="logo-container">
-            <img src="assets/Miami-logo.png" alt="Miami Market" class="header-logo-img">
+            <img src="assets/images/Miami-logo.png" alt="Miami Market" class="header-logo-img">
             <div class="logo-text">
                 <span class="logo-name-en">Miami Market</span>
                 <span class="logo-name-ar" id="marketName">ميامي ماركت</span>
@@ -77,8 +77,10 @@
 
 <!-- ============ الأقسام ============ -->
 <section class="categories" id="categoriesSection">
-    <div class="market-banner">
-        <img src="assets/market-sc.jpg" alt="أقسام الماركت">
+    <div class="market-banner-wrapper">
+        <div class="market-banner-circle">
+            <img src="assets/images/market-sc.jpg" alt="أقسام الماركت" class="market-banner-img">
+        </div>
     </div>
     <div class="categories-grid" id="categoriesGrid"></div>
 </section>
