@@ -1,4 +1,4 @@
-د// ============================================================
+// ============================================================
 // ⚙️ إعدادات الماركت
 // ============================================================
 const MARKET_NAME = 'ميامي ماركت';
@@ -110,7 +110,6 @@ let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let selectedWeights = {};
 let currentView = 'home';
 
-// أيقونات SVG (من assets/icons/)
 const CATEGORY_ICONS = {
     'الجبن والألبان': 'assets/icons/cheese.svg',
     'لحوم مصنعة': 'assets/icons/meat.svg',
@@ -124,22 +123,6 @@ const CATEGORY_ICONS = {
     'مياه ومثلجات': 'assets/icons/water.svg',
     'منوعات أخرى': 'assets/icons/misc.svg',
     'المنظفات والمناديل': 'assets/icons/cleaning.svg'
-};
-
-// صور الأقسام (من assets/images/)
-const CATEGORY_IMAGES = {
-    'الجبن والألبان': 'assets/images/dairy.jpg',
-    'لحوم مصنعة': 'assets/images/meat.jpg',
-    'المكرونات والأرز والدقيق': 'assets/images/pasta.jpg',
-    'السمن والزيوت': 'assets/images/oils.jpg',
-    'الخضروات المجمدة': 'assets/images/frozen.jpg',
-    'معلبات': 'assets/images/canned.jpg',
-    'الشاي والقهوة والنسكافيه': 'assets/images/tea.jpg',
-    'بسكوت وشيكولاتة': 'assets/images/biscuits.jpg',
-    'شيبسي ومولتو': 'assets/images/chips.jpg',
-    'مياه ومثلجات': 'assets/images/water.jpg',
-    'منوعات أخرى': 'assets/images/misc.jpg',
-    'المنظفات والمناديل': 'assets/images/cleaning.jpg'
 };
 
 const CATEGORY_COLOR_CLASS = {
@@ -217,21 +200,19 @@ function renderCategories() {
     }).join('');
 }
 
+// === نهاية الجزء 1 ===
 // ============================================================
 // 4. تغيير خلفية القسم
 // ============================================================
 function setCategoryBackground(category) {
-    // إزالة كلاسات الألوان القديمة
     Object.values(CATEGORY_COLOR_CLASS).forEach(cls => {
         document.body.classList.remove(cls);
     });
     
     if (category && CATEGORY_COLOR_CLASS[category]) {
-        // إضافة كلاس القسم (يفعّل الخلفية)
         document.body.classList.add(CATEGORY_COLOR_CLASS[category]);
         document.body.classList.add('has-category-bg');
     } else {
-        // إزالة خلفية القسم (نرجع للخلفية الرئيسية)
         document.body.classList.remove('has-category-bg');
     }
 }
@@ -515,8 +496,7 @@ function handleSearch(q) {
     document.getElementById('backBtn').style.display = 'inline-flex';
 
     if (scored.length > 0) {
-        const results
-                const results = scored.map(r => r.p);
+        const results = scored.map(r => r.p);
         
         if (scored[0].score >= 85) {
             document.getElementById('categoryTitle').innerHTML = 
@@ -535,6 +515,7 @@ function handleSearch(q) {
     }
 }
 
+// === نهاية الجزء 2 ===
 // ============================================================
 // 12. لوحة "غير متوفر + بدائل"
 // ============================================================
@@ -856,3 +837,5 @@ if ('serviceWorker' in navigator) {
             .catch(e => console.log('❌ Service Worker:', e));
     });
 }
+
+// === نهاية الملف ===
