@@ -1,8 +1,8 @@
 // ============================================================
 // Service Worker - ميامي ماركت PWA
 // ============================================================
-const CACHE_NAME = 'miami-market-v3';
-const CACHE_VERSION = '3.0.0';
+const CACHE_NAME = 'miami-market-v10';
+const CACHE_VERSION = '10.0.0';
 
 // الملفات الأساسية
 const CORE_ASSETS = [
