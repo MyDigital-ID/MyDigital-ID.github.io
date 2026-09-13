@@ -87,20 +87,15 @@
 
 <!-- ============ المنتجات ============ -->
 <section class="products-section" id="productsSection">
-    <div class="products-header">
+    <div class="products-header" id="productsHeader" style="display:none;">
         <h2 id="categoryTitle">
-            <i class="fas fa-hand-pointer"></i> اختر قسماً لعرض المنتجات
+            <i class="fas fa-folder-open"></i> <span id="categoryName"></span>
         </h2>
         <button class="back-btn" id="backBtn" onclick="showHome()">
             <i class="fas fa-arrow-right"></i> رجوع
         </button>
     </div>
-    <div class="products-grid" id="productsGrid">
-        <div class="empty-state">
-            <i class="fas fa-box-open"></i>
-            <p>اختر أحد الأقسام أعلاه لعرض المنتجات</p>
-        </div>
-    </div>
+    <div class="products-grid" id="productsGrid"></div>
 </section>
 
 <!-- ============ ركن الطلبات ============ -->

@@ -14,6 +14,7 @@ const SPLASH_DURATION = 3000;
 // 📦 بيانات المنتجات
 // ============================================================
 const productData = [
+    // ===== الجبن والألبان =====
     {"id":"p1","name":"جبنة بيضاء","brand":"بلدية","product_type":"جبنة بيضاء","category":"الجبن والألبان","type":"weight","weights":["⅛ ك","¼ ك","½ ك","1 ك"],"price":60,"barcode":"6221031491234","status":"available"},
     {"id":"p2","name":"جبنة تركي","brand":"المراعي","product_type":"جبنة تركي","category":"الجبن والألبان","type":"weight","weights":["⅛ ك","¼ ك","½ ك","1 ك"],"price":80,"barcode":"","status":"available"},
     {"id":"p3","name":"جبنة رومي","brand":"دومتي","product_type":"جبنة رومي","category":"الجبن والألبان","type":"weight","weights":["⅛ ك","¼ ك","½ ك","1 ك"],"price":90,"barcode":"","status":"available"},
@@ -26,6 +27,7 @@ const productData = [
     {"id":"p10","name":"لبن رايب","brand":"جهينة","product_type":"لبن رايب","category":"الجبن والألبان","weight":"علبة","price":15,"barcode":"","status":"available"},
     {"id":"p11","name":"قشطة","brand":"نستله","product_type":"قشطة","category":"الجبن والألبان","weight":"علبة","price":18,"barcode":"","status":"available"},
 
+    // ===== لحوم مصنعة =====
     {"id":"p12","name":"لانشون","brand":"حلواني","product_type":"لانشون","category":"لحوم مصنعة","type":"weight","weights":["¼ ك","½ ك","1 ك"],"price":50,"barcode":"","status":"available"},
     {"id":"p13","name":"بسطرمة","brand":"حلواني","product_type":"بسطرمة","category":"لحوم مصنعة","type":"weight","weights":["¼ ك","½ ك","1 ك"],"price":120,"barcode":"","status":"available"},
     {"id":"p14","name":"رومي مدخن","brand":"حلواني","product_type":"رومي","category":"لحوم مصنعة","type":"weight","weights":["¼ ك","½ ك","1 ك"],"price":100,"barcode":"","status":"available"},
@@ -34,27 +36,31 @@ const productData = [
     {"id":"p17","name":"مرتديلا","brand":"حلواني","product_type":"مرتديلا","category":"لحوم مصنعة","type":"weight","weights":["¼ ك","½ ك","1 ك"],"price":45,"barcode":"","status":"available"},
     {"id":"p18","name":"سجق","brand":"حلواني","product_type":"سجق","category":"لحوم مصنعة","weight":"250 جرام","price":35,"barcode":"","status":"available"},
 
-    {"id":"p19","name":"مكرونة سباجيتي","brand":"الملكة","product_type":"مكرونة","category":"المكرونات والأرز والدقيق","weight":"400 جم","price":15,"barcode":"","status":"available"},
-    {"id":"p20","name":"مكرونة سباجيتي","brand":"الملكة","product_type":"مكرونة","category":"المكرونات والأرز والدقيق","weight":"1 كيلو","price":32,"barcode":"","status":"available"},
-    {"id":"p21","name":"مكرونة بيني","brand":"ايطاليانو","product_type":"مكرونة","category":"المكرونات والأرز والدقيق","weight":"400 جم","price":15,"barcode":"","status":"available"},
-    {"id":"p22","name":"مكرونة بيني","brand":"ايطاليانو","product_type":"مكرونة","category":"المكرونات والأرز والدقيق","weight":"1 كيلو","price":32,"barcode":"","status":"available"},
-    {"id":"p23","name":"أرز الضحى","brand":"الضحى","product_type":"أرز","category":"المكرونات والأرز والدقيق","weight":"1 كيلو","price":32,"barcode":"","status":"available"},
-    {"id":"p24","name":"أرز الساعة","brand":"الساعة","product_type":"أرز","category":"المكرونات والأرز والدقيق","weight":"1 كيلو","price":30,"barcode":"","status":"available"},
-    {"id":"p25","name":"أرز الصقر","brand":"الصقر","product_type":"أرز","category":"المكرونات والأرز والدقيق","weight":"1 كيلو","price":28,"barcode":"","status":"available"},
-    {"id":"p26","name":"أرز بسمتي","brand":"أبو كاس","product_type":"أرز بسمتي","category":"المكرونات والأرز والدقيق","weight":"1 كيلو","price":45,"barcode":"","status":"available"},
-    {"id":"p27","name":"دقيق أبيض","brand":"الملكة","product_type":"دقيق","category":"المكرونات والأرز والدقيق","weight":"1 كيلو","price":18,"barcode":"","status":"available"},
+    // ===== مكرونات وأرز ودقيق =====
+    {"id":"p19","name":"مكرونة سباجيتي","brand":"الملكة","product_type":"مكرونة","category":"مكرونات وأرز ودقيق","weight":"400 جم","price":15,"barcode":"","status":"available"},
+    {"id":"p20","name":"مكرونة سباجيتي","brand":"الملكة","product_type":"مكرونة","category":"مكرونات وأرز ودقيق","weight":"1 كيلو","price":32,"barcode":"","status":"available"},
+    {"id":"p21","name":"مكرونة بيني","brand":"ايطاليانو","product_type":"مكرونة","category":"مكرونات وأرز ودقيق","weight":"400 جم","price":15,"barcode":"","status":"available"},
+    {"id":"p22","name":"مكرونة بيني","brand":"ايطاليانو","product_type":"مكرونة","category":"مكرونات وأرز ودقيق","weight":"1 كيلو","price":32,"barcode":"","status":"available"},
+    {"id":"p23","name":"أرز الضحى","brand":"الضحى","product_type":"أرز","category":"مكرونات وأرز ودقيق","weight":"1 كيلو","price":32,"barcode":"","status":"available"},
+    {"id":"p24","name":"أرز الساعة","brand":"الساعة","product_type":"أرز","category":"مكرونات وأرز ودقيق","weight":"1 كيلو","price":30,"barcode":"","status":"available"},
+    {"id":"p25","name":"أرز الصقر","brand":"الصقر","product_type":"أرز","category":"مكرونات وأرز ودقيق","weight":"1 كيلو","price":28,"barcode":"","status":"available"},
+    {"id":"p26","name":"أرز بسمتي","brand":"أبو كاس","product_type":"أرز بسمتي","category":"مكرونات وأرز ودقيق","weight":"1 كيلو","price":45,"barcode":"","status":"available"},
+    {"id":"p27","name":"دقيق أبيض","brand":"الملكة","product_type":"دقيق","category":"مكرونات وأرز ودقيق","weight":"1 كيلو","price":18,"barcode":"","status":"available"},
 
+    // ===== السمن والزيوت =====
     {"id":"p28","name":"زيت عباد الشمس","brand":"عافية","product_type":"زيت","category":"السمن والزيوت","weight":"لتر","price":60,"barcode":"","status":"available"},
     {"id":"p29","name":"زيت ذرة","brand":"كريستال","product_type":"زيت","category":"السمن والزيوت","weight":"لتر","price":65,"barcode":"","status":"available"},
     {"id":"p30","name":"زيت زيتون","brand":"الضحى","product_type":"زيت زيتون","category":"السمن والزيوت","weight":"لتر","price":120,"barcode":"","status":"available"},
     {"id":"p31","name":"سمن بلدي","brand":"البلدية","product_type":"سمن","category":"السمن والزيوت","weight":"كيلو","price":90,"barcode":"","status":"available"},
     {"id":"p32","name":"سمن نباتي","brand":"كريستال","product_type":"سمن","category":"السمن والزيوت","weight":"كيلو","price":55,"barcode":"","status":"available"},
 
-    {"id":"p33","name":"خضار مشكل","brand":"جرين لاند","product_type":"خضار مجمد","category":"الخضروات المجمدة","weight":"كيلو","price":25,"barcode":"","status":"available"},
-    {"id":"p34","name":"بازلاء","brand":"جرين لاند","product_type":"بازلاء","category":"الخضروات المجمدة","weight":"كيلو","price":22,"barcode":"","status":"available"},
-    {"id":"p35","name":"فاصوليا","brand":"جرين لاند","product_type":"فاصوليا","category":"الخضروات المجمدة","weight":"كيلو","price":20,"barcode":"","status":"available"},
-    {"id":"p36","name":"بروكلي","brand":"فريش","product_type":"بروكلي","category":"الخضروات المجمدة","weight":"كيلو","price":28,"barcode":"","status":"available"},
+    // ===== خضروات مجمدة =====
+    {"id":"p33","name":"خضار مشكل","brand":"جرين لاند","product_type":"خضار مجمد","category":"خضروات مجمدة","weight":"كيلو","price":25,"barcode":"","status":"available"},
+    {"id":"p34","name":"بازلاء","brand":"جرين لاند","product_type":"بازلاء","category":"خضروات مجمدة","weight":"كيلو","price":22,"barcode":"","status":"available"},
+    {"id":"p35","name":"فاصوليا","brand":"جرين لاند","product_type":"فاصوليا","category":"خضروات مجمدة","weight":"كيلو","price":20,"barcode":"","status":"available"},
+    {"id":"p36","name":"بروكلي","brand":"فريش","product_type":"بروكلي","category":"خضروات مجمدة","weight":"كيلو","price":28,"barcode":"","status":"available"},
 
+    // ===== معلبات =====
     {"id":"p37","name":"تونة","brand":"الوطنية","product_type":"تونة","category":"معلبات","weight":"علبة","price":25,"barcode":"","status":"available"},
     {"id":"p38","name":"تونة","brand":"شبرا","product_type":"تونة","category":"معلبات","weight":"علبة","price":22,"barcode":"","status":"available"},
     {"id":"p39","name":"سردين","brand":"الملكة","product_type":"سردين","category":"معلبات","weight":"علبة","price":18,"barcode":"","status":"available"},
@@ -62,25 +68,29 @@ const productData = [
     {"id":"p41","name":"طماطم معلبة","brand":"هاينز","product_type":"صلصة","category":"معلبات","weight":"علبة","price":10,"barcode":"","status":"available"},
     {"id":"p42","name":"حمص","brand":"حدائق","product_type":"حمص","category":"معلبات","weight":"علبة","price":12,"barcode":"","status":"available"},
 
-    {"id":"p43","name":"شاي ليبتون","brand":"ليبتون","product_type":"شاي","category":"الشاي والقهوة والنسكافيه","weight":"40 جم","price":18,"barcode":"","status":"available"},
-    {"id":"p44","name":"شاي ليبتون","brand":"ليبتون","product_type":"شاي","category":"الشاي والقهوة والنسكافيه","weight":"100 جم","price":40,"barcode":"","status":"available"},
-    {"id":"p45","name":"شاي العروسة","brand":"العروسة","product_type":"شاي","category":"الشاي والقهوة والنسكافيه","weight":"40 جم","price":15,"barcode":"","status":"available"},
-    {"id":"p46","name":"شاي العروسة","brand":"العروسة","product_type":"شاي","category":"الشاي والقهوة والنسكافيه","weight":"100 جم","price":35,"barcode":"","status":"available"},
-    {"id":"p47","name":"نسكافيه","brand":"نستله","product_type":"نسكافيه","category":"الشاي والقهوة والنسكافيه","weight":"50 جم","price":35,"barcode":"","status":"available"},
-    {"id":"p48","name":"نسكافيه","brand":"نستله","product_type":"نسكافيه","category":"الشاي والقهوة والنسكافيه","weight":"100 جم","price":65,"barcode":"","status":"available"},
-    {"id":"p49","name":"قهوة مطحونة","brand":"الأمير","product_type":"قهوة","category":"الشاي والقهوة والنسكافيه","weight":"250 جم","price":55,"barcode":"","status":"available"},
+    // ===== شاي وقهوة ونسكافيه =====
+    {"id":"p43","name":"شاي ليبتون","brand":"ليبتون","product_type":"شاي","category":"شاي وقهوة ونسكافيه","weight":"40 جم","price":18,"barcode":"","status":"available"},
+    {"id":"p44","name":"شاي ليبتون","brand":"ليبتون","product_type":"شاي","category":"شاي وقهوة ونسكافيه","weight":"100 جم","price":40,"barcode":"","status":"available"},
+    {"id":"p45","name":"شاي العروسة","brand":"العروسة","product_type":"شاي","category":"شاي وقهوة ونسكافيه","weight":"40 جم","price":15,"barcode":"","status":"available"},
+    {"id":"p46","name":"شاي العروسة","brand":"العروسة","product_type":"شاي","category":"شاي وقهوة ونسكافيه","weight":"100 جم","price":35,"barcode":"","status":"available"},
+    {"id":"p47","name":"نسكافيه","brand":"نستله","product_type":"نسكافيه","category":"شاي وقهوة ونسكافيه","weight":"50 جم","price":35,"barcode":"","status":"available"},
+    {"id":"p48","name":"نسكافيه","brand":"نستله","product_type":"نسكافيه","category":"شاي وقهوة ونسكافيه","weight":"100 جم","price":65,"barcode":"","status":"available"},
+    {"id":"p49","name":"قهوة مطحونة","brand":"الأمير","product_type":"قهوة","category":"شاي وقهوة ونسكافيه","weight":"250 جم","price":55,"barcode":"","status":"available"},
 
+    // ===== بسكوت وشيكولاتة =====
     {"id":"p50","name":"بسكوت اوريو","brand":"اوريو","product_type":"بسكوت","category":"بسكوت وشيكولاتة","weight":"باكو","price":15,"barcode":"","status":"available"},
     {"id":"p51","name":"بسكوت تيفاني","brand":"تيفاني","product_type":"بسكوت","category":"بسكوت وشيكولاتة","weight":"باكو","price":12,"barcode":"","status":"available"},
     {"id":"p52","name":"شيكولاتة جلاكسي","brand":"جلاكسي","product_type":"شيكولاتة","category":"بسكوت وشيكولاتة","weight":"قطعة","price":10,"barcode":"","status":"available"},
     {"id":"p53","name":"شيكولاتة كيت كات","brand":"نستله","product_type":"شيكولاتة","category":"بسكوت وشيكولاتة","weight":"قطعة","price":8,"barcode":"","status":"available"},
     {"id":"p54","name":"بسكوت ويفر","brand":"تيفاني","product_type":"بسكوت","category":"بسكوت وشيكولاتة","weight":"باكو","price":14,"barcode":"","status":"available"},
 
+    // ===== شيبسي ومولتو =====
     {"id":"p55","name":"شيبسي","brand":"شيبسي","product_type":"شيبسي","category":"شيبسي ومولتو","weight":"كيس كبير","price":10,"barcode":"","status":"available"},
     {"id":"p56","name":"شيبسي","brand":"شيبسي","product_type":"شيبسي","category":"شيبسي ومولتو","weight":"كيس صغير","price":5,"barcode":"","status":"available"},
     {"id":"p57","name":"مولتو","brand":"مولتو","product_type":"مولتو","category":"شيبسي ومولتو","weight":"علبة","price":8,"barcode":"","status":"available"},
     {"id":"p58","name":"بسكويت مالح","brand":"تايد","product_type":"بسكويت مالح","category":"شيبسي ومولتو","weight":"كيس","price":7,"barcode":"","status":"available"},
 
+    // ===== مياه ومثلجات =====
     {"id":"p59","name":"مياه نستله","brand":"نستله","product_type":"مياه","category":"مياه ومثلجات","weight":"1.5 لتر","price":7,"barcode":"","status":"available"},
     {"id":"p60","name":"مياه حياة","brand":"حياة","product_type":"مياه","category":"مياه ومثلجات","weight":"1.5 لتر","price":6,"barcode":"","status":"available"},
     {"id":"p61","name":"مياه بركة","brand":"بركة","product_type":"مياه","category":"مياه ومثلجات","weight":"1.5 لتر","price":6,"barcode":"","status":"available"},
@@ -89,6 +99,7 @@ const productData = [
     {"id":"p64","name":"آيس كريم","brand":"بريمو","product_type":"آيس كريم","category":"مياه ومثلجات","weight":"علبة","price":15,"barcode":"","status":"available"},
     {"id":"p65","name":"عصائر","brand":"جهينة","product_type":"عصير","category":"مياه ومثلجات","weight":"علبة","price":8,"barcode":"","status":"available"},
 
+    // ===== منوعات أخرى =====
     {"id":"p66","name":"بيض","brand":"بلدية","product_type":"بيض","category":"منوعات أخرى","weight":"طبق 30","price":60,"barcode":"","status":"available"},
     {"id":"p67","name":"سكر","brand":"السكر المصري","product_type":"سكر","category":"منوعات أخرى","weight":"كيلو","price":22,"barcode":"","status":"available"},
     {"id":"p68","name":"ملح","brand":"الملاح","product_type":"ملح","category":"منوعات أخرى","weight":"كيلو","price":8,"barcode":"","status":"available"},
@@ -96,11 +107,12 @@ const productData = [
     {"id":"p70","name":"عسل","brand":"النحل","product_type":"عسل","category":"منوعات أخرى","weight":"علبة","price":30,"barcode":"","status":"available"},
     {"id":"p71","name":"طحينة","brand":"الأسرة","product_type":"طحينة","category":"منوعات أخرى","weight":"علبة","price":20,"barcode":"","status":"available"},
 
-    {"id":"p72","name":"مسحوق غسيل","brand":"أريال","product_type":"مسحوق غسيل","category":"المنظفات والمناديل","weight":"كيلو","price":35,"barcode":"","status":"available"},
-    {"id":"p73","name":"صابون سائل","brand":"فيري","product_type":"صابون سائل","category":"المنظفات والمناديل","weight":"لتر","price":25,"barcode":"","status":"available"},
-    {"id":"p74","name":"مناديل ورقية","brand":"فاين","product_type":"مناديل","category":"المنظفات والمناديل","weight":"باكو","price":12,"barcode":"","status":"available"},
-    {"id":"p75","name":"منظف زجاج","brand":"كلين","product_type":"منظف زجاج","category":"المنظفات والمناديل","weight":"زجاجة","price":18,"barcode":"","status":"available"},
-    {"id":"p76","name":"معقم","brand":"ديتول","product_type":"معقم","category":"المنظفات والمناديل","weight":"زجاجة","price":15,"barcode":"","status":"available"}
+    // ===== منظفات ومناديل =====
+    {"id":"p72","name":"مسحوق غسيل","brand":"أريال","product_type":"مسحوق غسيل","category":"منظفات ومناديل","weight":"كيلو","price":35,"barcode":"","status":"available"},
+    {"id":"p73","name":"صابون سائل","brand":"فيري","product_type":"صابون سائل","category":"منظفات ومناديل","weight":"لتر","price":25,"barcode":"","status":"available"},
+    {"id":"p74","name":"مناديل ورقية","brand":"فاين","product_type":"مناديل","category":"منظفات ومناديل","weight":"باكو","price":12,"barcode":"","status":"available"},
+    {"id":"p75","name":"منظف زجاج","brand":"كلين","product_type":"منظف زجاج","category":"منظفات ومناديل","weight":"زجاجة","price":18,"barcode":"","status":"available"},
+    {"id":"p76","name":"معقم","brand":"ديتول","product_type":"معقم","category":"منظفات ومناديل","weight":"زجاجة","price":15,"barcode":"","status":"available"}
 ];
 
 // ============================================================
@@ -110,34 +122,19 @@ let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 let selectedWeights = {};
 let currentView = 'home';
 
-const CATEGORY_ICONS = {
-    'الجبن والألبان': 'assets/icons/cheese.svg',
-    'لحوم مصنعة': 'assets/icons/meat.svg',
-    'المكرونات والأرز والدقيق': 'assets/icons/pasta.svg',
-    'السمن والزيوت': 'assets/icons/oil.svg',
-    'الخضروات المجمدة': 'assets/icons/vegetables.svg',
-    'معلبات': 'assets/icons/cans.svg',
-    'الشاي والقهوة والنسكافيه': 'assets/icons/tea.svg',
-    'بسكوت وشيكولاتة': 'assets/icons/cookies.svg',
-    'شيبسي ومولتو': 'assets/icons/chips.svg',
-    'مياه ومثلجات': 'assets/icons/water.svg',
-    'منوعات أخرى': 'assets/icons/misc.svg',
-    'المنظفات والمناديل': 'assets/icons/cleaning.svg'
-};
-
 const CATEGORY_COLOR_CLASS = {
     'الجبن والألبان': 'category-cheese',
     'لحوم مصنعة': 'category-meat',
-    'المكرونات والأرز والدقيق': 'category-pasta',
+    'مكرونات وأرز ودقيق': 'category-pasta',
     'السمن والزيوت': 'category-oil',
-    'الخضروات المجمدة': 'category-veg',
+    'خضروات مجمدة': 'category-veg',
     'معلبات': 'category-cans',
-    'الشاي والقهوة والنسكافيه': 'category-tea',
+    'شاي وقهوة ونسكافيه': 'category-tea',
     'بسكوت وشيكولاتة': 'category-cookies',
     'شيبسي ومولتو': 'category-chips',
     'مياه ومثلجات': 'category-water',
     'منوعات أخرى': 'category-misc',
-    'المنظفات والمناديل': 'category-clean'
+    'منظفات ومناديل': 'category-clean'
 };
 
 // ============================================================
@@ -181,7 +178,7 @@ function applyMarketSettings() {
 }
 
 // ============================================================
-// 3. عرض الأقسام
+// 3. عرض الأقسام - دوائر حمراء
 // ============================================================
 function renderCategories() {
     const grid = document.getElementById('categoriesGrid');
@@ -189,18 +186,14 @@ function renderCategories() {
     const categories = [...new Set(productData.map(p => p.category))];
 
     grid.innerHTML = categories.map(cat => {
-        const icon = CATEGORY_ICONS[cat] || 'assets/icons/misc.svg';
         return `
-            <div class="category-item" data-cat="${cat}" onclick="openCategory('${cat}')">
-                <img src="${icon}" alt="${cat}" class="category-icon" 
-                     onerror="this.src='assets/icons/misc.svg'">
+            <div class="category-item" onclick="openCategory('${cat}')">
                 <span>${cat}</span>
             </div>
         `;
     }).join('');
 }
 
-// === نهاية الجزء 1 ===
 // ============================================================
 // 4. تغيير خلفية القسم
 // ============================================================
@@ -211,9 +204,6 @@ function setCategoryBackground(category) {
     
     if (category && CATEGORY_COLOR_CLASS[category]) {
         document.body.classList.add(CATEGORY_COLOR_CLASS[category]);
-        document.body.classList.add('has-category-bg');
-    } else {
-        document.body.classList.remove('has-category-bg');
     }
 }
 
@@ -225,9 +215,12 @@ function openCategory(cat) {
     setCategoryBackground(cat);
     
     const items = productData.filter(p => p.category === cat);
-    document.getElementById('categoryTitle').innerHTML = 
-        `<i class="fas fa-folder-open"></i> ${cat}`;
-    document.getElementById('backBtn').style.display = 'inline-flex';
+    
+    const productsHeader = document.getElementById('productsHeader');
+    const categoryName = document.getElementById('categoryName');
+    if (productsHeader) productsHeader.style.display = 'flex';
+    if (categoryName) categoryName.textContent = cat;
+    
     renderProducts(items);
     document.getElementById('categoriesSection').style.display = 'none';
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -236,17 +229,14 @@ function openCategory(cat) {
 // ============================================================
 // 6. عرض المنتجات
 // ============================================================
-function renderProducts(items, customTitle) {
+function renderProducts(items) {
     const grid = document.getElementById('productsGrid');
-
-    if (customTitle) {
-        document.getElementById('categoryTitle').innerHTML = customTitle;
-    }
+    if (!grid) return;
 
     if (!items || !items.length) {
         grid.innerHTML = `
-            <div class="empty-state">
-                <i class="fas fa-search"></i>
+            <div class="empty-state" style="grid-column:1/-1;text-align:center;padding:40px;color:#999;">
+                <i class="fas fa-search" style="font-size:50px;display:block;margin-bottom:15px;color:#ddd;"></i>
                 <p>لا توجد منتجات مطابقة</p>
             </div>`;
         return;
@@ -345,18 +335,18 @@ function generateBarcode(productId, code) {
         if (!svgEl) return;
         JsBarcode(svgEl, code, {
             format: "EAN13",
-            width: 1.6,
+            width: 1.5,
             height: 40,
             displayValue: true,
-            fontSize: 12,
+            fontSize: 11,
             margin: 4,
-            background: "#FAFAFA",
+            background: "#FFFFFF",
             lineColor: "#212121"
         });
     } catch (e) {
         const box = document.getElementById(`barcode-box-${productId}`);
         if (box) {
-            box.innerHTML = `<p class="no-alternatives" style="padding:8px;">⚠️ رقم باركود غير صالح</p>`;
+            box.innerHTML = `<p style="padding:6px;font-size:10px;text-align:center;color:#999;">⚠️ رقم باركود غير صالح</p>`;
         }
     }
 }
@@ -493,14 +483,16 @@ function handleSearch(q) {
     currentView = 'search';
     setCategoryBackground(null);
     document.getElementById('categoriesSection').style.display = 'none';
-    document.getElementById('backBtn').style.display = 'inline-flex';
+    
+    const productsHeader = document.getElementById('productsHeader');
+    const categoryName = document.getElementById('categoryName');
+    if (productsHeader) productsHeader.style.display = 'flex';
+    if (categoryName) categoryName.textContent = `نتائج البحث: "${q}"`;
 
     if (scored.length > 0) {
         const results = scored.map(r => r.p);
         
         if (scored[0].score >= 85) {
-            document.getElementById('categoryTitle').innerHTML = 
-                `<i class="fas fa-search"></i> نتائج البحث: "${q}" (${results.length})`;
             renderProducts(results);
         } else {
             renderNotFoundPanel(q, results);
@@ -515,15 +507,12 @@ function handleSearch(q) {
     }
 }
 
-// === نهاية الجزء 2 ===
 // ============================================================
 // 12. لوحة "غير متوفر + بدائل"
 // ============================================================
 function renderNotFoundPanel(query, suggestions, isSmart = false) {
     const grid = document.getElementById('productsGrid');
-    document.getElementById('categoryTitle').innerHTML = 
-        `<i class="fas fa-search"></i> نتائج البحث: "${query}"`;
-
+    
     const titleText = isSmart 
         ? `عذراً، "${query}" غير متوفرة حالياً` 
         : `لا يوجد تطابق كامل لـ "${query}"`;
@@ -542,7 +531,7 @@ function renderNotFoundPanel(query, suggestions, isSmart = false) {
                 </div>
             </div>
             <div class="alternatives-title-main">
-                <i class="fas fa-lightbulb"></i> بدائل متاحة
+                <i class="fas fa-lightbulb"></i> بدائل متاحة 
             </div>
         </div>
         ${suggestions.map(p => renderProductCard(p)).join('')}
@@ -559,8 +548,6 @@ function renderNotFoundPanel(query, suggestions, isSmart = false) {
 
 function renderEmptySearch(query) {
     const grid = document.getElementById('productsGrid');
-    document.getElementById('categoryTitle').innerHTML = 
-        `<i class="fas fa-search"></i> نتائج البحث: "${query}"`;
     
     grid.innerHTML = `
         <div class="not-found-panel" style="grid-column: 1 / -1;">
@@ -644,16 +631,14 @@ function showHome() {
     currentView = 'home';
     setCategoryBackground(null);
     document.getElementById('categoriesSection').style.display = 'block';
-    document.getElementById('categoryTitle').innerHTML = 
-        '<i class="fas fa-hand-pointer"></i> اختر قسماً لعرض المنتجات';
-    document.getElementById('backBtn').style.display = 'none';
+    
+    const productsHeader = document.getElementById('productsHeader');
+    if (productsHeader) productsHeader.style.display = 'none';
+    
     document.getElementById('searchInput').value = '';
     document.getElementById('clearBtn').style.display = 'none';
-    document.getElementById('productsGrid').innerHTML = `
-        <div class="empty-state">
-            <i class="fas fa-box-open"></i>
-            <p>اختر أحد الأقسام أعلاه لعرض المنتجات</p>
-        </div>`;
+    document.getElementById('productsGrid').innerHTML = '';
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -832,10 +817,9 @@ document.addEventListener('DOMContentLoaded', initApp);
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js?v=2')
+        navigator.serviceWorker.register('service-worker.js?v=3')
             .then(() => console.log('✅ Service Worker مسجّل'))
             .catch(e => console.log('❌ Service Worker:', e));
     });
 }
-
-// === نهاية الملف ===
+                
