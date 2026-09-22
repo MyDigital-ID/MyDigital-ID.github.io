@@ -4,11 +4,11 @@
 
 const DEFAULT_MENU = {
   zones: [
-    { id: "pizza",  name_ar: "ركن البيتزا",       name_en: "Pizza Corner",       image: "assets/images/pizza-zone.jpg",        video: "videos/pizza.mp4" },
-    { id: "savory", name_ar: "ركن الفطير الحادق",  name_en: "Savory Pies Corner", image: "assets/images/Savory-pizza-zone.png", video: "videos/savory-pies.mp4" },
-    { id: "sweet",  name_ar: "ركن الفطير الحلو",   name_en: "Sweet Pies Corner",  image: "assets/images/sweet-pie.jpg",         video: "videos/sweet-pie.mp4" },
-    { id: "pasta",  name_ar: "ركن المكرونات",      name_en: "Pasta Corner",       image: "assets/images/pasta.png",             video: "videos/pasta.mp4" },
-    { id: "wetsh",  name_ar: "ركن وتش فطير",       name_en: "Wetsh Pie Corner",   image: "assets/images/wetsh-pie.jpg",         video: "videos/Sandwich-roll.mp4", ratio169: true }
+    { id: "pizza",  name_ar: "ركن البيتزا",       name_en: "Pizza Corner",       image: "assets/images/pizza-zone.jpg",        video: "assets/videos/pizza.mp4" },
+    { id: "savory", name_ar: "ركن الفطير الحادق",  name_en: "Savory Pies Corner", image: "assets/images/Savory-pizza-zone.png", video: "assets/videos/savory-pies.mp4" },
+    { id: "sweet",  name_ar: "ركن الفطير الحلو",   name_en: "Sweet Pies Corner",  image: "assets/images/sweet-pie.jpg",         video: "assets/videos/sweet-pie.mp4" },
+    { id: "pasta",  name_ar: "ركن المكرونات",      name_en: "Pasta Corner",       image: "assets/images/pasta.png",             video: "assets/videos/pasta.mp4" },
+    { id: "wetsh",  name_ar: "ركن وتش فطير",       name_en: "Wetsh Pie Corner",   image: "assets/images/wetsh-pie.jpg",         video: "assets/videos/Sandwich-roll.mp4", ratio169: true }
   ],
 
   items: {

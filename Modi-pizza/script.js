@@ -73,9 +73,10 @@ function openSection(zoneId){
 
   document.getElementById("sectionTitle").textContent = LANG==="ar" ? zone.name_ar : zone.name_en;
 
+  const vidBox = document.querySelector(".section-video-box");
   const vid = document.getElementById("sectionVideo");
   vid.src = zone.video;
-  vid.classList.toggle("ratio169", !!zone.ratio169);
+  vidBox.classList.toggle("ratio169", !!zone.ratio169);
   vid.loop = false;
   vid.play().catch(()=>{});
   vid.onended = ()=>{ vid.pause(); }; // freeze on last frame, no repeat
