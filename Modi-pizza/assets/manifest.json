@@ -1,0 +1,12 @@
+{
+  "name": "بيتزا مودي",
+  "short_name": "Pizza Modi",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#1b120a",
+  "theme_color": "#1b120a",
+  "icons": [
+    { "src": "assets/images/logo.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/images/logo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

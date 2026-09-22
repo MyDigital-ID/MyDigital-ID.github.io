@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>بيتزا مودي | Pizza Modi</title>
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== Fixed Header ===== -->
+<header class="site-header">
+  <div class="header-row">
+    <button id="menuBtn" class="icon-btn" aria-label="menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <div class="brand" id="brandHome">
+      <img src="assets/images/logo.png" alt="Pizza Modi" class="brand-logo" onerror="this.style.display='none'">
+      <span class="brand-name" data-ar="بيتزا مودي" data-en="Pizza Modi">بيتزا مودي</span>
+    </div>
+
+    <div class="header-actions">
+      <button id="langBtn" class="pill-btn">EN</button>
+      <button id="cartBtn" class="icon-btn cart-btn" aria-label="cart">
+        🛒<span id="cartCount" class="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+  <div class="header-tagline" data-ar="الطعم الأصلي للبيتزا" data-en="The Original Taste of Pizza">الطعم الأصلي للبيتزا</div>
+</header>
+
+<!-- ===== Side Menu ===== -->
+<div id="sideOverlay" class="overlay"></div>
+<aside id="sideMenu" class="side-menu">
+  <button id="closeMenu" class="icon-btn close-btn">✕</button>
+  <nav class="side-nav">
+    <a href="#" class="side-link" data-nav="home" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+    <a href="#" class="side-link" data-nav="about" data-ar="عنا" data-en="About Us">عنا</a>
+    <a href="#" class="side-link" data-nav="contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+  </nav>
+  <div id="aboutBox" class="side-box hidden">
+    <p data-ar="نقدم أطيب انواع البيتزا و جميع أنواع الفطير الحادق و الحلو بلمسه شرقيه ذات مذاق و طابع خاص ، مع إهتمامنا بأختيار نوعية المكونات ذات الجوده العاليه من أجل الوصول إلى مذاق خاص ننفرد به."
+       data-en="We serve the finest pizza and all kinds of savory and sweet pies with an oriental touch and a special flavor, taking great care in choosing high quality ingredients to reach a taste that is uniquely ours.">
+      نقدم أطيب انواع البيتزا و جميع أنواع الفطير الحادق و الحلو بلمسه شرقيه ذات مذاق و طابع خاص ، مع إهتمامنا بأختيار نوعية المكونات ذات الجوده العاليه من أجل الوصول إلى مذاق خاص ننفرد به.
+    </p>
+    <p class="side-motto" data-ar="هدفنا إرضائكم" data-en="Our goal is your satisfaction">هدفنا إرضائكم</p>
+    <p class="side-hint" data-ar="يا ترى جربت بيتزا الحبة الكاملة ❤️" data-en="Have you tried our whole-grain pizza yet? ❤️">يا ترى جربت بيتزا الحبة الكاملة ❤️</p>
+  </div>
+  <div id="contactBox" class="side-box hidden">
+    <p>📍 <span data-ar="54 شارع خالد بن الوليد، سيدي بشر بحري" data-en="54 Khaled Ibn El Walid St, Sidi Bishr Bahary">54 شارع خالد بن الوليد، سيدي بشر بحري</span></p>
+    <a class="map-link" href="https://www.google.com/maps?q=31.255411,29.979250" target="_blank" data-ar="افتح الموقع على الخريطة" data-en="Open location on map">افتح الموقع على الخريطة</a>
+    <p>☎️ 3585073</p>
+    <p>📱 <a href="tel:01205154025">01205154025</a></p>
+    <a class="wa-link" href="https://wa.me/201205154025" target="_blank" data-ar="راسلنا على واتساب" data-en="Message us on WhatsApp">راسلنا على واتساب</a>
+  </div>
+</aside>
+
+<main id="app">
+
+  <!-- ===== HOME VIEW ===== -->
+  <section id="view-home" class="view">
+    <div class="hero-video-box">
+      <video id="heroVideo" src="videos/pizza.mp4" autoplay muted playsinline></video>
+    </div>
+
+    <div class="zones-grid" id="zonesGrid"></div>
+  </section>
+
+  <!-- ===== SECTION VIEW (populated by JS) ===== -->
+  <section id="view-section" class="view hidden">
+    <button class="back-btn" id="backBtn">→ <span data-ar="رجوع للرئيسية" data-en="Back to home">رجوع للرئيسية</span></button>
+    <div class="section-video-box">
+      <video id="sectionVideo" playsinline muted></video>
+    </div>
+    <h2 id="sectionTitle" class="section-title"></h2>
+    <div id="itemsList" class="items-list"></div>
+  </section>
+
+</main>
+
+<!-- ===== Cart Drawer ===== -->
+<div id="cartOverlay" class="overlay"></div>
+<aside id="cartDrawer" class="cart-drawer">
+  <div class="cart-header">
+    <h3 data-ar="سلة الطلبات" data-en="Your Order">سلة الطلبات</h3>
+    <button id="closeCart" class="icon-btn close-btn">✕</button>
+  </div>
+
+  <div id="cartItems" class="cart-items"></div>
+
+  <div class="addons-box">
+    <h4 data-ar="إضافات اختيارية (20 ج.م)" data-en="Optional add-ons (EGP 20)">إضافات اختيارية (20 ج.م)</h4>
+    <div class="addons-grid" id="addonsGrid"></div>
+  </div>
+
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span data-ar="الإجمالي" data-en="Total">الإجمالي</span>
+      <span id="cartTotal">0</span> <span data-ar="ج.م" data-en="EGP">ج.م</span>
+    </div>
+    <button id="sendOrderBtn" class="cta-btn" data-ar="إرسال الطلب عبر واتساب" data-en="Send order via WhatsApp">إرسال الطلب عبر واتساب</button>
+  </div>
+</aside>
+
+<!-- ===== Install Prompt ===== -->
+<div id="installPrompt" class="install-prompt hidden">
+  <p data-ar="ثبّت تطبيق بيتزا مودي على شاشتك الرئيسية" data-en="Install Pizza Modi to your home screen">ثبّت تطبيق بيتزا مودي على شاشتك الرئيسية</p>
+  <div class="install-actions">
+    <button id="installNowBtn" class="cta-btn small" data-ar="تثبيت الآن" data-en="Install now">تثبيت الآن</button>
+    <button id="installLaterBtn" class="pill-btn small" data-ar="لاحقاً" data-en="Later">لاحقاً</button>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p data-ar="جميع الحقوق محفوظة لبيتزا مودي" data-en="All rights reserved to Pizza Modi">جميع الحقوق محفوظة لبيتزا مودي</p>
+  <a href="https://mydigital-id.github.io" target="_blank" class="fingerprint-link">
+    <span class="fingerprint">🔏</span>
+  </a>
+</footer>
+
+<script src="menu-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
