@@ -208,7 +208,7 @@ document.getElementById("sendOrderBtn").addEventListener("click", ()=>{
   });
   const total = cart.reduce((a,l)=>a+l.price*l.qty,0);
   msg += (LANG==="ar" ? "الإجمالي: " : "Total: ") + total + (LANG==="ar"?" ج.م":" EGP");
-  window.open(`https://wa.me/201205154025?text=${msg}`, "_blank");
+  window.open(`https://wa.me/201205154052?text=${msg}`, "_blank");
 });
 
 /* ---------- Install prompt ---------- */
@@ -238,6 +238,8 @@ setTimeout(()=>{
     splash.classList.add("fade-out");
     setTimeout(()=> splash.remove(), 700);
   }
+  const heroVideo = document.getElementById("heroVideo");
+  if(heroVideo){ heroVideo.play().catch(()=>{}); }
 }, 2000);
 
 /* ---------- Init ---------- */
