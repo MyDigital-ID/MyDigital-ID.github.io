@@ -231,6 +231,15 @@ document.getElementById("installLaterBtn").addEventListener("click", ()=>{
   sessionStorage.setItem("installDismissed","1");
 });
 
+/* ---------- Splash Intro ---------- */
+setTimeout(()=>{
+  const splash = document.getElementById("splashScreen");
+  if(splash){
+    splash.classList.add("fade-out");
+    setTimeout(()=> splash.remove(), 700);
+  }
+}, 2000);
+
 /* ---------- Init ---------- */
 renderZones();
 renderCart();

@@ -21,14 +21,25 @@ body{
   padding-top: var(--header-h);
   padding-bottom: 70px;
 }
-body::before{
-  content:"";
-  position:fixed; inset:0; z-index:-1;
-  background:rgba(15,10,5,.30);
-}
 button{font-family:inherit; cursor:pointer; border:none;}
 a{color:inherit;}
 .hidden{display:none !important;}
+
+/* ---------- Splash Intro ---------- */
+.splash-screen{
+  position:fixed; inset:0; z-index:45;
+  background:url("assets/images/background.png") center/cover no-repeat;
+  display:flex; align-items:center; justify-content:center;
+  padding:0 24px; text-align:center;
+  transition:opacity .6s ease;
+}
+.splash-screen.fade-out{ opacity:0; pointer-events:none; }
+.splash-text{
+  font-family:'Lalezar', cursive; font-weight:700; color:#fff;
+  font-size:1.6rem; line-height:1.6;
+  text-shadow:0 2px 4px rgba(0,0,0,.9), 0 0 14px rgba(0,0,0,.7);
+  -webkit-text-stroke: .5px rgba(0,0,0,.4);
+}
 
 /* ---------- Header ---------- */
 .site-header{
@@ -133,8 +144,8 @@ a{color:inherit;}
 
 /* ---------- Section view ---------- */
 .back-btn{
-  display:flex; align-items:center; gap:6px; background:transparent; color:var(--gold-soft);
-  margin:14px; font-weight:700;
+  display:flex; align-items:center; gap:8px; background:transparent; color:var(--gold-soft);
+  margin:14px; font-weight:700; font-size:1.15rem;
 }
 .section-video-box{
   margin:0 auto 10px; max-width:280px; border-radius:var(--radius); overflow:hidden; background:#000;
@@ -144,8 +155,9 @@ a{color:inherit;}
 .section-video-box.ratio169{aspect-ratio:16/9; max-width:340px;}
 .section-video-box.ratio169 video{object-fit:cover;}
 .section-title{
-  font-family:'Lalezar', cursive; color:var(--gold-soft); text-align:center; margin:6px 0 14px; font-size:1.85rem;
-  text-shadow:0 2px 12px rgba(212,167,60,.4);
+  font-family:'Lalezar', cursive; text-align:center; margin:6px 0 14px; font-size:1.85rem;
+  color:#fdfaf3; -webkit-text-stroke: 1px var(--gold); font-weight:700;
+  text-shadow:0 2px 6px rgba(0,0,0,.7);
 }
 .items-list{padding:0 14px 20px; display:flex; flex-direction:column; gap:12px;}
 .item-row{
