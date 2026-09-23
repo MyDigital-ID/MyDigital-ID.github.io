@@ -19,7 +19,7 @@ body{
   color:var(--cream);
   font-family:'Tajawal', sans-serif;
   padding-top: var(--header-h);
-  padding-bottom: 70px;
+  padding-bottom: 90px;
 }
 button{font-family:inherit; cursor:pointer; border:none;}
 a{color:inherit;}
@@ -138,8 +138,9 @@ a{color:inherit;}
   border-radius:16px; box-shadow:0 6px 16px rgba(0,0,0,.45);
 }
 .zone-card span{
-  padding:8px 4px 2px; font-weight:700; color:var(--gold-soft); text-align:center; font-size:1.05rem;
+  padding:6px 12px; font-weight:700; color:var(--gold-soft); text-align:center; font-size:1.05rem;
   text-shadow:0 2px 6px rgba(0,0,0,.6);
+  display:inline-block; align-self:center; margin:8px auto 2px; border:1.5px solid #fff; border-radius:8px;
 }
 
 /* ---------- Section view ---------- */
@@ -164,7 +165,10 @@ a{color:inherit;}
   background:transparent; border-radius:var(--radius); padding:12px 14px;
   border:2px solid var(--gold);
 }
-.item-name{font-weight:700; margin-bottom:4px; color:#fff; font-size:1.08rem;}
+.item-name{
+  font-weight:700; margin-bottom:8px; color:#fff; font-size:1.08rem;
+  display:inline-block; border:1.5px solid #fff; border-radius:8px; padding:3px 12px;
+}
 .item-desc{font-size:.86rem; color:#f0e6d6; margin-bottom:8px;}
 .item-controls{display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
 .item-controls.sizes .size-btn{
@@ -215,6 +219,15 @@ a{color:inherit;}
 .install-actions{display:flex; gap:10px; justify-content:center; margin-top:10px;}
 
 /* ---------- Footer ---------- */
+/* ---------- Persistent Cart Bar ---------- */
+.cart-bar{
+  position:fixed; bottom:0; left:0; right:0; z-index:55;
+  background:linear-gradient(135deg, var(--ember), #c0392b); color:#fff;
+  border:none; padding:14px 18px; display:flex; align-items:center; justify-content:space-between;
+  font-weight:800; font-size:1rem; box-shadow:0 -4px 14px rgba(0,0,0,.4);
+}
+.cart-bar-total{font-size:1.05rem;}
+
 .site-footer{
   text-align:center; padding:20px 14px; color:var(--muted); font-size:.8rem;
   border-top:1px solid rgba(212,167,60,.15);
