@@ -117,7 +117,7 @@
           "id": "p6",
           "name_ar": "بيتزا كوكتيل مشكل لحوم",
           "name_en": "Mixed Meat Cocktail Pizza",
-          "desc_ar": "مشكل لحوم + خضار + زيتون",
+          "desc_ar": "جبنه موتزاريلا + خضار + زيتون",
           "price_medium": 200,
           "price_family": 350,
           "img": ""
@@ -127,7 +127,7 @@
           "name_ar": "بيتزا سبشيل بالمشروم",
           "name_en": "Special Mushroom Pizza",
           "desc_ar": "جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 120,
+          "price_medium": 140,
           "price_family": 240,
           "img": ""
         },
@@ -136,7 +136,7 @@
           "name_ar": "بيتزا بالتونة",
           "name_en": "Tuna Pizza",
           "desc_ar": "جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 130,
+          "price_medium": 140,
           "price_family": 250,
           "img": ""
         },
@@ -154,7 +154,7 @@
           "name_ar": "بيتزا دايتو بالفراخ",
           "name_en": "Chicken Dieto Pizza",
           "desc_ar": "جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 130,
+          "price_medium": 140,
           "price_family": 250,
           "img": ""
         },
@@ -163,7 +163,7 @@
           "name_ar": "بيتزا سوسيس",
           "name_en": "Sausage Roll Pizza",
           "desc_ar": "جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 130,
+          "price_medium": 140,
           "price_family": 250,
           "img": ""
         },
@@ -172,7 +172,7 @@
           "name_ar": "بيتزا سلامي",
           "name_en": "Salami Pizza",
           "desc_ar": "جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 130,
+          "price_medium": 140,
           "price_family": 250,
           "img": ""
         },
@@ -190,7 +190,7 @@
           "name_ar": "بيتزا سوبر سوبريم مشكل",
           "name_en": "Super Supreme Mix Pizza",
           "desc_ar": "مشروم + جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 190,
+          "price_medium": 200,
           "price_family": 300,
           "img": ""
         },
@@ -199,7 +199,7 @@
           "name_ar": "بيتزا جمبري",
           "name_en": "Shrimp Pizza",
           "desc_ar": "جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 170,
+          "price_medium": 190,
           "price_family": 350,
           "img": ""
         },
@@ -208,7 +208,7 @@
           "name_ar": "بيتزا فواكه",
           "name_en": "Seafood Fruit Pizza",
           "desc_ar": "جمبري + سبيط + بطارخ + مشروم + جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 160,
+          "price_medium": 220,
           "price_family": 320,
           "img": ""
         },
@@ -217,7 +217,7 @@
           "name_ar": "بيتزا جمبري + سبيط + بطارخ + مشروم",
           "name_en": "Shrimp, Squid, Roe & Mushroom Pizza",
           "desc_ar": "جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 200,
+          "price_medium": 250,
           "price_family": 380,
           "img": ""
         },
@@ -226,7 +226,7 @@
           "name_ar": "بيتزا أرجوستا مودي",
           "name_en": "Argosta Modi Pizza",
           "desc_ar": "نص فواكه - نص مشكل لحوم (جبنة موزاريلا + خضار + زيتون)",
-          "price_medium": 200,
+          "price_medium": 220,
           "price_family": 380,
           "img": ""
         },
@@ -235,8 +235,8 @@
           "name_ar": "بيتزا تشكن رانش",
           "name_en": "Chicken Ranch Pizza",
           "desc_ar": "",
-          "price_medium": 140,
-          "price_family": 250,
+          "price_medium": 150,
+          "price_family": 280,
           "img": ""
         },
         {
@@ -244,8 +244,8 @@
           "name_ar": "بيتزا تشكن باربيكيو",
           "name_en": "Chicken BBQ Pizza",
           "desc_ar": "",
-          "price_medium": 140,
-          "price_family": 250,
+          "price_medium": 150,
+          "price_family": 280,
           "img": ""
         }
       ]
