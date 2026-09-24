@@ -100,7 +100,7 @@
           "name_ar": "بيتزا سجق",
           "name_en": "Sausage Pizza",
           "desc_ar": "جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 130,
+          "price_medium": 140,
           "price_family": 250,
           "img": ""
         },
@@ -109,7 +109,7 @@
           "name_ar": "بيتزا باللحمة",
           "name_en": "Meat Pizza",
           "desc_ar": "جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 130,
+          "price_medium": 140,
           "price_family": 240,
           "img": ""
         },
@@ -117,8 +117,8 @@
           "id": "p6",
           "name_ar": "بيتزا كوكتيل مشكل لحوم",
           "name_en": "Mixed Meat Cocktail Pizza",
-          "desc_ar": "جبنة موزاريلا + خضار + زيتون",
-          "price_medium": 180,
+          "desc_ar": "مشكل لحوم + خضار + زيتون",
+          "price_medium": 200,
           "price_family": 350,
           "img": ""
         },
