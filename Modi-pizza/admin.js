@@ -1,9 +1,6 @@
 const ADMIN_PASSWORD = "Modi@alex26";
 const SINGLE_PRICE_ZONES = ["pasta","wetsh"]; // أركان بسعر واحد + كمية (من غير أحجام)
 let menu = loadMenu();
-const ADMIN_PASSWORD = "Modi@alex26";
-const SINGLE_PRICE_ZONES = ["pasta","wetsh"]; // أركان بسعر واحد + كمية (من غير أحجام)
-let menu = loadMenu();
 
 document.getElementById("togglePass").addEventListener("click", ()=>{
   const input = document.getElementById("passInput");
@@ -17,7 +14,6 @@ document.getElementById("togglePass").addEventListener("click", ()=>{
   }
 });
 
-document.getElementById("loginBtn").addEventListener("click", tryLogin);
 document.getElementById("loginBtn").addEventListener("click", tryLogin);
 document.getElementById("passInput").addEventListener("keydown", e=>{ if(e.key==="Enter") tryLogin(); });
 
