@@ -264,8 +264,8 @@
           "name_ar": "فطيرة بالجبنة الرومي",
           "name_en": "Romy Cheese Pie",
           "desc_ar": "جبنة رومي + خضار + زيتون",
-          "price_medium": 130,
-          "price_family": 250,
+          "price_medium": 150,
+          "price_family": 280,
           "img": ""
         },
         {
@@ -273,8 +273,8 @@
           "name_ar": "فطيرة مشكل جبنات",
           "name_en": "Mixed Cheese Pie",
           "desc_ar": "جبنة موزاريلا + رومي + خضار + زيتون",
-          "price_medium": 130,
-          "price_family": 250,
+          "price_medium": 140,
+          "price_family": 280,
           "img": ""
         },
         {
@@ -282,8 +282,8 @@
           "name_ar": "فطيرة بالسجق",
           "name_en": "Sausage Pie",
           "desc_ar": "جبنة رومي + خضار + زيتون",
-          "price_medium": 0,
-          "price_family": 0,
+          "price_medium": 150,
+          "price_family": 380,
           "img": ""
         },
         {
@@ -291,8 +291,8 @@
           "name_ar": "فطيرة بالبسطرمة",
           "name_en": "Basterma Pie",
           "desc_ar": "جبنة رومي + خضار + زيتون",
-          "price_medium": 130,
-          "price_family": 250,
+          "price_medium": 0,
+          "price_family": 280,
           "img": ""
         },
         {
@@ -300,8 +300,8 @@
           "name_ar": "فطيرة باللحمة البلدي",
           "name_en": "Local Meat Pie",
           "desc_ar": "جبنة رومي + خضار + زيتون",
-          "price_medium": 130,
-          "price_family": 250,
+          "price_medium": 140,
+          "price_family": 280,
           "img": ""
         },
         {
@@ -309,8 +309,8 @@
           "name_ar": "فطيرة بالبسطرمة + موزاريلا",
           "name_en": "Basterma & Mozzarella Pie",
           "desc_ar": "",
-          "price_medium": 130,
-          "price_family": 250,
+          "price_medium": 150,
+          "price_family": 280,
           "img": ""
         },
         {
@@ -318,8 +318,8 @@
           "name_ar": "فطيرة سوسيس + موزاريلا",
           "name_en": "Sausage & Mozzarella Pie",
           "desc_ar": "",
-          "price_medium": 130,
-          "price_family": 250,
+          "price_medium": 150,
+          "price_family": 280,
           "img": ""
         },
         {
@@ -327,8 +327,8 @@
           "name_ar": "فطيرة سجق + موزاريلا",
           "name_en": "Sujuk & Mozzarella Pie",
           "desc_ar": "",
-          "price_medium": 130,
-          "price_family": 250,
+          "price_medium": 0,
+          "price_family": 280,
           "img": ""
         },
         {
@@ -336,8 +336,8 @@
           "name_ar": "فطيرة جمبري",
           "name_en": "Shrimp Pie",
           "desc_ar": "موزاريلا + خضار",
-          "price_medium": 170,
-          "price_family": 350,
+          "price_medium": 190,
+          "price_family": 380,
           "img": ""
         },
         {
@@ -345,8 +345,8 @@
           "name_ar": "فطيرة جبنة + بيض + خضار",
           "name_en": "Cheese, Egg & Veg Pie",
           "desc_ar": "",
-          "price_medium": 150,
-          "price_family": 300,
+          "price_medium": 170,
+          "price_family": 330,
           "img": ""
         },
         {
@@ -354,7 +354,7 @@
           "name_ar": "فطيرة فواكه بحر",
           "name_en": "Seafood Pie",
           "desc_ar": "موزاريلا + خضار",
-          "price_medium": 200,
+          "price_medium": 220,
           "price_family": 380,
           "img": ""
         },
@@ -363,7 +363,7 @@
           "name_ar": "فطيرة مشكل لحوم مودي",
           "name_en": "Modi Mixed Meat Pie",
           "desc_ar": "لحمة + سجق + بسطرمة + جبنة رومي + موزاريلا",
-          "price_medium": 180,
+          "price_medium": 200,
           "price_family": 350,
           "img": ""
         },
@@ -372,7 +372,7 @@
           "name_ar": "فطيرة مشكل لحوم مخصوص",
           "name_en": "Special Mixed Meat Pie",
           "desc_ar": "",
-          "price_medium": 200,
+          "price_medium": 220,
           "price_family": 400,
           "img": ""
         }
