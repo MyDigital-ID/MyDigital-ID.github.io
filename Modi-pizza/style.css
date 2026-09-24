@@ -79,9 +79,13 @@ a{color:inherit;}
   border-radius:20px; padding:6px 14px; font-weight:700; font-size:.85rem;
 }
 .pill-btn.small{padding:6px 12px; font-size:.8rem;}
-.cart-btn{position:relative;}
+.cart-btn{
+  position:relative; background:#2fae5c; border-radius:50%;
+  width:36px; height:36px;
+}
+.cart-icon{width:19px; height:19px;}
 .cart-count{
-  position:absolute; top:-2px; left:-2px; background:var(--ember); color:#fff;
+  position:absolute; top:-4px; left:-4px; background:var(--ember); color:#fff;
   font-size:.65rem; border-radius:50%; min-width:16px; height:16px; display:flex;
   align-items:center; justify-content:center; padding:0 3px;
 }
@@ -169,7 +173,7 @@ a{color:inherit;}
   font-weight:700; margin-bottom:8px; color:#fff; font-size:1.08rem;
   display:inline-block; border:1.5px solid #fff; border-radius:8px; padding:3px 12px;
 }
-.item-desc{font-size:.86rem; color:#f0e6d6; margin-bottom:8px;}
+.item-desc{font-size:.86rem; font-weight:700; color:#f0e6d6; margin-bottom:8px;}
 .item-controls{display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
 .item-controls.sizes .size-btn{
   background:transparent; color:#fff; border:2px solid var(--ember);
