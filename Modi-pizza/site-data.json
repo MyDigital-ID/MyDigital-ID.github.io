@@ -392,8 +392,8 @@
           "name_ar": "فطيرة سادة",
           "name_en": "Plain Sweet Pie",
           "desc_ar": "لبن + سكر + سمنة",
-          "price_medium": 45,
-          "price_family": 80,
+          "price_medium": 50,
+          "price_family": 100,
           "img": ""
         },
         {
@@ -401,8 +401,8 @@
           "name_ar": "فطيرة بالكريمة",
           "name_en": "Cream Pie",
           "desc_ar": "لبن + سكر + سمنة",
-          "price_medium": 45,
-          "price_family": 80,
+          "price_medium": 50,
+          "price_family": 100,
           "img": ""
         },
         {
@@ -410,7 +410,7 @@
           "name_ar": "فطيرة بالكريمة + جوزهند",
           "name_en": "Cream & Coconut Pie",
           "desc_ar": "",
-          "price_medium": 70,
+          "price_medium": 80,
           "price_family": 130,
           "img": ""
         },
@@ -428,8 +428,8 @@
           "name_ar": "فطيرة بالقشطة",
           "name_en": "Qishta Pie",
           "desc_ar": "",
-          "price_medium": 130,
-          "price_family": 250,
+          "price_medium": 150,
+          "price_family": 280,
           "img": ""
         },
         {
@@ -437,7 +437,7 @@
           "name_ar": "فطيرة شلمة",
           "name_en": "Shalma Pie",
           "desc_ar": "سمن + سكر + جوز هند + قشطة",
-          "price_medium": 150,
+          "price_medium": 180,
           "price_family": 280,
           "img": ""
         },
@@ -446,13 +446,13 @@
           "name_ar": "فطيرة بغاشة",
           "name_en": "Baghasha Pie",
           "desc_ar": "سمن + سكر + جوز هند",
-          "price_medium": 70,
+          "price_medium": 80,
           "price_family": 130,
           "img": ""
         },
         {
           "id": "sw8",
-          "name_ar": "فطيرة مكس",
+          "name_ar": "فطيرة ",
           "name_en": "Mix Sweet Pie",
           "desc_ar": "",
           "price_medium": 0,
@@ -464,7 +464,7 @@
           "name_ar": "فطيرة موز",
           "name_en": "Banana Pie",
           "desc_ar": "",
-          "price_medium": 100,
+          "price_medium": 120,
           "price_family": 200,
           "img": ""
         },
@@ -473,8 +473,8 @@
           "name_ar": "فطيرة شوكولاتة سادة",
           "name_en": "Plain Chocolate Pie",
           "desc_ar": "",
-          "price_medium": 130,
-          "price_family": 250,
+          "price_medium": 150,
+          "price_family": 280,
           "img": ""
         },
         {
@@ -482,8 +482,8 @@
           "name_ar": "فطيرة شوكولاتة بالبندق",
           "name_en": "Chocolate Hazelnut Pie",
           "desc_ar": "",
-          "price_medium": 200,
-          "price_family": 350,
+          "price_medium": 250,
+          "price_family": 400,
           "img": ""
         },
         {
@@ -491,8 +491,8 @@
           "name_ar": "فطيرة شوكولاتة فستق",
           "name_en": "Chocolate Pistachio Pie",
           "desc_ar": "",
-          "price_medium": 200,
-          "price_family": 400,
+          "price_medium": 300,
+          "price_family": 500,
           "img": ""
         },
         {
@@ -500,8 +500,8 @@
           "name_ar": "فطيرة موز + شوكولاتة",
           "name_en": "Banana & Chocolate Pie",
           "desc_ar": "",
-          "price_medium": 150,
-          "price_family": 250,
+          "price_medium": 200,
+          "price_family": 350,
           "img": ""
         },
         {
@@ -518,7 +518,7 @@
           "name_ar": "فطيرة زبيب وجوزهند وبندق",
           "name_en": "Raisin, Coconut & Hazelnut Pie",
           "desc_ar": "",
-          "price_medium": 180,
+          "price_medium": 200,
           "price_family": 350,
           "img": ""
         },
@@ -526,9 +526,9 @@
           "id": "sw16",
           "name_ar": "فطيرة شهر العسل مودي",
           "name_en": "Modi Honeymoon Pie",
-          "desc_ar": "سمن + سكر + عسل + مكسرات + بلح + قشطة",
-          "price_medium": 200,
-          "price_family": 380,
+          "desc_ar": "سمن + سكر + عسل + مكسرات  + قشطة",
+          "price_medium": 350,
+          "price_family": 450,
           "img": ""
         }
       ]
