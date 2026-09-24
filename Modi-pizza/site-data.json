@@ -628,28 +628,28 @@
           "id": "w1",
           "name_ar": "وتش رومي",
           "name_en": "Romy Wetsh",
-          "price": 100,
+          "price": 150,
           "img": ""
         },
         {
           "id": "w2",
           "name_ar": "وتش موزاريلا",
           "name_en": "Mozzarella Wetsh",
-          "price": 120,
+          "price": 150,
           "img": ""
         },
         {
           "id": "w3",
           "name_ar": "وتش كيري",
           "name_en": "Kiri Wetsh",
-          "price": 100,
+          "price": 150,
           "img": ""
         },
         {
           "id": "w4",
           "name_ar": "وتش مشكل جبن",
           "name_en": "Mixed Cheese Wetsh",
-          "price": 130,
+          "price": 150,
           "img": ""
         },
         {
@@ -663,63 +663,63 @@
           "id": "w6",
           "name_ar": "وتش سجق",
           "name_en": "Sujuk Wetsh",
-          "price": 100,
+          "price": 150,
           "img": ""
         },
         {
           "id": "w7",
           "name_ar": "وتش بسطرمة",
           "name_en": "Basterma Wetsh",
-          "price": 100,
+          "price": 150,
           "img": ""
         },
         {
           "id": "w8",
           "name_ar": "وتش لحمة",
           "name_en": "Meat Wetsh",
-          "price": 100,
+          "price": 150,
           "img": ""
         },
         {
           "id": "w9",
           "name_ar": "وتش تونة",
           "name_en": "Tuna Wetsh",
-          "price": 120,
+          "price": 150,
           "img": ""
         },
         {
           "id": "w10",
           "name_ar": "وتش مشكل لحوم",
           "name_en": "Mixed Meat Wetsh",
-          "price": 130,
+          "price": 180,
           "img": ""
         },
         {
           "id": "w11",
           "name_ar": "وتش جمبري",
           "name_en": "Shrimp Wetsh",
-          "price": 160,
+          "price": 190,
           "img": ""
         },
         {
           "id": "w12",
           "name_ar": "وتش سلامي",
           "name_en": "Salami Wetsh",
-          "price": 120,
+          "price": 150,
           "img": ""
         },
         {
           "id": "w13",
           "name_ar": "وتش سوسيس",
           "name_en": "Sausage Roll Wetsh",
-          "price": 120,
+          "price": 150,
           "img": ""
         },
         {
           "id": "w14",
           "name_ar": "وتش سي فود",
           "name_en": "Seafood Wetsh",
-          "price": 170,
+          "price": 200,
           "img": ""
         }
       ]
