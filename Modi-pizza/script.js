@@ -1,4 +1,4 @@
-const MENU = loadMenu();
+let MENU = loadMenu();
 let LANG = "ar";
 let cart = []; // {key, name, size, price, qty}
 let cartLineId = 0;
@@ -146,7 +146,6 @@ const cartOverlay = document.getElementById("cartOverlay");
 function openCartDrawer(){ cartDrawer.classList.add("open"); cartOverlay.classList.add("show"); }
 function closeCartDrawer(){ cartDrawer.classList.remove("open"); cartOverlay.classList.remove("show"); }
 document.getElementById("cartBtn").addEventListener("click", openCartDrawer);
-document.getElementById("cartBar").addEventListener("click", openCartDrawer);
 document.getElementById("closeCart").addEventListener("click", closeCartDrawer);
 cartOverlay.addEventListener("click", closeCartDrawer);
 
@@ -184,17 +183,6 @@ function renderCart(){
   document.getElementById("cartCount").textContent = cart.reduce((a,l)=>a+l.qty,0);
   document.getElementById("cartTotal").textContent = cart.reduce((a,l)=>a+l.price*l.qty,0);
 
-  const barText = document.getElementById("cartBarText");
-  const barTotal = document.getElementById("cartBarTotal");
-  const totalCount = cart.reduce((a,l)=>a+l.qty,0);
-  const totalPrice = cart.reduce((a,l)=>a+l.price*l.qty,0);
-  if(cart.length === 0){
-    barText.textContent = LANG==="ar" ? "السلة فارغة" : "Your cart is empty";
-    barTotal.textContent = "";
-  } else {
-    barText.textContent = LANG==="ar" ? `${totalCount} عنصر في السلة` : `${totalCount} items in cart`;
-    barTotal.textContent = `${totalPrice} ${LANG==="ar"?"ج.م":"EGP"}`;
-  }
 }
 
 /* ---------- Add-ons ---------- */
@@ -256,7 +244,17 @@ setTimeout(()=>{
 }, 2000);
 
 /* ---------- Init ---------- */
-renderZones();
-renderCart();
-renderAddons();
-applyLang();
+// site-data-loader.js يبدأ أولاً ويضع Promise في window.siteDataReady.
+// ننتظر انتهاء التحميل حتى لا نقرأ DEFAULT_MENU قبل وصول site-data.json.
+(async function initApp(){
+  if (window.siteDataReady) {
+    await window.siteDataReady;
+  }
+
+  MENU = loadMenu();
+
+  renderZones();
+  renderCart();
+  renderAddons();
+  applyLang();
+})();
