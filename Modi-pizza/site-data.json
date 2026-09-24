@@ -1,0 +1,77 @@
+{
+  "config": {
+    "brand_ar": "بيتزا مودي",
+    "brand_en": "Modi Pizza",
+    "tagline_ar": "الطعم الأصلي للبيتزا",
+    "about_ar": "نقدم أطيب انواع البيتزا و جميع أنواع الفطير الحادق و الحلو بلمسه شرقيه ذات مذاق و طابع خاص، مع إهتمامنا بأختيار نوعية المكونات ذات الجوده العاليه من أجل الوصول إلى مذاق خاص ننفرد به",
+    "about_en": "",
+    "whatsappNumber": "201205154052",
+    "phones": ["3585073", "01205154052"],
+    "address_ar": "54 شارع خالد بن الوليد، سيدي بشر بحري",
+    "address_en": "",
+    "mapUrl": "https://www.google.com/maps?q=31.255411,29.979250",
+    "rights_ar": "جميع الحقوق محفوظة لبيتزا مودي"
+  },
+  "addons": [
+    { "name_ar": "اللحمة", "name_en": "Meat", "price": 20 },
+    { "name_ar": "السجق", "name_en": "Sausage", "price": 20 },
+    { "name_ar": "البسطرمة", "name_en": "Basterma", "price": 20 },
+    { "name_ar": "التونة", "name_en": "Tuna", "price": 20 },
+    { "name_ar": "المشروم", "name_en": "Mushroom", "price": 20 },
+    { "name_ar": "الأنشوجة", "name_en": "Anchovy", "price": 20 },
+    { "name_ar": "الموتزاريلا", "name_en": "Mozzarella", "price": 20 },
+    { "name_ar": "جبنة تركي", "name_en": "Turkey Cheese", "price": 20 }
+  ],
+  "zones": [
+    {
+      "id": "zone_pizza",
+      "icon": "🍕",
+      "name_ar": "ركن البيتزا",
+      "name_en": "Pizza",
+      "homeImg": "pizza-zone.jpg",
+      "headerVideo": "pizza.mp4",
+      "type": "sized",
+      "items": []
+    },
+    {
+      "id": "zone_savory_pies",
+      "icon": "🥧",
+      "name_ar": "ركن الفطير الحادق",
+      "name_en": "Savory Pies",
+      "homeImg": "Savory-pizza-zone.png",
+      "headerVideo": "savory-pies.mp4",
+      "type": "sized",
+      "items": []
+    },
+    {
+      "id": "zone_sweet_pies",
+      "icon": "🍮",
+      "name_ar": "ركن الفطير الحلو",
+      "name_en": "Sweet Pies",
+      "homeImg": "sweet-pie.jpg",
+      "headerVideo": "sweet-pie.mp4",
+      "type": "sized",
+      "items": []
+    },
+    {
+      "id": "zone_pasta",
+      "icon": "🍝",
+      "name_ar": "ركن المكرونات",
+      "name_en": "Pasta",
+      "homeImg": "pasta.png",
+      "headerVideo": "pasta.mp4",
+      "type": "sized",
+      "items": []
+    },
+    {
+      "id": "zone_watsh",
+      "icon": "🌯",
+      "name_ar": "ركن وتش فطير",
+      "name_en": "Watsh Pie",
+      "homeImg": "wetsh-pie.jpg",
+      "headerVideo": "wetsh-pie.mp4",
+      "type": "simple",
+      "items": []
+    }
+  ]
+}
