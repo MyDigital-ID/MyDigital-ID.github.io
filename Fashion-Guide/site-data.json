@@ -36,11 +36,9 @@
           "price_xxxl": 300,
           "sizes": [
             "S",
-            "M",
             "L",
             "XL",
-            "XXL",
-            "XXXL"
+            "XXL"
           ],
           "images": [
             "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80",
@@ -58,7 +56,6 @@
           "price": 300,
           "price_xxxl": 360,
           "sizes": [
-            "M",
             "L",
             "XL",
             "XXL"
