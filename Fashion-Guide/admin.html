@@ -574,10 +574,13 @@
 <div id="loginScreen" class="login-wrap">
   <h1>🎛️ لوحة تحكم FASHION GUIDE</h1>
   <p class="subtitle">أدخل رمز الدخول للتحكم في المنتجات</p>
-  <input type="password" id="pwInput" placeholder="أدخل التوكن هنا" autocomplete="off">
+<div style="position:relative;margin-bottom:12px;">
+  <input type="password" id="pwInput" placeholder="أدخل التوكن هنا" autocomplete="off" style="padding-left:50px;">
+  <button type="button" id="togglePw" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:transparent;border:none;font-size:1.3rem;cursor:pointer;padding:6px;">👁️</button>
+</div>
   <button class="btn-primary" style="width:100%;" id="loginBtn">🔓 دخول</button>
   <div id="loginErr"></div>
-  <p class="subtitle" style="margin-top:20px;font-size:0.75rem;">مشروع الهوية الرقمية لمطعم FASHION GUIDE</p>
+  <p class="subtitle" style="margin-top:20px;font-size:0.75rem;">مشروع الهوية الرقمية لأزياء FASHION GUIDE</p>
 </div>
 
 <!-- ============ Loading Overlay ============ -->

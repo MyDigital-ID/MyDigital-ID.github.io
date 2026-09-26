@@ -9,8 +9,8 @@
 const GITHUB_OWNER  = "MyDigital-ID";
 const GITHUB_REPO   = "MyDigital-ID.github.io";
 const GITHUB_BRANCH = "main";
-const DATA_PATH     = "Fashion-Store/site-data.json";
-const IMAGES_PATH   = "Fashion-Store/assets/uploads";
+const DATA_PATH     = "Fashion-Guide/site-data.json";
+const IMAGES_PATH   = "Fashion-Guide/assets/uploads";
 
 const TOKEN_KEY = "fashion_guide_token";
 const DATA_API  = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${DATA_PATH}`;
@@ -886,3 +886,20 @@ window.addEventListener("beforeunload", (e) => {
 // انتهى الملف ✅
 // ============================================================
 console.log("🎛️ FASHION GUIDE Admin Panel loaded");
+
+// ============================================================
+// زر إظهار/إخفاء التوكن
+// ============================================================
+const togglePw = document.getElementById("togglePw");
+if (togglePw) {
+  togglePw.onclick = () => {
+    const inp = document.getElementById("pwInput");
+    if (inp.type === "password") {
+      inp.type = "text";
+      togglePw.textContent = "🙈";
+    } else {
+      inp.type = "password";
+      togglePw.textContent = "👁️";
+    }
+  };
+}
