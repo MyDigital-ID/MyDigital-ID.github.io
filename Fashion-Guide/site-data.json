@@ -1,0 +1,369 @@
+{
+  "config": {
+    "brand_ar": "FASHION GUIDE",
+    "brand_en": "FASHION GUIDE",
+    "tagline_ar": "أناقة بلا حدود",
+    "tagline_en": "Fashion Without Limits",
+    "about_ar": "نقدر اهتمامك بمظهرك ونسعى بإجتهاد أن نقدم لك كل ما هو جديد ومتميز ونقدم في سبيل ذلك أحدث موديلات وتصميمات بيوت الأزياء العالمية من أجود وأرقى الخامات التي تناسب جميع الأذواق والأعمار.",
+    "about_en": "We appreciate your attention to your appearance and strive to offer you everything new and distinctive with the latest fashion designs from the finest materials.",
+    "whatsappNumber": "",
+    "phones": [],
+    "address_ar": "Online Fashion Store",
+    "address_en": "Online Fashion Store",
+    "mapUrl": "",
+    "email": "",
+    "instagram": "",
+    "facebook": "",
+    "tiktok": "",
+    "rights_ar": "جميع الحقوق محفوظة لـ FASHION GUIDE"
+  },
+  "categories": [
+    {
+      "id": "men-shirts",
+      "icon": "👔",
+      "name_ar": "قمصان رجالي",
+      "name_en": "Men's Shirts",
+      "homeImg": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&q=80",
+      "visible": true,
+      "products": [
+        {
+          "id": "ms1",
+          "name_ar": "قميص كلاسيك أبيض",
+          "name_en": "Classic White Shirt",
+          "desc_ar": "قميص قطن 100% بتصميم كلاسيكي أنيق - متوفر بثلاث ألوان",
+          "desc_en": "100% cotton classic elegant shirt - available in 3 colors",
+          "price": 250,
+          "price_xxxl": 300,
+          "sizes": ["S", "M", "L", "XL", "XXL", "XXXL"],
+          "images": [
+            "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80",
+            "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80",
+            "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=800&q=80"
+          ]
+        },
+        {
+          "id": "ms2",
+          "name_ar": "قميص كاجوال أزرق",
+          "name_en": "Blue Casual Shirt",
+          "desc_ar": "قميص قطن مخلوط بتصميم كاجوال عصري",
+          "desc_en": "Cotton blend modern casual shirt",
+          "price": 300,
+          "price_xxxl": 360,
+          "sizes": ["M", "L", "XL", "XXL"],
+          "images": [
+            "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80"
+          ]
+        },
+        {
+          "id": "ms3",
+          "name_ar": "قميص مقلم رسمي",
+          "name_en": "Striped Formal Shirt",
+          "desc_ar": "قميص مقلم مناسب للمناسبات الرسمية",
+          "desc_en": "Striped shirt for formal occasions",
+          "price": 350,
+          "price_xxxl": 0,
+          "sizes": ["S", "M", "L", "XL"],
+          "images": [
+            "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=800&q=80"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "men-tshirts",
+      "icon": "👕",
+      "name_ar": "تيشيرتات رجالي",
+      "name_en": "Men's T-Shirts",
+      "homeImg": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80",
+      "visible": true,
+      "products": [
+        {
+          "id": "mt1",
+          "name_ar": "تيشيرت قطني أسود",
+          "name_en": "Black Cotton T-Shirt",
+          "desc_ar": "تيشيرت قطن 100% مريح للاستخدام اليومي - متوفر بثلاث ألوان",
+          "desc_en": "100% cotton comfortable daily t-shirt - available in 3 colors",
+          "price": 150,
+          "price_xxxl": 180,
+          "sizes": ["S", "M", "L", "XL", "XXL"],
+          "images": [
+            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
+            "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=800&q=80"
+          ]
+        },
+        {
+          "id": "mt2",
+          "name_ar": "تيشيرت مطبوع أبيض",
+          "name_en": "White Printed T-Shirt",
+          "desc_ar": "تيشيرت بتصميم مطبوع عصري",
+          "desc_en": "Modern printed design t-shirt",
+          "price": 200,
+          "price_xxxl": 0,
+          "sizes": ["S", "M", "L", "XL"],
+          "images": [
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80"
+          ]
+        },
+        {
+          "id": "mt3",
+          "name_ar": "تيشيرت رياضي رمادي",
+          "name_en": "Gray Sports T-Shirt",
+          "desc_ar": "تيشيرت رياضي بخامة سريعة الجفاف",
+          "desc_en": "Sports t-shirt quick-dry fabric",
+          "price": 180,
+          "price_xxxl": 220,
+          "sizes": ["M", "L", "XL", "XXL", "XXXL"],
+          "images": [
+            "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=800&q=80"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "men-pants",
+      "icon": "👖",
+      "name_ar": "بناطيل رجالي",
+      "name_en": "Men's Pants",
+      "homeImg": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&q=80",
+      "visible": true,
+      "products": [
+        {
+          "id": "mp1",
+          "name_ar": "بنطلون جينز كلاسيك",
+          "name_en": "Classic Jeans",
+          "desc_ar": "بنطلون جينز بقصة مستقيمة",
+          "desc_en": "Straight cut jeans pants",
+          "price": 400,
+          "price_xxxl": 480,
+          "sizes": ["S", "M", "L", "XL", "XXL"],
+          "images": [
+            "https://images.unsplash.com/photo-1542272604-787c3835535d?w=800&q=80"
+          ]
+        },
+        {
+          "id": "mp2",
+          "name_ar": "بنطلون قماش أسود",
+          "name_en": "Black Fabric Pants",
+          "desc_ar": "بنطلون قماش رسمي أنيق",
+          "desc_en": "Elegant formal fabric pants",
+          "price": 350,
+          "price_xxxl": 0,
+          "sizes": ["M", "L", "XL"],
+          "images": [
+            "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=800&q=80"
+          ]
+        },
+        {
+          "id": "mp3",
+          "name_ar": "بنطلون شينو بيج",
+          "name_en": "Beige Chino Pants",
+          "desc_ar": "بنطلون شينو كاجوال",
+          "desc_en": "Casual chino pants",
+          "price": 320,
+          "price_xxxl": 380,
+          "sizes": ["S", "M", "L", "XL", "XXL"],
+          "images": [
+            "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800&q=80"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "men-jackets",
+      "icon": "🧥",
+      "name_ar": "جاكيتات رجالي",
+      "name_en": "Men's Jackets",
+      "homeImg": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80",
+      "visible": true,
+      "products": [
+        {
+          "id": "mj1",
+          "name_ar": "جاكيت جينز أزرق",
+          "name_en": "Blue Denim Jacket",
+          "desc_ar": "جاكيت جينز كلاسيكي",
+          "desc_en": "Classic denim jacket",
+          "price": 600,
+          "price_xxxl": 700,
+          "sizes": ["S", "M", "L", "XL", "XXL"],
+          "images": [
+            "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&q=80"
+          ]
+        },
+        {
+          "id": "mj2",
+          "name_ar": "جاكيت جلد أسود",
+          "name_en": "Black Leather Jacket",
+          "desc_ar": "جاكيت جلد صناعي عالي الجودة",
+          "desc_en": "High quality leather jacket",
+          "price": 900,
+          "price_xxxl": 0,
+          "sizes": ["M", "L", "XL"],
+          "images": [
+            "https://images.unsplash.com/photo-1520975954732-35dd22299614?w=800&q=80"
+          ]
+        },
+        {
+          "id": "mj3",
+          "name_ar": "جاكيت بافر رمادي",
+          "name_en": "Gray Puffer Jacket",
+          "desc_ar": "جاكيت بافر دافئ للشتاء",
+          "desc_en": "Warm winter puffer jacket",
+          "price": 750,
+          "price_xxxl": 850,
+          "sizes": ["S", "M", "L", "XL", "XXL"],
+          "images": [
+            "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&q=80"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sneakers",
+      "icon": "👟",
+      "name_ar": "كوتشي",
+      "name_en": "Sneakers",
+      "homeImg": "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&q=80",
+      "visible": true,
+      "products": [
+        {
+          "id": "sn1",
+          "name_ar": "كوتشي رياضي أبيض",
+          "name_en": "White Sneakers",
+          "desc_ar": "كوتشي رياضي عصري مريح",
+          "desc_en": "Modern comfortable sneakers",
+          "price": 450,
+          "price_xxxl": 0,
+          "sizes": ["40", "41", "42", "43", "44", "45"],
+          "images": [
+            "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&q=80"
+          ]
+        },
+        {
+          "id": "sn2",
+          "name_ar": "كوتشي رياضي أسود",
+          "name_en": "Black Sneakers",
+          "desc_ar": "كوتشي أسود أنيق",
+          "desc_en": "Elegant black sneakers",
+          "price": 500,
+          "price_xxxl": 0,
+          "sizes": ["40", "41", "42", "43", "44", "45", "46"],
+          "images": [
+            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80"
+          ]
+        },
+        {
+          "id": "sn3",
+          "name_ar": "كوتشي كاجوال بني",
+          "name_en": "Brown Sneakers",
+          "desc_ar": "كوتشي كاجوال جلد",
+          "desc_en": "Casual leather sneakers",
+          "price": 550,
+          "price_xxxl": 0,
+          "sizes": ["40", "41", "42", "43", "44"],
+          "images": [
+            "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=800&q=80"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "belts",
+      "icon": "🎗️",
+      "name_ar": "أحزمة جلد طبيعي",
+      "name_en": "Leather Belts",
+      "homeImg": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80",
+      "visible": true,
+      "products": [
+        {
+          "id": "bl1",
+          "name_ar": "حزام جلد أسود",
+          "name_en": "Black Leather Belt",
+          "desc_ar": "حزام جلد طبيعي 100% - إبزيم فضي",
+          "desc_en": "100% genuine leather belt - silver buckle",
+          "price": 220,
+          "price_xxxl": 0,
+          "sizes": ["M", "L", "XL"],
+          "images": [
+            "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80"
+          ]
+        },
+        {
+          "id": "bl2",
+          "name_ar": "حزام جلد بني",
+          "name_en": "Brown Leather Belt",
+          "desc_ar": "حزام جلد طبيعي بني - إبزيم ذهبي",
+          "desc_en": "Genuine brown leather belt - gold buckle",
+          "price": 240,
+          "price_xxxl": 0,
+          "sizes": ["M", "L", "XL"],
+          "images": [
+            "https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=800&q=80"
+          ]
+        },
+        {
+          "id": "bl3",
+          "name_ar": "حزام جلد كلاسيك",
+          "name_en": "Classic Leather Belt",
+          "desc_ar": "حزام جلد كلاسيكي أنيق",
+          "desc_en": "Classic elegant leather belt",
+          "price": 260,
+          "price_xxxl": 0,
+          "sizes": ["M", "L", "XL", "XXL"],
+          "images": [
+            "https://images.unsplash.com/photo-1627123424574-724758594e93?w=800&q=80"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kids-wear",
+      "icon": "🧒",
+      "name_ar": "ملابس أطفال",
+      "name_en": "Kids Wear",
+      "homeImg": "https://images.unsplash.com/photo-1519278409-1f56fdda7fe5?w=600&q=80",
+      "visible": true,
+      "products": [
+        {
+          "id": "kw1",
+          "name_ar": "طقم أطفال ولادي",
+          "name_en": "Boys Outfit Set",
+          "desc_ar": "طقم قطني مريح",
+          "desc_en": "Comfortable cotton set",
+          "price": 180,
+          "price_xxxl": 0,
+          "sizes": ["2Y", "3Y", "4Y", "5Y", "6Y"],
+          "images": [
+            "https://images.unsplash.com/photo-1519278409-1f56fdda7fe5?w=800&q=80"
+          ]
+        },
+        {
+          "id": "kw2",
+          "name_ar": "فستان بناتي زهري",
+          "name_en": "Pink Girls Dress",
+          "desc_ar": "فستان بناتي بلون زهري",
+          "desc_en": "Pink girls dress",
+          "price": 220,
+          "price_xxxl": 0,
+          "sizes": ["2Y", "3Y", "4Y", "5Y", "6Y", "7Y"],
+          "images": [
+            "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=800&q=80"
+          ]
+        },
+        {
+          "id": "kw3",
+          "name_ar": "تيشيرت أطفال مطبوع",
+          "name_en": "Kids Printed T-Shirt",
+          "desc_ar": "تيشيرت قطني بتصميم مرح",
+          "desc_en": "Fun cotton t-shirt",
+          "price": 120,
+          "price_xxxl": 0,
+          "sizes": ["2Y", "3Y", "4Y", "5Y", "6Y", "7Y", "8Y"],
+          "images": [
+            "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=800&q=80"
+          ]
+        }
+      ]
+    }
+  ]
+}
