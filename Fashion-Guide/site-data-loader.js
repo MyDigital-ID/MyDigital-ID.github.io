@@ -37,17 +37,20 @@
       })
     };
 
-    // خزّنه في localStorage عشان script.js يلاقيه
+    // خزّنه في localStorage
     localStorage.setItem('fashionStoreData', JSON.stringify(converted));
     console.log('✅ site-data.json loaded:', converted.categories.length, 'categories');
 
+    // 🎯 إشارة إن التحميل خلص
+    window.dispatchEvent(new Event('storeDataReady'));
+
   } catch (e) {
     console.warn('⚠️ site-data.json failed:', e.message);
-    // fallback: نستخدم بيانات افتراضية لو الملف مش موجود
+    // fallback
     const fallback = {
       config: {
-        brand_ar: 'Fashion Store',
-        brand_en: 'Fashion Store',
+        brand_ar: 'FASHION GUIDE',
+        brand_en: 'FASHION GUIDE',
         tagline_ar: 'أناقة بلا حدود',
         about_ar: 'نقدر اهتمامك بمظهرك ونسعى بإجتهاد أن نقدم لك كل ما هو جديد ومتميز.',
         whatsappNumber: '',
@@ -57,10 +60,14 @@
         email: '',
         instagram: '',
         facebook: '',
-        tiktok: ''
+        tiktok: '',
+        rights_ar: 'جميع الحقوق محفوظة لـ FASHION GUIDE'
       },
       categories: []
     };
     localStorage.setItem('fashionStoreData', JSON.stringify(fallback));
+    
+    // 🎯 إشارة إن التحميل خلص (حتى لو فشل)
+    window.dispatchEvent(new Event('storeDataReady'));
   }
 })();
