@@ -361,6 +361,65 @@ function renderProductDetail() {
     });
   });
   
+  // 🎯 تفاعل مع السحب (Swipe)
+  const gallery = box.querySelector(".pd-gallery");
+  if (gallery && images.length > 1) {
+    let touchStartX = 0;
+    
+    gallery.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    gallery.addEventListener("touchend", (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      const threshold = 50;
+      
+      if (Math.abs(diff) < threshold) return;
+      
+      if (diff > 0) {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+      } else {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      }
+      renderProductDetail();
+    }, { passive: true });
+    
+    // للكمبيوتر (Mouse Drag)
+    let mouseStartX = 0;
+    let isDragging = false;
+    
+    gallery.addEventListener("mousedown", (e) => {
+      mouseStartX = e.screenX;
+      isDragging = true;
+      gallery.style.cursor = "grabbing";
+    });
+    
+    gallery.addEventListener("mouseup", (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      gallery.style.cursor = "grab";
+      const diff = mouseStartX - e.screenX;
+      const threshold = 50;
+      
+      if (Math.abs(diff) < threshold) return;
+      
+      if (diff > 0) {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+      } else {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      }
+      renderProductDetail();
+    });
+    
+    gallery.addEventListener("mouseleave", () => {
+      isDragging = false;
+      gallery.style.cursor = "grab";
+    });
+    
+    gallery.style.cursor = "grab";
+  }
+
   // تفاعل مع المقاسات
   let selectedSize = sizes.length === 1 ? sizes[0] : null;
   const addBtn = document.getElementById("pdAddBtn");
