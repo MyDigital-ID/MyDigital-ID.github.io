@@ -36,10 +36,10 @@
           "price_xxxl": 300,
           "sizes": ["S", "M", "L", "XL", "XXL", "XXXL"],
           "images": [
-            "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80",
-            "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&q=80",
-            "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=800&q=80"
-          ]
+  "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80",
+  "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
+  "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80"
+]
         },
         {
           "id": "ms2",
