@@ -30,16 +30,16 @@
           "id": "ms1",
           "name_ar": "قميص كلاسيك أبيض",
           "name_en": "Classic White Shirt",
-          "desc_ar": "قميص قطن 100% بتصميم كلاسيكي أنيق - متوفر بثلاث ألوان",
+          "desc_ar": "قميص قطن 100% بتصميم كلاسيكي أنيق - متوفر بثلاثة ألوان",
           "desc_en": "100% cotton classic elegant shirt - available in 3 colors",
           "price": 250,
           "price_xxxl": 300,
           "sizes": ["S", "M", "L", "XL", "XXL", "XXXL"],
           "images": [
-  "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80",
-  "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
-  "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80"
-]
+            "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&q=80",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80",
+            "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=800&q=80"
+          ]
         },
         {
           "id": "ms2",
@@ -79,9 +79,9 @@
       "products": [
         {
           "id": "mt1",
-          "name_ar": "تيشيرت قطني أسود",
-          "name_en": "Black Cotton T-Shirt",
-          "desc_ar": "تيشيرت قطن 100% مريح للاستخدام اليومي - متوفر بثلاث ألوان",
+          "name_ar": "تيشيرت قطني",
+          "name_en": "Cotton T-Shirt",
+          "desc_ar": "تيشيرت قطن 100% مريح للاستخدام اليومي - متوفر بثلاثة ألوان",
           "desc_en": "100% cotton comfortable daily t-shirt - available in 3 colors",
           "price": 150,
           "price_xxxl": 180,
