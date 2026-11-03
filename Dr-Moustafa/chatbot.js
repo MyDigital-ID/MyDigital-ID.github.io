@@ -37,6 +37,16 @@
         opt1: { ar: '١- متعلق بقضية جارية', en: '1- An ongoing case' },
         opt2: { ar: '٢- استشارة قانونية أو تحرير عقود', en: '2- A legal consultation or contract drafting' },
 
+        opt3: { ar: '٣- شؤون الأكاديمية ومشاريع التخرج', en: '3- Academy matters and graduation projects' },
+        opt4: { ar: '٤- أمر آخر', en: '4- Something else' },
+        askAcademy: {
+            ar: 'برجاء شرح الاستفسار أو الطلب بشكل محدد.',
+            en: 'Please explain your inquiry or request specifically.'
+        },
+        askOther: {
+            ar: 'برجاء شرح الأمر وتفاصيله.',
+            en: 'Please explain the matter and its details.'
+        },
         askCase: {
             ar: 'برجاء شرح الموضوع بالترتيب مع ذكر الخطوات التي قمت باتخاذها.',
             en: 'Please explain the matter in order, including the steps you have already taken.'
@@ -145,6 +155,13 @@
             .replace(/[\u0660-\u0669]/g, function (d) { return d.charCodeAt(0) - 0x0660; })
             .replace(/[\u06F0-\u06F9]/g, function (d) { return d.charCodeAt(0) - 0x06F0; });
     }
+
+    var TYPE_LABEL = {
+        case: 'قضية جارية',
+        consult: 'استشارة قانونية / تحرير عقود',
+        academy: 'شؤون الأكاديمية ومشاريع التخرج',
+        other: 'أمر آخر'
+    };
 
     function cleanPhone(s) {
         return toLatinDigits(s).replace(/[\s\-().]/g, '');
@@ -403,7 +420,7 @@
 
     function buildMessages() {
         var s = state;
-        var typeLabel = s.type === 'case' ? 'قضية جارية' : 'استشارة قانونية / تحرير عقود';
+        var typeLabel = TYPE_LABEL[s.type] || s.type;
         var first = s.details.slice(0, 2000);
         var rest = s.details.slice(2000);
 
@@ -417,7 +434,7 @@
         ];
         if (s.type === 'consult') {
             lines.push('💻 <b>استشارة أونلاين:</b> ' + (s.online ? 'نعم' : 'لا'));
-        } else {
+        } else if (s.type === 'case') {
             lines.push('📎 <b>المرفقات:</b> ' + (s.files.length ? s.files.length + ' ملف (تصل بعد هذه الرسالة)' : 'لا يوجد'));
         }
         lines.push('', '📝 <b>التفاصيل:</b>', esc(first));
@@ -441,7 +458,7 @@
         var parts = [
             'السلام عليكم دكتور مصطفى،',
             'الاسم: ' + s.name,
-            'نوع الموضوع: ' + (s.type === 'case' ? 'قضية جارية' : 'استشارة قانونية / تحرير عقود'),
+            'نوع الموضوع: ' + (TYPE_LABEL[s.type] || s.type),
             'الموبايل: ' + cleanPhone(s.phone)
         ];
         if (s.type === 'consult') { parts.push('استشارة أونلاين: ' + (s.online ? 'نعم' : 'لا')); }
@@ -521,11 +538,14 @@
         await botSay(tr(S.hello, state.name));
         state.type = await showChoices([
             { label: S.opt1, value: 'case' },
-            { label: S.opt2, value: 'consult' }
+            { label: S.opt2, value: 'consult' },
+            { label: S.opt3, value: 'academy' },
+            { label: S.opt4, value: 'other' }
         ]);
         if (!alive()) { return; }
 
-        await botSay(tr(state.type === 'case' ? S.askCase : S.askConsult));
+        var prompts = { case: S.askCase, consult: S.askConsult, academy: S.askAcademy, other: S.askOther };
+        await botSay(tr(prompts[state.type]));
         state.details = (await askText({
             ph: S.phText, max: 4000,
             validate: function (v) { return v.length < 5 ? tr(S.detailsBad) : null; }
@@ -546,7 +566,7 @@
                     { label: S.cont, value: 'skip' }
                 ]);
             }
-        } else {
+        } else if (state.type === 'consult') {
             await botSay(tr(S.askOnline));
             var o = await showChoices([
                 { label: S.yesOnline, value: 'yes' },
@@ -672,6 +692,12 @@
     function mount() {
         document.body.appendChild(root);
         applyLang();
+        var autoOpen = false;
+        try { autoOpen = new URLSearchParams(window.location.search).get('chat') === '1'; } catch (e) { /* قديم */ }
+        if (autoOpen) {
+            setTimeout(openChat, 700);
+            return;
+        }
         if (!store('nr_teaser_seen', undefined, true)) {
             setTimeout(function () {
                 if (!panel.classList.contains('nr-open')) {
