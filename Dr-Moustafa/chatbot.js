@@ -37,7 +37,7 @@
         opt1: { ar: '١- متعلق بقضية جارية', en: '1- An ongoing case' },
         opt2: { ar: '٢- استشارة قانونية أو تحرير عقود', en: '2- A legal consultation or contract drafting' },
 
-        opt3: { ar: '٣- شؤون الأكاديمية ومشاريع التخرج', en: '3- Academy matters and graduation projects' },
+        opt3: { ar: '٣- شئون الأكاديمية ومشاريع التخرج', en: '3- Academy matters and graduation projects' },
         opt4: { ar: '٤- أمر آخر', en: '4- Something else' },
         askAcademy: {
             ar: 'برجاء شرح الاستفسار أو الطلب بشكل محدد.',
