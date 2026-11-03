@@ -28,7 +28,7 @@
             ar: 'أهلاً بحضرتك، أنا نور، المساعد الشخصي للدكتور مصطفى.',
             en: "Welcome, I'm Noor, Dr. Moustafa's personal assistant."
         },
-        askName: { ar: 'تحب أنادي حضرتك بإيه؟', en: 'What should I call you?' },
+        askName: { ar: ' ممكن أتشرف بإسم حضرتك ', en: 'What should I call you?' },
         nameBad: { ar: 'برجاء كتابة الاسم (حرفان على الأقل).', en: 'Please type your name (at least 2 letters).' },
         hello: {
             ar: function (n) { return 'أهلاً أ/ ' + n + '. كيف يمكنني مساعدة حضرتك؟ هل الموضوع:'; },
