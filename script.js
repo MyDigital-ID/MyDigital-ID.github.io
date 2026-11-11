@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     e.preventDefault();
 
-                    window.history.back();
+ window.history.length > 1 ? window.history.back() : window.close();
 
                 }
             );
